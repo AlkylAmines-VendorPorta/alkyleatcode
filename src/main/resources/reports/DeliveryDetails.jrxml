@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-27T14:11:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DeliveryDetails" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" uuid="361bf94a-f6a5-471f-b930-3d65b1a87faa">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long"/>
+	<parameter name="SEC_KEY" class="java.lang.String"/>
+	<parameter name="IV_PREFIX" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT A.FIRST_LOT, A.DELIVERING_MONTH, A.RATE_PER_MONTH
+,A.T_COMMERCIAL_BID_ID
+,C.NAME, C.CRN_NUMBER,SUBSTR(C.GSTIN_NO,1, 2) AS GSTIN_NO,
+CASE
+  WHEN SUBSTR(C.GSTIN_NO,1, 2)=27 THEN '(Central GST + State GST)'
+   ELSE 'Integrated GST'
+END As DynamicGSTtype,
+CASE
+  WHEN SUBSTR(C.GSTIN_NO,1, 2)=27 THEN 'for within Maharastra state'
+   ELSE 'for outside state'
+END As DynamicText,
+D.VALUE AS TENDER_CODE, E.NAME AS FACTORY
+,CASE WHEN G.VALUE='OTHERS' THEN F.OTHER_COMMENCEMENT_PERIOD ELSE G.name END AS COMMENCEMENT_PERIOD_CODE,
+CONFIG.NAME AS Report_Dir
+,D.value AS TENDERCODE
+,D. TAHDR_TYPE_CODE
+FROM  T_COMMERCIAL_BID A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+INNER JOIN  T_BIDDER B ON (A.T_BIDDER_ID= B.T_BIDDER_ID)
+INNER JOIN  M_BPARTNER C ON (A.M_BPARTNER_ID = C.M_BPARTNER_ID)
+INNER JOIN T_TAHDR D ON (B.T_TAHDR_ID=  D.T_TAHDR_ID)
+INNER JOIN T_TAHDR_DETAIL F ON (F.T_TAHDR_ID=  D.T_TAHDR_ID AND F.ISACTIVE = 'Y')
+INNER JOIN M_REFERENCE_LIST G ON (G.VALUE = F.COMMENCEMENT_PERIOD_CODE)
+LEFT OUTER JOIN M_BP_ORG E ON (B.M_BP_ORG_ID=  E.M_BP_ORG_ID)
+WHERE A.T_BIDDER_ID=  $P{T_BIDDER_ID}]]>
+	</queryString>
+	<field name="FIRST_LOT" class="java.math.BigDecimal"/>
+	<field name="DELIVERING_MONTH" class="java.math.BigDecimal"/>
+	<field name="RATE_PER_MONTH" class="java.math.BigDecimal"/>
+	<field name="T_COMMERCIAL_BID_ID" class="java.math.BigDecimal"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="CRN_NUMBER" class="java.lang.String"/>
+	<field name="GSTIN_NO" class="java.lang.String"/>
+	<field name="DYNAMICGSTTYPE" class="java.lang.String"/>
+	<field name="DYNAMICTEXT" class="java.lang.String"/>
+	<field name="TENDER_CODE" class="java.lang.String"/>
+	<field name="FACTORY" class="java.lang.String"/>
+	<field name="COMMENCEMENT_PERIOD_CODE" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="TAHDR_TYPE_CODE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="231">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="556" height="230" forecolor="#000000" uuid="f5a1bf7c-bd14-4083-9821-851702650878"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="61" width="231" height="30" uuid="e8c25219-e88e-425f-ae91-9a495094e811"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="91" width="231" height="32" uuid="5eb76036-7f0b-4436-8477-a766187359fb"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Registration Number"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="46" y="31" width="460" height="30" backcolor="#45F1F7" uuid="22506fd7-3b5f-4ab7-9a32-f32e7ac8fa3f"/>
+					<box leftPadding="0">
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Commercial Bid"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="123" width="231" height="28" uuid="569dc0a4-2b04-403f-b999-c50eea0f5f71"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tender Code"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="152" width="231" height="30" uuid="4929bb3f-6080-4e59-b2cf-7a340e76559e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PDF Creation Time"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="278" y="62" width="228" height="29" uuid="fd673d88-8e54-4c69-ba86-5e5319080784"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="277" y="91" width="229" height="32" uuid="3fa0ef58-7681-4eb4-b313-80e8eec9afc6"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{CRN_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="277" y="123" width="229" height="29" uuid="cdf7898c-5ab8-49a0-8eed-f8a5929c6b8c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="277" y="151" width="229" height="31" uuid="41b6744a-8757-4745-9698-59c1c4a2265e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date().getTime())]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="182" width="231" height="30" uuid="800f1e3e-9544-482e-8d19-8a1e1f94b8ee">
+						<printWhenExpression><![CDATA[$F{TAHDR_TYPE_CODE}.equals("PT")]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor Factory"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="278" y="182" width="228" height="30" uuid="089282ee-5172-4ee6-8c1f-c6950c8b107a">
+						<printWhenExpression><![CDATA[$F{TAHDR_TYPE_CODE}.equals("PT")]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{FACTORY}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="50"/>
+	</pageFooter>
+	<summary>
+		<band height="407" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="80" uuid="ce59bc17-bca7-4263-bea2-027e5701b1bd">
+					<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+				</reportElement>
+				<textField>
+					<reportElement x="0" y="19" width="555" height="30" uuid="732cb66b-a8d5-48cb-b62c-45196e51dec7"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Delivery Details"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="49" width="555" height="20" uuid="561c3e14-7729-4156-af95-56a9b2c7f2c7"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["[Delivery must in the units specified for the items as per Price Schedule]"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="69" width="555" height="30" uuid="40ce9aac-f8bc-4959-b8ed-2768ffa646ea"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["First lot of "+$F{FIRST_LOT}+" in assorted sizes will be delivered within "+$F{DELIVERING_MONTH}+" Months from the date of "+$F{COMMENCEMENT_PERIOD_CODE}+".After this period supply will be completed at the rate of "+$F{RATE_PER_MONTH}+" in assorted sized per month"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="119" width="555" height="237" isPrintWhenDetailOverflows="true" uuid="aa8d0ad2-d56b-47ed-98f9-88e2ed250303">
+					<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+				</reportElement>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="30" uuid="8d2be02b-b048-47c9-989a-06b7ae9ac756">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Confirmation Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="30" width="555" height="20" uuid="c4a6b950-e810-4804-9eff-83465ca4f5a0">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["We Confirm The Following :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="50" width="555" height="20" uuid="36e686ac-6cf2-4b32-b70f-45f86b8db6ab">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["I) Goods and Services Tax(GST) i.e Integrated GST / (Central GST+ State GST):"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="70" width="555" height="120" uuid="28a4664e-810e-41fa-9382-cec5b640c5c0">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["The GST is included in our prices quoted in price bid "+$F{DYNAMICGSTTYPE} +" "+$F{DYNAMICTEXT}+" and we shall not charge any additional amount towards  "+$F{DYNAMICGSTTYPE}+", during currency of contract except statutory variation by Central / State Government in normal (full) rate of  "+$F{DYNAMICGSTTYPE}+", in case of  "+$F{DYNAMICGSTTYPE}+" Rate is increased. In case the  "+$F{DYNAMICGSTTYPE}+" is decreased than the rate indicated in the price bid, the benefits of the reduction in the  "+$F{DYNAMICGSTTYPE}+" shall be passed on to the Purchaser.The increase in the  "+$F{DYNAMICGSTTYPE}+" rate due to increase in turnover during the contractual delivery period shall not be charged to the Purchaser .If the  "+$F{DYNAMICGSTTYPE}+" is not payable at present,we shall not charge the same, if it becomes applicable during the currency of contract due to expiry / withdrawal of tax concessions and incentives during the currency of contract except for statutory variation by Central / State Government."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="192" width="555" height="15" uuid="6c9a80d0-78be-4fcc-b4b8-4882ec9e2ed0">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["(i) Necessary documentary evidence for the GST claimed by us shall be submitted along with the bills."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="207" width="555" height="20" uuid="2f18d6d1-3c30-4bb5-acd2-77b3aa973f22">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["(ii) We here by declare that while quoting the price in the Price Bid, we have taken into account the entire credit on inputs available under the GST Act."]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="-2" y="366" width="555" height="40" uuid="8bc2e2dd-9e81-49c0-a940-a4d90006da2f"/>
+				<subreport>
+					<reportElement x="2" y="-8" width="553" height="40" uuid="8121c82f-a103-4100-ba20-dbff9da077d1"/>
+					<subreportParameter name="T_BIDDER_ID">
+						<subreportParameterExpression><![CDATA[$P{T_BIDDER_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SEC_KEY">
+						<subreportParameterExpression><![CDATA[$P{SEC_KEY}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="IV_PREFIX">
+						<subreportParameterExpression><![CDATA[$P{IV_PREFIX}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Item_Quoted_Status.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

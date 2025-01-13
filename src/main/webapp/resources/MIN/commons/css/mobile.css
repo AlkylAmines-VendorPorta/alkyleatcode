@@ -1,0 +1,225 @@
+@media only screen and (max-width: 768px) {
+	#mobile_second_container {
+		display: none;
+		margin-top: 35px;
+		position: inherit;
+		padding: 0px;
+	}
+	#mobile_first_container {
+		/* z-index: 99999; */
+		margin-top: 36px;
+		position: relative;
+	}
+	.logo {
+		width: 30px;
+		
+		height: 30px;
+		padding: 0px;
+		margin-top: 2px;
+		margin-left: 10px;
+	}
+	.paginate-pagination {
+		position: absolute;
+		bottom: 16px;
+		left: 10px;
+	}
+	.cellpading{padding:0px;}
+	.topview {
+		padding: 2px 8px;
+	}
+	.SlMdview {
+		padding: 2px 8px;
+	}
+	.tabs-left {
+		border-right: 1px solid #ddd;
+		height: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+		margin-top: -2px;
+		position: relative;
+		margin-bottom: 70px;
+	}
+	/* .nav-tabs li a {
+		padding: 5px 0px;
+	} */
+	.feedback-tab {
+		font-size: 22px;
+		width: 35px;
+		height: 40px;
+	}
+	.mobnav>li>a {
+		padding: 10px 10px;
+	}
+	.mob-body {
+		padding: 0px;
+	}
+	#mobile_Batch_container {
+		display: none;
+		margin-top: 36px;
+		position: inherit;
+	}
+	#mobile_Auction_container {
+		z-index: 99999;
+		margin-top: 0px;
+		position: inherit;
+		padding: 0px;
+	}
+	.navlogo {
+		width: 120px;
+		height: 25px;
+	}
+	.tab-pane {
+		margin-bottom: 40px;
+	}
+	.goBack {
+		display: block;
+	}
+	.mobbtn {
+		margin-bottom: 5px;
+	}
+	.actionbutton {
+		display: none;
+	}
+	#MainProductTiles {
+		margin-top: 40px;
+	}
+	#ProductDetailsTiles {
+		margin-top: 38px !important;
+		margin-bottom: 20px;
+	}
+	.tiles {
+		margin: 9px auto !important
+	}
+	#custom-search-input {
+		padding: 0px;
+		background: transparent;
+	}
+	.input-group {
+		width: 100%;
+	}
+	.header {
+		margin-bottom: 0px;
+	}
+	li a span {
+		padding-right: 1px !important;
+	}
+	li a span .col-sm-6 {
+		padding-right: 1px !important;
+	}
+	.tiles_background {
+		background-size: cover;
+	}
+	#MainProductTiles {
+		margin-bottom: 25px;
+	}
+	.tabs-left>li.active>a, .tabs-left>li.active>a:hover, .tabs-left>li.active>a:focus
+		{
+		border-bottom-color: #ddd;
+		border-right-color: #ddd;
+		background: #fff !important;
+		color: #555 !important;
+	}
+	.tiles_background {
+		background-size: 100% 100% !important;
+		background-repeat: no-repeat !important;
+		width: 100% !important;
+		height: 100% !important;
+		background-attachment: fixed !important;
+	}
+	.tab_bar_one>li {
+		float: left;
+		margin-bottom: -1px;
+		width: 50%;
+		padding-left: 12px;
+	}
+	.tab_bar_one {
+		position: fixed;
+		top: 37px;
+		left: 0px;
+		right: 0px;
+		background: #f3cfcf;
+		z-index: 99;
+	}
+	.tab_bar_two {
+		position: fixed;
+		top: 70px;
+		left: 0px;
+		right: 0px;
+		background: #f3cfcf;
+		z-index: 99;
+	}
+	.tab_bar_two {
+		background: #ffffff;
+		padding-top: 7px;
+	}
+	.tab_bar_two_content {
+		margin-top: 45px;
+	}
+	.padding35 {
+		padding-top: 35px;
+	}
+	.padding45 {
+		padding-top: 45px;
+	}
+	.mobileNoPadding {
+		padding: 0px !important;
+	}
+	#myTab2 {
+		border: none;
+	}
+	#myTab2 li a {
+		padding: 10px 15px;
+	}
+	#myTab>li.active>a, #myTab>li.active>a:hover, #myTab>li.active>a:focus {
+		color: #fff !important;
+		cursor: default !important;
+		background-color: #607e89 !important;
+		border: navajowhite !important;
+	}
+.scrtabs-tab-container{
+		height: 42px;
+		border-bottom: 1px solid #ededed;
+		border-top: 1px solid #ededed;
+		    position: fixed;
+    top: 44px;
+    background: #fff;
+    z-index: 9999;
+    right: 15px;
+    left: 15px;
+	}
+	.top80 {
+		margin-top: 45px;
+	}
+	.disnonemob {
+		display: none;
+	}
+	.nonepadd {
+		padding: 0px 0px;
+		padding-bottom: 10px;
+	}
+	#myTabContent2 {
+		margin-top: 65px !important;
+		padding-top: 0px;
+	}
+	.first-level-tab{    position: fixed;
+    top: 45px;
+    background: #fff;
+    z-index: 9999;
+    right: 15px;
+    left: 15px;}
+    .Subvender {
+    margin-left: 0px; 
+}
+.btnmrg{    margin-top: 15px;}
+#mdbcontainer {
+		display: none;
+		margin-top: 35px;
+		position: inherit;
+		padding: 0px;
+	}
+	#mdbnew_first_container {
+		/* z-index: 99999; */
+		margin-top: 36px;
+		position: relative;
+	}
+}

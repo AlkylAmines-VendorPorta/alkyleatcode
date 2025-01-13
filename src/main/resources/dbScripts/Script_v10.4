@@ -1,0 +1,12 @@
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,M_BPARTNER_ID) values
+(155,16,'Y','DOCUMENT_STATUS','ASCH','Auction Scheduling', SYSDATE, SYSDATE ,'Auction Scheduling',2);
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,M_BPARTNER_ID,AUCTION_URL) values
+(156,25,'Y','MY_TENDER_BUTTON','LIVBID','LIVE BID', SYSDATE, SYSDATE ,'LIVE BID',2,'myLiveBid');
+
+
+alter table M_WITHHOLDING_TAX_CODE add (created_session_id varchar2(255));
+alter table M_WITHHOLDING_TAX_CODE add (UPDATED_SESSION_ID varchar2(255));
+
+COMMIT;
+

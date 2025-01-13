@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-11T11:46:37 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Technical_Deviation_Details" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="0d601c75-fb3f-40ea-9c34-c467d00ff30c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="T_TECHNICAL_BID_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT A.T_TAHDR_ID, A.VALUE AS TENDER_CODE 
+,C.T_TAHDR_MATERIAL_ID
+,D.NAME AS ITEM_NAME, D.VALUE AS ITEM_CODE
+,G.NAME AS PARTNER , G.CRN_NUMBER AS REG_NO
+,H.T_TECHNICAL_BID_ID
+,K.NAME GTP_PARAMETER
+, L.VALUE
+,CASE WHEN L.VALUE='FILE' THEN TO_CHAR(M.FILE_NAME) ELSE coalesce (I.TEXT_RESPONSE,'')  END AS RESPONSE
+,CONFIG.NAME AS Report_Dir,A.value AS TENDERCODE
+,M.PATH,M.NAME AS PHYS_NAME
+,N.NAME AS FACTORY
+FROM T_TAHDR A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+INNER JOIN T_TAHDR_DETAIL B ON (A.T_TAHDR_ID=B.T_TAHDR_ID AND B.ISACTIVE='Y')
+INNER JOIN T_TAHDR_MATERIAL C ON (B.T_TAHDR_DETAIL_ID = C.T_TAHDR_DETAIL_ID)
+INNER JOIN M_MATERIAL D ON (C.T_MATERIAL_ID= D.M_MATERIAL_ID)
+INNER JOIN T_ITEM_BID E ON (C.T_TAHDR_MATERIAL_ID = E.T_TAHDR_MATERIAL_ID)
+INNER JOIN T_BIDDER F ON (E.T_BIDDER_ID= F.T_BIDDER_ID)
+INNER JOIN M_BPARTNER G ON (F.M_BPARTNER_ID = G.M_BPARTNER_ID)
+INNER JOIN T_TECHNICAL_BID H ON (E.T_ITEM_BID_ID= H.T_ITEM_BID_ID)
+INNER JOIN T_BIDDER_GTP I ON (H.T_TECHNICAL_BID_ID = I.T_TECHNICAL_BID_ID)
+INNER JOIN T_TAHDR_MATERIAL_GTP J ON (I.T_TAHDR_MATERIAL_GTP_ID = J.T_TAHDR_MATERIAL_GTP_ID)
+INNER JOIN M_GTP_PARAMETER K ON (J.M_GTP_ID= K.M_GTP_PARAMETER_ID)
+INNER JOIN M_GTP_PARAMETERTYPE L ON (L.M_GTP_PARAMETERTYPE_ID= K.M_GTP_PARAMETERTYPE_ID)
+LEFT OUTER JOIN M_ATTACHMENT M ON (M.M_ATTACHMENT_ID=I.FILE_RESPONSE)
+LEFT OUTER JOIN M_BP_ORG N ON (F.M_BP_ORG_ID=  N.M_BP_ORG_ID)
+WHERE  H.T_TECHNICAL_BID_ID= $P{T_TECHNICAL_BID_ID}]]>
+	</queryString>
+	<field name="T_TAHDR_ID" class="java.math.BigDecimal"/>
+	<field name="TENDER_CODE" class="java.lang.String"/>
+	<field name="T_TAHDR_MATERIAL_ID" class="java.math.BigDecimal"/>
+	<field name="ITEM_NAME" class="java.lang.String"/>
+	<field name="ITEM_CODE" class="java.lang.String"/>
+	<field name="PARTNER" class="java.lang.String"/>
+	<field name="REG_NO" class="java.lang.String"/>
+	<field name="T_TECHNICAL_BID_ID" class="java.math.BigDecimal"/>
+	<field name="GTP_PARAMETER" class="java.lang.String"/>
+	<field name="VALUE" class="java.lang.String"/>
+	<field name="RESPONSE" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="PHYS_NAME" class="java.lang.String"/>
+	<field name="FACTORY" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="100">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="80" uuid="75141424-0390-4dfb-98f7-9fb754f9c7ee"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#3BEDED" uuid="e9b312b8-05ba-4ae5-ba4f-be31fb596a5a"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Guaranteed Technical Particulars"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="40" width="555" height="40" uuid="6bef9c7e-879f-4885-9cca-05549eae40be"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ItemName: "+$F{ITEM_NAME}+". AS PER TECHNICAL SPECIFICATION ANNEXURE 'D' ItemCode: "+$F{ITEM_CODE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="80" width="556" height="20" uuid="ac05b9a2-bec8-4976-8a44-466faedcf798">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textField>
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="80" height="20" backcolor="#F4F78B" uuid="8e37985f-7a16-4bea-882b-524e0eff18ca"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Sr. No."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="80" y="0" width="352" height="20" backcolor="#F0F788" uuid="8ad2a27e-7a4c-48b9-9f11-3a24d7344269"/>
+					<box>
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["GTP Parameter"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="432" y="0" width="123" height="20" backcolor="#EEF589" uuid="925fe4db-6943-4328-bb6e-0a30c7bbfb7d"/>
+					<box>
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["GTP Value"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="34" uuid="e11a6a35-e3bb-464a-9bed-3d3bfb04d14d"/>
+				<textField>
+					<reportElement x="80" y="0" width="352" height="34" uuid="c4b22429-78e2-4cfd-99b4-ce2c215d7f7e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{GTP_PARAMETER}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement x="432" y="0" width="123" height="34" uuid="822cbb3d-341b-4f0b-a4d2-75dc7e3c43e5">
+						<printWhenExpression><![CDATA["FILE".equals($F{VALUE})]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{RESPONSE}==null?"NA":$F{RESPONSE}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{PHYS_NAME}]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="80" height="34" uuid="0c0d9fd3-d3c3-4a70-833b-670e208090d1"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="432" y="0" width="123" height="34" uuid="84ccd233-d8dc-48d1-b881-86142d20dde1">
+						<printWhenExpression><![CDATA[$F{VALUE} !="FILE"]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{RESPONSE}==null?"NA":$F{RESPONSE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<noData>
+		<band height="50">
+			<frame>
+				<reportElement positionType="Float" x="0" y="18" width="565" height="30" uuid="6ad1b6f1-6913-4cf8-aaf5-6039ece55d88"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="565" height="30" backcolor="#74ECF7" uuid="21b9d95c-e0f7-4ae0-b886-136258f2af34"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NO GTP FOUND"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</noData>
+</jasperReport>

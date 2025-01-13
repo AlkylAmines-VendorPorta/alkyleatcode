@@ -1,0 +1,34 @@
+alter table m_bank_branch_details add column c_region_id numeric;
+
+alter table t_advance_shipment_notice add column t_purchase_order_id numeric;
+
+alter table t_advance_shipment_notice add column basic_amount numeric;
+alter table t_advance_shipment_notice add column igst numeric;
+alter table t_advance_shipment_notice add column sgst numeric;
+alter table t_advance_shipment_notice add column cgst numeric;
+alter table t_advance_shipment_notice add column packing_charges numeric;
+alter table t_advance_shipment_notice add column freight_charges numeric;
+alter table t_advance_shipment_notice add column invoice_doc numeric;
+
+
+alter table t_advance_shipment_notice add column status varchar(255);
+alter table t_advance_shipment_notice add column name_of_driver varchar(255);
+alter table t_advance_shipment_notice add column mobile_no varchar(255);
+alter table t_advance_shipment_notice add column id_proof varchar(255);
+alter table t_advance_shipment_notice add column id_proof_attachment varchar(255);
+
+alter table t_purchase_order_line add column uom varchar(255);
+alter table t_purchase_order_line add column currency varchar(255);
+alter table t_purchase_order_line add column asn_quantity numeric;
+alter table t_purchase_order add column remark varchar(255);
+
+alter table t_advance_shipment_notice_line add column shortage_qty numeric;
+alter table t_advance_shipment_notice_line add column rejected_qty numeric;
+alter table t_advance_shipment_notice_line add column confirm_qty numeric;
+
+alter table t_advance_shipment_notice
+ALTER column advance_shipment_notice_no type INT USING advance_shipment_notice_no::integer;
+alter table t_advance_shipment_notice add column irn varchar(255);
+alter table t_advance_shipment_notice add column loading_charges numeric;
+
+alter table ad_user add column user_name varchar(255);

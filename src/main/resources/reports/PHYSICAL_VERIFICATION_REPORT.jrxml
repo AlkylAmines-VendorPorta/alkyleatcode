@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-06T21:16:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PHYSICAL_VERIFICATION_REPORT" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="ec365f7d-a96e-48a8-892c-61f7e2212957">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="M_BP_ORG_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+        CASE WHEN A.IS_NOTE_RECEIVED = 'Y' THEN 'YES' ELSE 'NO' END AS IS_NOTE_RECEIVED,
+        CASE WHEN A.IS_CAPABLE_FOR_MANUFACTURING = 'Y' THEN 'YES' ELSE 'NO' END AS IS_CAPABLE_FOR_MANUFACTURING,
+        CASE WHEN A.IS_ADEQUET_TESTING = 'Y' THEN 'YES' ELSE 'NO' END AS IS_ADEQUET_TESTING,
+        CASE WHEN A.IS_FINANCIALLY_CAPABLE = 'Y' THEN 'YES' ELSE 'NO' END AS IS_FINANCIALLY_CAPABLE,
+        CASE WHEN A.IS_ALL_INSPECTIONREPORT_FILLED = 'Y' THEN 'YES' ELSE 'NO' END AS IS_ALL_INSPECTIONREPORT_FILLED,
+        CASE WHEN A.IS_MACHINE_WORKING = 'Y' THEN 'YES' ELSE 'NO' END AS IS_MACHINE_WORKING,
+        CASE WHEN A.IS_CALIBRATION_CERTIFIED = 'Y' THEN 'YES' ELSE 'NO' END AS IS_CALIBRATION_CERTIFIED,
+    A.CE_COMMENT
+    FROM M_BP_ORG_INSPECTION A 
+    WHERE A.M_BP_ORG_ID = $P{M_BP_ORG_ID}]]>
+	</queryString>
+	<field name="IS_NOTE_RECEIVED" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_NOTE_RECEIVED"/>
+	</field>
+	<field name="IS_CAPABLE_FOR_MANUFACTURING" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_CAPABLE_FOR_MANUFACTURING"/>
+	</field>
+	<field name="IS_ADEQUET_TESTING" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_ADEQUET_TESTING"/>
+	</field>
+	<field name="IS_FINANCIALLY_CAPABLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_FINANCIALLY_CAPABLE"/>
+	</field>
+	<field name="IS_ALL_INSPECTIONREPORT_FILLED" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_ALL_INSPECTIONREPORT_FILLED"/>
+	</field>
+	<field name="IS_MACHINE_WORKING" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_MACHINE_WORKING"/>
+	</field>
+	<field name="IS_CALIBRATION_CERTIFIED" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="IS_CALIBRATION_CERTIFIED"/>
+	</field>
+	<field name="CE_COMMENT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CE_COMMENT"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="50" uuid="81ad5efc-ad05-4ae7-a047-e9dda6df86fd"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="554" height="50" backcolor="#7EEDE8" uuid="86ff1030-bc9a-4288-8f01-2ad1c008e187"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Physical Verification Report"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="30" width="554" height="70" uuid="5d3b3e6b-4d82-4821-b292-75d8e5275074"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="554" height="40" backcolor="#7EEDE8" uuid="2aa353fa-b6dd-4658-9ced-bd5fee19d467"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Factory Verification"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="40" width="70" height="30" backcolor="#EFF233" uuid="0f5b7a21-16de-4a74-b84d-ee6e01c5d581"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Sr No"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="70" y="40" width="284" height="30" backcolor="#EFF233" uuid="bac3cb61-76ef-451f-8b34-84cd95bc4836"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Check List Name"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="354" y="40" width="200" height="30" backcolor="#EFF233" uuid="9c3eac12-f878-4747-872b-5ff3dad930f6"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Status"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="253" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="210" uuid="c06bf421-8a4b-4d5b-a653-129357dabf1e"/>
+				<textField>
+					<reportElement x="0" y="0" width="70" height="30" uuid="81026475-64b4-460e-a264-2629c915e1b9"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="0" width="284" height="30" uuid="03c47053-de8f-4a49-b2e9-03ad70d2d361"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether note received from Committee"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="30" width="70" height="30" uuid="5b23ec0e-6d39-4f1c-8eda-6d6a2994ec3b"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="60" width="70" height="30" uuid="98dbb61a-7b31-40d4-b28e-ae47361ed4c3"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["3"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="90" width="70" height="30" uuid="b284f390-cbd8-4675-aa84-5b9389ef512e"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="120" width="70" height="30" uuid="2ff78add-1547-437e-b35c-6637832bf254"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["5"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="150" width="70" height="30" uuid="3f356c9a-de25-436b-827c-f521c62268fe"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["6"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="180" width="70" height="30" uuid="2b089507-d448-48b1-bd49-08ff8d668a00"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["7"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="30" width="284" height="30" uuid="47bba80a-3da7-452e-8509-0b345134a59e"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether the factory/works is capable of manufacturing the items stated"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="60" width="284" height="30" uuid="25b462aa-008a-4aa2-869d-36695641b201"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether the factory/works is having adequate testing facility for items"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="90" width="284" height="30" uuid="7b3fc832-a495-447a-8ad4-f10767dc908f"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether the manufacturer is having adequate financial resources/capacity to execute the order"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="120" width="284" height="30" uuid="d034cba5-f4a4-4bdf-9e42-7e5a00613aed"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether all required details in factory inspection report are filled"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="150" width="284" height="30" uuid="d2874063-b021-42e0-9db6-5b10cdc89d46"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether all the machines listed in the list given by the manufacturer are in working condition"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="70" y="180" width="284" height="30" uuid="af18e8fd-7a7e-4f31-a4ab-6f7b540e154d"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Whether all the testing equipments are having valid calibration certificate"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="354" y="0" width="200" height="30" forecolor="#206E3B" uuid="4992c06a-bcec-4025-8114-8f9f64f6b82e">
+						<printWhenExpression><![CDATA[$F{IS_NOTE_RECEIVED}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_NOTE_RECEIVED}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="30" width="200" height="30" forecolor="#206E3B" uuid="f942d76c-eee5-4b33-8486-c814bc3f743d">
+						<printWhenExpression><![CDATA[$F{IS_CAPABLE_FOR_MANUFACTURING}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_CAPABLE_FOR_MANUFACTURING}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="60" width="200" height="30" forecolor="#206E3B" uuid="2f720f01-95cb-4937-8a4c-ed743f07734f">
+						<printWhenExpression><![CDATA[$F{IS_ADEQUET_TESTING}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_ADEQUET_TESTING}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="90" width="200" height="30" forecolor="#206E3B" uuid="9e244f6c-ac5a-4603-9638-6bb7dfd31132">
+						<printWhenExpression><![CDATA[$F{IS_FINANCIALLY_CAPABLE}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_FINANCIALLY_CAPABLE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="120" width="200" height="30" forecolor="#206E3B" uuid="9b8b8961-a61c-4734-8560-7dfe1104d83b">
+						<printWhenExpression><![CDATA[$F{IS_ALL_INSPECTIONREPORT_FILLED}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_ALL_INSPECTIONREPORT_FILLED}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="150" width="200" height="30" forecolor="#206E3B" uuid="69b289bf-3d4b-46b4-b4e9-aa8b08c6d719">
+						<printWhenExpression><![CDATA[$F{IS_MACHINE_WORKING}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_MACHINE_WORKING}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="180" width="200" height="30" forecolor="#206E3B" uuid="0509430d-c1d9-4c63-8082-631ed5af494a">
+						<printWhenExpression><![CDATA[$F{IS_CALIBRATION_CERTIFIED}.equals("YES")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_CALIBRATION_CERTIFIED}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="0" y="255" width="554" height="30" uuid="2fac93cf-10e0-4f2c-979d-0115e1aeff91"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="554" height="30" uuid="002b1a17-e3f3-40a3-836b-182f22a0d352"/>
+						<box>
+							<topPen lineWidth="0.9"/>
+							<leftPen lineWidth="0.9"/>
+							<bottomPen lineWidth="0.9"/>
+							<rightPen lineWidth="0.9"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{CE_COMMENT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField isBlankWhenNull="true">
+					<reportElement x="354" y="0" width="200" height="30" forecolor="#F5112F" uuid="9d7eb38c-deec-4940-ab10-de3917743919">
+						<printWhenExpression><![CDATA[$F{IS_NOTE_RECEIVED}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_NOTE_RECEIVED}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="30" width="200" height="30" forecolor="#F5112F" uuid="c86b2aae-ab86-49a9-867e-5a29ef287eb6">
+						<printWhenExpression><![CDATA[$F{IS_CAPABLE_FOR_MANUFACTURING}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_CAPABLE_FOR_MANUFACTURING}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="60" width="200" height="30" forecolor="#F5112F" uuid="5a6e5734-c5a6-4389-95dd-4a13497dfe9c">
+						<printWhenExpression><![CDATA[$F{IS_ADEQUET_TESTING}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_ADEQUET_TESTING}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="90" width="200" height="30" forecolor="#F5112F" uuid="e27a2cec-2bcb-43fb-b672-cf909cc34fa0">
+						<printWhenExpression><![CDATA[$F{IS_FINANCIALLY_CAPABLE}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_FINANCIALLY_CAPABLE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="120" width="200" height="30" forecolor="#F5112F" uuid="2d56601b-3f9a-4eae-9f2b-8c34def1e8b8">
+						<printWhenExpression><![CDATA[$F{IS_ALL_INSPECTIONREPORT_FILLED}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_ALL_INSPECTIONREPORT_FILLED}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="150" width="200" height="30" forecolor="#F5112F" uuid="2c9ad3a3-c50a-4f7e-bbf2-e6ce2bd2dd4c">
+						<printWhenExpression><![CDATA[$F{IS_MACHINE_WORKING}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_MACHINE_WORKING}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="180" width="200" height="30" forecolor="#F5112F" uuid="cc5b6214-4aa1-41ec-859f-42e1b28990ce">
+						<printWhenExpression><![CDATA[$F{IS_CALIBRATION_CERTIFIED}.equals("NO")]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="0.9"/>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IS_CALIBRATION_CERTIFIED}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="220" width="554" height="30" backcolor="#84E2F5" uuid="00feaafa-7c00-44f0-be6a-cde86ef7c8aa"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CE Comments"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="34" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

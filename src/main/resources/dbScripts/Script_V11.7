@@ -1,0 +1,8 @@
+alter table t_payment add fo_approved_date TIMESTAMP(6);
+alter table t_payment add fa_approved_date TIMESTAMP(6);
+
+ALTER TABLE M_TILE ADD M_PARENT_ID NUMBER(10,0);
+
+UPDATE M_TILE T SET T.M_PARENT_ID=T.PARENT_ID;
+
+COMMIT;

@@ -1,0 +1,25 @@
+alter table T_PRICE_BID add clause5a VARCHAR2(255 char);
+alter table T_PRICE_BID add clause5b VARCHAR2(255 char);
+
+alter table T_PRICE_BID add is_C1_file_Submitted VARCHAR2(255 char);
+
+
+ALTER TABLE t_tahdr
+MODIFY title VARCHAR2(2000 CHAR);
+
+
+Alter table m_charge add  M_HSN_ID NUMBER(19,0);
+
+
+Insert into M_HSN (M_HSN_ID,CREATED,ISACTIVE,UPDATED,VALUE,DESCRIPTION,NAME,CREATEDBY,M_BPARTNER_ID,UPDATEDBY) 
+values (3249,to_timestamp('12-06-18 07:45:10.000000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'Y',to_timestamp('12-06-18 07:45:10.000000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'9984','Tender/Auction fee','TF',1,1,1);
+
+Insert into M_HSN (M_HSN_ID,CREATED,ISACTIVE,UPDATED,VALUE,DESCRIPTION,NAME,CREATEDBY,M_BPARTNER_ID,UPDATEDBY) 
+values (3250,to_timestamp('12-06-18 07:45:10.000000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'Y',to_timestamp('12-06-18 07:45:10.000000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'998599','Registration/Renewal Fee','RF',1,1,1);
+
+update m_charge set m_hsn_id=3250 where m_charge_id in(1,2);
+update m_charge set m_hsn_id=3249 where m_charge_id in(3,4);
+
+alter table ad_user_details add other_designation_desc VARCHAR2(255 CHAR);
+
+COMMIT;

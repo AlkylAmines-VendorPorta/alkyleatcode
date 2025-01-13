@@ -1,0 +1,62 @@
+1)Inserting Records in m_bpartner Table:
+INSERT INTO public.m_bpartner(m_bpartner_id,created,isactive,updated,name,vendor_sap_code)	
+select(nextval('m_bpartner_seq')),current_timestamp,'Y',current_timestamp,vendor_name,vendor_code from tmp_company_details;
+
+
+2)Inserting Records in ad_user_details Table:
+insert into ad_user_details(ad_user_details_id,created,isactive,updated,createdby,updatedby,email,name,user_detail_type,m_bpartner_id)
+select  nextval('ad_user_details_seq'),current_timestamp,'Y',current_timestamp,1,1,email,vendor_name,'COMPUSR',b.m_bpartner_id from tmp_company_details a inner join m_bpartner b on a.vendor_code=b.vendor_sap_code and a.vendor_name=b.name  
+
+3)Inserting Records in ad_user Table:
+INSERT INTO ad_user(
+ad_user_id,created,isactive,updated,createdby,updatedby,name,user_name,email,m_bpartner_id,ad_user_details_id ) 	
+select (nextval('ad_user_seq')),current_timestamp,'Y',current_timestamp,1,1,a.vendor_name,a.vendor_code,a.email,b.m_bpartner_id,c.ad_user_details_id
+from tmp_company_details a inner join m_bpartner b on a.vendor_code=b.vendor_sap_code inner join ad_user_details c on b.m_bpartner_id=c.m_bpartner_id ;
+
+
+4)Inserting Records in ad_user_roles Table:
+INSERT INTO ad_user_roles(
+ad_user_roles_id,created,isactive,updated,createdby,updatedby,m_bpartner_id,ad_role_id,ad_user_id) 
+select nextval('ad_user_roles_seq'),current_timestamp,'Y',current_timestamp,1,1,a.m_bpartner_id,2,a.ad_user_id
+from ad_user a inner join m_bpartner b on a.m_bpartner_id=b.m_bpartner_id inner join tmp_company_details c on
+c.vendor_code=b.vendor_sap_code ;
+
+5) Inserting Records in c_location Table:  
+insert into c_location(c_location_id,created,isactive,updated,createdby,updatedby,address_1,address_2,address_3,city,postal,m_country_id,m_bpartner_id) 
+select 
+(nextval('c_location_seq')),current_timestamp,'Y',current_timestamp,1,1,address_line_1,address_line_2,address_line_3,district,postal_code,1,b.m_bpartner_id from tmp_address_details a 
+inner join m_bpartner b on cast(a.vendor_code as character varying)=b.vendor_sap_code 
+
+6)Updating Kyc Info in m_bpartner:
+update m_bpartner  set gstin_no=b.gst_number,pan_no=b.pan_no from tmp_kyc_details b where vendor_sap_code=b.vendor_code a inner join m_bpartner b on a.vendor_code=b.vendor_sap_code	   
+
+7)Inserting Records in m_bank_branch_details Table:
+insert into m_bank_branch_details(m_bank_branch_details_id,created,isactive,updated,createdby,updatedby,branch_name,
+								 ifsc_code,branch_state,m_bpartner_id)
+select nextval('m_bank_branch_details_seq'),current_timestamp,'Y',current_timestamp,1,1,branch_name,ifsc_code,branch_state,b.m_bpartner_id
+from tmp_bank_details a inner join m_bpartner b on a.vendor_code=b.vendor_sap_code								 
+
+
+
+8)Inserting Records in m_bp_bank_detail Table:
+insert into m_bp_bank_detail(m_bp_bank_detail_id,created,isactive,updated,createdby,updatedby,m_bpartner_id,account_number,benificiary_name,ifsc_code,m_bank_branch_details_id)
+select nextval('m_bp_bank_detail_seq'),current_timestamp,'Y',current_timestamp,1,1,b.m_bpartner_id,a.account_number,a.name_on_check,a.ifsc_code,c.m_bank_branch_details_id
+from tmp_bank_details a inner join m_bpartner b on a.vendor_code=b.vendor_sap_code inner join m_bank_branch_details c on c.m_bpartner_id=b.m_bpartner_id								 
+
+
+
+9)Inserting Records in m_bp_company_address Table:
+insert into m_bp_company_address(m_bp_company_address_id,created,isactive,updated,createdby,updatedby,
+m_bpartner_id,c_location_id,locationtype,is_primary_account ) 
+SELECT nextval('m_bp_company_address_seq'),current_timestamp,'Y',current_timestamp,1,1,a.m_bpartner_id,c_location_id,
+'COMP_ADDR','Y'
+from c_location a inner join m_bpartner b on a.m_bpartner_id=b.m_bpartner_id 
+inner join tmp_address_details c on b.vendor_sap_code=cast(c.vendor_code as character varying)
+
+
+10) inserting Records into m_bp_kyc:
+insert into m_bp_kyc(m_bp_kyc_id,created,isactive,updated,createdby,updatedby,
+m_bpartner_id ) 
+SELECT nextval('m_bp_kyc_seq'),current_timestamp,'Y',current_timestamp,1,1,b.m_bpartner_id
+from tmp_kyc_details a inner join m_bpartner b on b.vendor_sap_code=a.vendor_code
+

@@ -1,0 +1,39 @@
+/* @CHARSET "ISO-8859-1";
+.k-tabstrip>.k-tabstrip-items>.k-item {
+    text-transform: capitalize;
+    border-bottom: 0px !important;
+    background: #d2e4f7;
+    border-right: 2px solid;
+}.Firsttab>.k-tabstrip-items>.k-item:hover {
+    background-color: #2066a1 !important;
+    border-bottom: none !important;
+    border-top:transprent;
+    
+}.Firsttab>.k-tabstrip-items .k-state-active {
+    background-color: #2066a1 !important;}
+    .Firsttab>.k-tabstrip-items>.k-state-active>.k-link {
+    color: #fff;
+} .Firsttab>.k-tabstrip-items>.k-state-hover>.k-link {
+    color: #fff;
+}
+.k-tabstrip>.k-tabstrip-items>.k-item:hover {
+    background-color: #2066a1 !important;
+    border-bottom: none !important;
+    border-top:transprent;
+    
+}.k-tabstrip>.k-tabstrip-items .k-state-active {
+    background-color: #2066a1 !important;
+    pointer-events: none;
+}
+    .k-tabstrip>.k-tabstrip-items>.k-state-active>.k-link {
+    color: #fff;
+} .k-tabstrip>.k-tabstrip-items>.k-state-hover>.k-link {
+    color: #fff;
+}
+.k-widget.k-tabstrip {
+    background-image: none;
+    border-style: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-top: 1px solid #2066a1;
+} */

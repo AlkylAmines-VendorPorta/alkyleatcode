@@ -1,0 +1,272 @@
+#607e89:#607e89;
+#a3c5d2: #a3c5d2;
+#a3c5d2: #a3c5d2;
+/* @bodyback: url('../images/1.jpg'); */
+.tiles_background {
+    background-image:url('../images/1.jpg');
+    background-size: 100% 100% !important;
+	background-repeat: no-repeat !important;
+	width: 100% !important;
+	height: 100% !important;
+	background-attachment: fixed !important;
+}
+
+.nav-side-menu li a {
+    text-decoration: none;
+    background: transparent;
+    color:#607e89;
+}
+.nav-tabs > li > a:hover {
+  border-color: #a3c5d2;
+}
+.Firsttab>.k-tabstrip .k-content.k-state-active {
+    border-color: transparent;
+    padding-top: 0px;
+}
+.k-tabstrip .k-content.k-state-active {
+    border-color: transparent;
+    padding-top: 10px;
+}
+.Firsttab>.k-tabstrip-items{background-color:#a3c5d2}
+.Firsttab>.k-tabstrip-items>.k-state-active {
+    background-color: #607e89;
+    background-image: none;
+    border-bottom:4px solid #607e89;
+}
+.Firsttab>.k-tabstrip-items>.k-state-active>.k-link{color:#fff;}
+.k-panelbar .k-tabstrip-items .k-state-active, .k-tabstrip-items .k-state-active {
+    background-color: transparent;
+    background-image: none;
+    border-bottom:4px solid #607e89;
+}
+.k-tabstrip-items .k-item.k-state-hover {
+	  background-color: transparent;
+    background-image: none;
+    border-bottom:2px solid  #a3c5d2;;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #555;
+  cursor: default;
+  background-color:transparent;
+  
+}
+a {
+    text-decoration: none;
+}
+
+.nav-side-menu ul .sub-menu li:hover,
+.nav-side-menu li .sub-menu li:hover {
+    background-color: #a3c5d2;
+}
+
+.nav-side-menu li:hover {
+    border-left: 3px solid #d19b3d;
+    background-color: #a3c5d2;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.panel-default {
+    border-color: #a3c5d2;
+}
+
+.panel-default > .panel-heading {
+    color: #607e89;
+    background-color: #a3c5d2;
+    border-color: #a3c5d2;
+}
+.panel-title {
+    font-weight: bold;
+    }
+#sidebar-wrapper.active {
+    background-color: #fff;
+}
+
+.nav-side-menu .brand {
+    background-color: #607e89;
+}
+
+.nav-side-menu ul .active,
+.nav-side-menu li .active {
+    background-color: #a3c5d2;
+    color: #607e89;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #607e89;
+    border-color: #a3c5d2;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+    border-radius: 0px;
+}
+
+.btn-info:hover {
+    background-color: #a3c5d2;
+}
+
+.navbar-toggle {
+    background-color: #607e89;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.tab_bar_one > li.active > a,
+.tab_bar_one > li.active > a:hover,
+.tab_bar_one > li.active > a:focus {
+    color: #607e89;
+    cursor: default;
+    background-color: transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 3px solid #607e89;
+}
+
+.header {
+    background-color: #607e89;
+    float: left;
+    font-size: 13px;
+    font-weight: 600;
+    /*box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);*/
+    width: 100%;
+    padding: 0px 0px 5px 0px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 999;
+}
+
+.tiles {
+background-color: rgba(237, 237, 237, 0.09);
+    padding: 10px;
+    box-shadow: 2px 1px 1px #000;
+    border-radius: 5px;
+    color: #fff;
+    width: 80%;
+    margin: 20px auto;
+    min-height: 185px;
+    cursor: pointer;
+    position: relative;
+}
+
+.footer {
+    background-color: #607e89;
+    position: fixed;
+    bottom: 0px;
+    padding: 5px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+        padding-top: 0px;
+}
+
+.tabs-left>li.active>a,
+.tabs-left>li.active>a:hover,
+.tabs-left>li.active>a:focus {
+    border-bottom-color: #ddd;
+    border-right-color: #ddd;
+    background: #a3c5d2;
+    color: #607e89;
+}
+
+.colorpicker li {
+    list-style-type: none;
+    list-style-type: none;
+    float: left;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 5px 7px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.backgroundImg li {
+    list-style-type: none;
+    list-style-type: none;
+    float: left;
+    display: inline-block;
+    height: 35px;
+    width: 60px;
+    margin: 5px 7px;
+    cursor: pointer;
+}
+
+.button {
+    &:hover {
+        background-color: lighten(green, 5%);
+        cursor: pointer;
+        cursor: hand;
+    }
+    width: 100px;
+    height: 50px;
+    background-color: green;
+    color: white;
+    text-align:center;
+    line-height:50px;
+    border-radius: 30px;
+}
+.tab_bar_one {
+		background: #a3c5d2;
+	}
+	.tab_bar_two>li.active>a, .tab_bar_two>li.active>a:hover, .tab_bar_two>li.active>a:focus
+	{
+	
+	border-bottom: 3px solid #a3c5d2;
+}
+.k-block, .k-draghandle, .k-grid-header, .k-grouping-header, .k-header, .k-pager-wrap, .k-treemap-tile, html .km-pane-wrapper .k-header {
+    background-color: #ffffff;
+    border-bottom: none !important;
+}
+.k-button.k-bare {
+    border-color: transparent!important;
+    color: #040404 !important;
+    background: 0 0!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    opacity: .7;
+}
+.k-reset {
+    border-bottom: none;
+}
+.k-pager-wrap, .k-panelbar .k-tabstrip-items .k-item, .k-picker-wrap, .k-progressbar, .k-state-highlight, .k-tabstrip-items .k-item, .k-textbox, .km-pane-wrapper>.km-pane>.km-view>.km-content {
+    background-image: none;
+    background-image: none,-webkit-gradient(linear,left top,left bottom,from(false));
+    background-image: none,-webkit-linear-gradient(top,false);
+    background-image: none,linear-gradient(to bottom,false);
+    background-position: 50% 50%;
+    background-color: transparent;
+    color: #000;
+}
+.k-panelbar>li.k-state-default>.k-link, .k-tabstrip-items .k-item .k-link {
+    color: #000;
+    text-transform: initial;
+}
+.k-panelbar .k-tabstrip>.k-content, .k-tabstrip>.k-content {
+    position: static;
+    border-style: solid;
+    border-width: 0px;
+    margin: 0 .286em .3em;
+    padding: 0px;
+    zoom: 1;
+}
+.Firsttab{    background: #a3c5d2;}
+.k-tabstrip-top>.k-tabstrip-items>.k-item {
+    border-bottom-width: 4px;
+    margin-bottom: 0px;
+}
+.k-tabstrip:focus {
+    -webkit-box-shadow: none;
+    box-shadow:none;
+}
+.k-tabstrip .k-tabstrip-items .k-link {
+    padding: 10px 1.071em;
+}

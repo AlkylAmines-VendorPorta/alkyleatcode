@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-23T15:49:05 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TechnicalSpecificationCont" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="50" bottomMargin="20" uuid="eb7e08e2-8845-41e2-b205-3a7f16322bfd">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="633"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="353"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="TAHDRID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT B.name as Item, D.name as TechSpecification FROM T_TAHDR_MATERIAL A 
+INNER JOIN M_MATERIAL B ON (A.T_MATERIAL_ID=B.M_MATERIAL_ID)
+INNER JOIN M_MATERIAL_VERSION C ON (A.M_MATERIAL_VERSION_ID=C.M_MATERIAL_VERSION_ID)
+INNER JOIN M_MATERIAL D ON (C.M_MATERIAL_ID= D.M_MATERIAL_ID)
+INNER JOIN T_TAHDR_DETAIL E ON (A.T_TAHDR_DETAIL_ID=E.T_TAHDR_DETAIL_ID)
+WHERE A.ABOUT_SPEC_CODE ='ref' and E.T_TAHDR_ID= $P{TAHDRID} and E.ISACTIVE='Y']]>
+	</queryString>
+	<field name="ITEM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM"/>
+	</field>
+	<field name="TECHSPECIFICATION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TECHSPECIFICATION"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="49" uuid="47da5af6-f752-4109-8bfa-6ec47a93f220"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="1" y="0" width="549" height="30" backcolor="#9DDCF5" uuid="8e76b425-9d8c-4dd2-b4eb-e6c5e79cc95e"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Technical Specification Cont"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="1" y="31" width="269" height="18" uuid="6e75e686-a2b7-4072-9524-25707c5c918a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Item"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="270" y="32" width="280" height="18" uuid="5f5c5c5b-d180-48b4-8f36-edb45f42f86e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Technical Specification"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="30" uuid="457ed651-f3ef-486d-9986-8c3aa187dfc5"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="0" width="279" height="30" uuid="eb32c175-a91d-46f2-b049-d20fcb92b254"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textFieldExpression><![CDATA["Refer To The Following Item Specification: "+$F{TECHSPECIFICATION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="1" y="0" width="269" height="30" uuid="be06e0b7-2bfb-48c2-93fe-c55564843321"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{ITEM}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,88 @@
+create sequence t_contract_condition_seq start with 1 increment by  1;
+create sequence t_contract_header_seq start with 1 increment by  1;
+create sequence t_contract_item_seq start with 1 increment by  1;
+create sequence t_contract_service_seq start with 1 increment by  1;
+
+create table t_contract_condition (t_contract_condition_id number(19,0) not null, created timestamp, isactive varchar2(255 char), updated timestamp, created_session_id varchar2(255 char), updated_session_id varchar2(255 char), amount number(19,2), condition_type varchar2(255 char), service_line_item varchar2(255 char), service_lineitem_no varchar2(255 char), createdBy number(19,0), m_bpartner_id number(19,0), updatedBy number(19,0), t_contract_header_id number(19,0), t_winner_selection_id number(19,0), primary key (t_contract_condition_id));
+create table t_contract_header (t_contract_header_id number(19,0) not null, created timestamp, isactive varchar2(255 char), updated timestamp, created_session_id varchar2(255 char), updated_session_id varchar2(255 char), acc_ass_categ varchar2(255 char), agr_type varchar2(255 char), is_contract_created varchar2(255 char), performance_dep varchar2(255 char), plant varchar2(255 char), pur_grp varchar2(255 char), pur_org varchar2(255 char), security_dep varchar2(255 char), storage_loc varchar2(255 char), targ_value number(19,2), val_end_date varchar2(255 char), val_start_date varchar2(255 char), createdBy number(19,0), m_bpartner_id number(19,0), updatedBy number(19,0), t_bidder_id number(19,0), t_tahdr_id number(19,0), primary key (t_contract_header_id));
+create table t_contract_item (t_contract_item_id number(19,0) not null, created timestamp, isactive varchar2(255 char), updated timestamp, created_session_id varchar2(255 char), updated_session_id varchar2(255 char), item varchar2(255 char), material_group varchar2(255 char), material_no varchar2(255 char), net_price varchar2(255 char), short_texr varchar2(255 char), target_quantity varchar2(255 char), tax_code varchar2(255 char), valuation_type varchar2(255 char), createdBy number(19,0), m_bpartner_id number(19,0), updatedBy number(19,0), t_contract_header_id number(19,0), t_winner_selection_id number(19,0), primary key (t_contract_item_id));
+create table t_contract_service (t_contract_service_id number(19,0) not null, created timestamp, isactive varchar2(255 char), updated timestamp, created_session_id varchar2(255 char), updated_session_id varchar2(255 char), amount number(19,2), cost_center varchar2(255 char), material_no varchar2(255 char), quantity number(19,2), service_no varchar2(255 char), service_lineitem_no varchar2(255 char), createdBy number(19,0), m_bpartner_id number(19,0), updatedBy number(19,0), t_contract_header_id number(19,0), t_winner_selection_id number(19,0), primary key (t_contract_service_id));
+
+alter table t_contract_condition add constraint FK91o4d6ec1pcdc48ee2gcke5j9 foreign key (createdBy) references ad_user;
+alter table t_contract_condition add constraint FKpstfxosiybb24kcnmvk36rh11 foreign key (m_bpartner_id) references m_bpartner;
+alter table t_contract_condition add constraint FKplcr9vgig9fhnhrl3u04yhbhe foreign key (updatedBy) references ad_user;
+alter table t_contract_condition add constraint FK1l50fs21xn10ur86apf739w7w foreign key (t_contract_header_id) references t_contract_header;
+alter table t_contract_condition add constraint FKhbiver0bcacqmgfv0n6eq9rud foreign key (t_winner_selection_id) references t_winner_selection;
+alter table t_contract_header add constraint FKj43f4yk3cqsckuvs7gxrjutf0 foreign key (createdBy) references ad_user;
+alter table t_contract_header add constraint FKhni7x8gt83vvl3pqeugch7vyy foreign key (m_bpartner_id) references m_bpartner;
+alter table t_contract_header add constraint FKepn89nhxdp2tfqdg59vha4ii9 foreign key (updatedBy) references ad_user;
+alter table t_contract_header add constraint FKa3skw653a4oy3yiwp8enunmry foreign key (t_bidder_id) references t_bidder;
+alter table t_contract_header add constraint FK5cywyi2ipad7whmu4t99h7ev6 foreign key (t_tahdr_id) references t_tahdr;
+alter table t_contract_item add constraint FKhjvcemkq7mv0khn53ayxulfp6 foreign key (createdBy) references ad_user;
+alter table t_contract_item add constraint FKho91guq4ubcbmai77ksftsnxa foreign key (m_bpartner_id) references m_bpartner;
+alter table t_contract_item add constraint FKio6f0kp84a7t2u5n8y2qbw6yv foreign key (updatedBy) references ad_user;
+alter table t_contract_item add constraint FKf1cc80mbn2gajbijp685gf5qu foreign key (t_contract_header_id) references t_contract_header;
+alter table t_contract_item add constraint FKb64k82i2795ybhdjmaq5k0u1 foreign key (t_winner_selection_id) references t_winner_selection;
+alter table t_contract_service add constraint FK6qkqtghtlo9d48ylovxum5ekx foreign key (createdBy) references ad_user;
+alter table t_contract_service add constraint FKtqscl92dhpjcwrosga1475l3r foreign key (m_bpartner_id) references m_bpartner;
+alter table t_contract_service add constraint FK56emmswpol5r0e2b2r9b9jc0q foreign key (updatedBy) references ad_user;
+alter table t_contract_service add constraint FKoy06i49j4p30e9iqt2lg815nq foreign key (t_contract_header_id) references t_contract_header;
+alter table t_contract_service add constraint FKo1orx76ymqlpydxg4lcgv8gwu foreign key (t_winner_selection_id) references t_winner_selection;
+
+
+ --------------------------------------------------------
+--  DDL for Table T_SCRUTINY_FILE
+--------------------------------------------------------
+
+  CREATE TABLE "EAT"."T_SCRUTINY_FILE" 
+   (	"T_SCRUTINY_FILE_ID" NUMBER(19,0), 
+	"CREATED" TIMESTAMP (6), 
+	"ISACTIVE" VARCHAR2(255 CHAR), 
+	"UPDATED" TIMESTAMP (6), 
+	"CREATED_SESSION_ID" VARCHAR2(255 CHAR), 
+	"UPDATED_SESSION_ID" VARCHAR2(255 CHAR), 
+	"SCRUTINY_LVL" VARCHAR2(255 CHAR), 
+	"SCRUTINY_TYPE" VARCHAR2(255 CHAR), 
+	"CREATEDBY" NUMBER(19,0), 
+	"M_BPARTNER_ID" NUMBER(19,0), 
+	"UPDATEDBY" NUMBER(19,0), 
+	"T_BIDDER_ID" NUMBER(19,0), 
+	"T_ITEM_BID_ID" NUMBER(19,0), 
+	"M_ATTACHMENT_ID" NUMBER(19,0), 
+	"T_ITEM_SCRUTINY_ID" NUMBER(19,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C0030121
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "EAT"."SYS_C0030121" ON "EAT"."T_SCRUTINY_FILE" ("T_SCRUTINY_FILE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table T_SCRUTINY_FILE
+--------------------------------------------------------
+
+  ALTER TABLE "EAT"."T_SCRUTINY_FILE" MODIFY ("T_SCRUTINY_FILE_ID" NOT NULL ENABLE);
+  ALTER TABLE "EAT"."T_SCRUTINY_FILE" ADD PRIMARY KEY ("T_SCRUTINY_FILE_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+
+
+CREATE SEQUENCE T_SCRUTINY_FILE_SEQ
+  MINVALUE 0
+  START WITH 1
+  INCREMENT BY 1;
+
+commit;

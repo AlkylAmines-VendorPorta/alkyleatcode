@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-08T15:42:32 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reg_manufacturing_details" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="36791b87-a4bc-4afb-94aa-d90d9a3e3889">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT A.M_BP_ORG_ID, A.NAME 
+,A.LICENCE_NO, to_char(A.ESTD_DATE,'dd-mm-yyyy') as established_date
+,to_char(A.VALID_FROM,'dd-mm-yyyy') as validity
+,A.MANPOWER, A.INSPECTION_REPORTNO
+,B.ADDRESS_1 || '' || Coalesce(B.ADDRESS_2,'') address
+,B.CITY, B.POSTAL
+,C.NAME as country
+,D.NAME as state
+,E.NAME as district
+,G.NAME as material
+,H.VALUE as HSNCODE
+,G.VALUE as ITEMCODE
+,F.QTY_PM, F.TURNOVER, F.LICENCENO, F.M_ATTACHMENT_ID
+,I.NAME AS Ind_PHYS
+,I.FILE_NAME AS Ind_LIC_CER
+,I.PATH
+,J.NAME AS FLICENEC_NAME_PHYS_NAME
+,J.FILE_NAME AS FAC_LIC
+,J.M_ATTACHMENT_ID AS FLICENCE_COPY
+,K.NAME AS FMACHINLIST_PHYS_NAME
+,K.FILE_NAME AS FMACHINLIST
+,K.M_ATTACHMENT_ID AS FMACHINLIST_ID
+,L.NAME  AS REPORT_DIR 
+,A.IS_CE_APPROVED
+,A.M_BPARTNER_ID
+,M.ISTRADER
+,N.ISNOTAPPLICABLE
+,A.IS_FACTORY_INSPECTED
+, to_char(A.INSPECTION_DATE,'dd-mm-yyyy') AS INSPECTION_DATE ,O.NAME AS INSPECTION_PHYS_NAME,O.FILE_NAME AS INSPECTION_REPOT_FILENAME,O.PATH AS INSPECTION_REPOT_PATH
+,P.NAME AS STAFF_PHYS_NAME,P.FILE_NAME AS STAFF_FILENAME,P.PATH AS STAFF_REPORT_PATH 
+,Q.NAME AS TESTING_PHYS_NAME,Q.FILE_NAME AS TESTING_FILENAME,P.PATH AS TESTING_REPORT_PATH,
+R.NAME AS UOM,
+S.REGISTRATION_NO AS FAC_REG_NO ,
+S.REGISTRATION_TYPE,
+T.BIS_LICENCE_NO
+FROM M_BP_ORG A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') L
+INNER JOIN C_LOCATION B ON (A.C_LOCATION_ID= B.C_LOCATION_ID)
+INNER JOIN M_COUNTRY C ON (B.M_COUNTRY_ID=C.M_COUNTRY_ID)
+INNER JOIN C_REGION D ON (B.C_REGION_ID=D.C_REGION_ID)
+INNER JOIN C_DISTRICT E ON  (B.C_DISTRICT_ID= E.C_DISTRICT_ID)
+INNER JOIN M_BP_ORG_PRODUCT F ON ( A.M_BP_ORG_ID =  F.M_BP_ORG_ID)
+INNER JOIN M_MATERIAL G ON (F.M_MATERIAL_ID=G.M_MATERIAL_ID)
+INNER JOIN M_HSN H ON (G.M_HSN_ID=H.M_HSN_ID)
+INNER JOIN M_UOM R ON (G.M_UOM_ID=R.M_UOM_ID)
+LEFT JOIN M_BP_ORG_REGISTRATION S ON (F.M_BP_ORG_REGISTRATION_ID=S.M_BP_ORG_REGISTRATION_ID)
+LEFT JOIN M_BP_ORG_BIS T ON (T.M_BP_ORG_BIS_ID=F.M_BP_ORG_BIS_ID)
+LEFT JOIN M_ATTACHMENT I ON (F.M_ATTACHMENT_ID=I.M_ATTACHMENT_ID)
+INNER JOIN M_ATTACHMENT J ON (J.M_ATTACHMENT_ID=A.LICENCECOPY)
+INNER JOIN M_ATTACHMENT K ON (K.M_ATTACHMENT_ID=A.MACHINARYCOPY)
+INNER JOIN M_BPARTNER M ON(A.M_BPARTNER_ID = M.M_BPARTNER_ID)
+INNER JOIN M_BP_ORG_CERTIFICATION N ON(N.M_BP_ORG_ID=A.M_BP_ORG_ID)
+LEFT JOIN M_ATTACHMENT O ON (O.M_ATTACHMENT_ID=A.INSPECTION_REPORT_COPY)
+LEFT JOIN M_ATTACHMENT P ON (P.M_ATTACHMENT_ID=A.STAFFLIST_COPY)
+LEFT JOIN M_ATTACHMENT Q ON (Q.M_ATTACHMENT_ID=A.TESTING_EQUIPMENT_COPY)
+WHERE A.M_BP_ITEM_MANUFACTURER_ID IS NULL AND A.M_BPARTNER_ID  = $P{M_BPARTNER_ID}]]>
+	</queryString>
+	<field name="M_BP_ORG_ID" class="java.math.BigDecimal"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="LICENCE_NO" class="java.lang.String"/>
+	<field name="ESTABLISHED_DATE" class="java.lang.String"/>
+	<field name="VALIDITY" class="java.lang.String"/>
+	<field name="MANPOWER" class="java.lang.String"/>
+	<field name="INSPECTION_REPORTNO" class="java.lang.String"/>
+	<field name="ADDRESS" class="java.lang.String"/>
+	<field name="CITY" class="java.lang.String"/>
+	<field name="POSTAL" class="java.lang.String"/>
+	<field name="COUNTRY" class="java.lang.String"/>
+	<field name="STATE" class="java.lang.String"/>
+	<field name="DISTRICT" class="java.lang.String"/>
+	<field name="MATERIAL" class="java.lang.String"/>
+	<field name="HSNCODE" class="java.lang.String"/>
+	<field name="ITEMCODE" class="java.lang.String"/>
+	<field name="QTY_PM" class="java.lang.Double"/>
+	<field name="TURNOVER" class="java.lang.Double"/>
+	<field name="LICENCENO" class="java.lang.String"/>
+	<field name="M_ATTACHMENT_ID" class="java.math.BigDecimal"/>
+	<field name="IND_PHYS" class="java.lang.String"/>
+	<field name="IND_LIC_CER" class="java.lang.String"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="FLICENEC_NAME_PHYS_NAME" class="java.lang.String"/>
+	<field name="FAC_LIC" class="java.lang.String"/>
+	<field name="FLICENCE_COPY" class="java.math.BigDecimal"/>
+	<field name="FMACHINLIST_PHYS_NAME" class="java.lang.String"/>
+	<field name="FMACHINLIST" class="java.lang.String"/>
+	<field name="FMACHINLIST_ID" class="java.math.BigDecimal"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="IS_CE_APPROVED" class="java.lang.String"/>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal"/>
+	<field name="ISTRADER" class="java.lang.String"/>
+	<field name="ISNOTAPPLICABLE" class="java.lang.String"/>
+	<field name="IS_FACTORY_INSPECTED" class="java.lang.String"/>
+	<field name="INSPECTION_DATE" class="java.lang.String"/>
+	<field name="INSPECTION_PHYS_NAME" class="java.lang.String"/>
+	<field name="INSPECTION_REPOT_FILENAME" class="java.lang.String"/>
+	<field name="INSPECTION_REPOT_PATH" class="java.lang.String"/>
+	<field name="STAFF_PHYS_NAME" class="java.lang.String"/>
+	<field name="STAFF_FILENAME" class="java.lang.String"/>
+	<field name="STAFF_REPORT_PATH" class="java.lang.String"/>
+	<field name="TESTING_PHYS_NAME" class="java.lang.String"/>
+	<field name="TESTING_FILENAME" class="java.lang.String"/>
+	<field name="TESTING_REPORT_PATH" class="java.lang.String"/>
+	<field name="UOM" class="java.lang.String"/>
+	<field name="FAC_REG_NO" class="java.lang.String"/>
+	<field name="REGISTRATION_TYPE" class="java.lang.String"/>
+	<field name="BIS_LICENCE_NO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50">
+			<textField>
+				<reportElement mode="Opaque" x="4" y="15" width="553" height="30" backcolor="#7CF2E6" uuid="ab6498a1-5772-4bbb-931b-006ad68dc9c4"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MANUFACTURING DETAILS"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="245" splitType="Stretch">
+			<frame>
+				<reportElement x="4" y="0" width="553" height="240" uuid="12b19eb4-76c3-4eca-be39-223316ba8a11">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="1" width="553" height="20" uuid="5e1ca824-8239-4d8a-9772-dcb0a3545064">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="2abcb9bf-dc50-44a1-aeea-67f6e78bdfb1"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[" ITEM NAME"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="270" y="0" width="282" height="20" uuid="adfc2240-d32f-4f1f-b36b-ad1beb7b57c7"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{MATERIAL}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="82" width="552" height="18" uuid="02ad64ba-0e75-4241-ac6f-7b00e4d32be8"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="-1" width="270" height="18" uuid="40e5e804-c379-4a29-8459-6bfeb4391a1b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["QUANTITY MANUFACTURED PER MONTH"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="-1" width="281" height="18" uuid="ef15bc4a-f3f0-48cd-aeda-19012dbe2683"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{QTY_PM}.intValue()]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="100" width="552" height="20" uuid="c2b01286-8868-4cb7-938a-4429006b9833"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="ececa660-b4c6-4ce7-b4f3-8d383ce14b24"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["TURNOVER PER YEAR (in LAKHS)"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="270" y="0" width="282" height="20" uuid="cb56c685-2b6b-4bb7-a727-825b12357788"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{TURNOVER}.intValue()]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="120" width="552" height="23" uuid="378c5ab3-6dcb-4b69-a7ef-48933573066b"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="23" uuid="633df7bb-3430-44bb-9594-c587ab5a4aa9"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["INDUSTRY LICENSE NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="0" width="281" height="23" uuid="47a7c118-f8c5-4d7d-a1af-0b03681616bd"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{LICENCENO}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="143" width="553" height="20" uuid="e3535774-3306-4dc2-885a-21767c7e612b"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="19" uuid="fca77c0b-f666-4db9-8519-5c399bd20396"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["INDUSTRY LINCENSE CERTIFICATE"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+						<reportElement x="270" y="1" width="282" height="19" uuid="b021e064-da34-4ab8-b937-d767c8543b31"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{IND_LIC_CER}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{IND_PHYS}]]></hyperlinkReferenceExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="60" width="553" height="20" uuid="faabad20-af20-48c5-aa8c-aa155fe36d99"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="1" width="270" height="19" uuid="ed502cd4-a9a6-4890-89a1-500688e2d800"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[" UNIT"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="271" y="0" width="281" height="20" uuid="791f7b23-65ca-46b4-92b5-aaea3baf68be"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{UOM}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="42" width="552" height="18" uuid="168b1801-248a-4bab-98dd-cde9c0738286"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="270" height="18" uuid="307e9f6d-3f1e-480f-8f1d-bc6012dc33c0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[" Item Code"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="271" y="0" width="281" height="18" uuid="552d4436-2c3d-4d4e-8817-07db10a6cfa0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="21" width="553" height="21" uuid="41bd8804-e84a-4f56-92a1-d6321db0f534"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="270" height="21" uuid="e616190e-89a6-4be0-8510-c81fb4ec8756"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[" HSN Code"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="270" y="1" width="283" height="20" uuid="3ae9eafb-ad4c-41fd-8e8e-e0396e75ec89"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{HSNCODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="163" width="552" height="28" uuid="77d192b8-eead-492d-885c-442ac8f1e0f2"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="270" height="28" uuid="c3fab4d3-9f2a-47c6-ad37-900e44f6e4e8"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[" REGISTRATION TYPE"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="270" y="0" width="282" height="28" uuid="cb72dfc3-e49f-4b0e-818d-4b15af4e9a04"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{REGISTRATION_TYPE}==null?"NA":$F{REGISTRATION_TYPE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="216" width="553" height="24" uuid="94e502e4-9ec7-42e1-9a8c-895e882d5453"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="270" height="24" uuid="8a4e34bc-52e6-4f8d-b9ba-bf472af5a634"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[" BIS LICENCE NUMBER"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="271" y="0" width="281" height="24" uuid="63be3ada-9cf0-471e-9587-a9ca7bdc9082">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{BIS_LICENCE_NO}==null?"NA":$F{BIS_LICENCE_NO}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="191" width="552" height="25" uuid="f7404949-357b-458f-9483-379f847054d8"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="270" height="25" uuid="7dd25b9a-770a-401c-ab6a-8a5f1f33d6c5"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[" FACTORY REGISTRATION NUMBER"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="270" y="0" width="282" height="25" uuid="618fc046-a2e0-4ec0-87c0-2338cdde5732"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{FAC_REG_NO}==null?"NA":$F{FAC_REG_NO}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

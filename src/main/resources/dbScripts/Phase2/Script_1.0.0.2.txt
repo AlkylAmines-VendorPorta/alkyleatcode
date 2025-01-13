@@ -1,0 +1,88 @@
+INSERT INTO ad_role(ad_role_id, created, isactive, updated, description, isadmin, name, page_access, user_level, value, view_name, createdby, m_bpartner_id, updatedby, updated_session_id, created_session_id, m_client_id, m_org_id) VALUES (24, '2020-04-19 23:22:18.689727', 'Y', '2020-04-19 23:22:18.689727', 'Buyer Admin', 'N', 'Buyer Admin', 'Y', 'home', 'BUADM', 'userDashboard', null, null, null, null, null, null, null);
+INSERT INTO ad_role(ad_role_id, created, isactive, updated, description, isadmin, name, page_access, user_level, value, view_name, createdby, m_bpartner_id, updatedby, updated_session_id, created_session_id, m_client_id, m_org_id) VALUES (25, '2020-04-19 23:22:18.689727', 'Y', '2020-04-19 23:22:18.689727', 'Technical Approver Admin', 'N', 'Technical Approver Admin', 'Y', 'home', 'TAADM', 'userDashboard', null, null, null, null, null, null, null);
+
+
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES (10389, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'IP', null, 'In Progress', 'PR_STATUS', null, null, 1, null, 65, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES  (10390, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'ACPT', null, 'Accepted', 'PR_STATUS', null, null, 1, null, 65, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES   (10391, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'REJ', null, 'Rejected', 'PR_STATUS', null, null, 1, null, 65, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES    (10392, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'BA', null, 'Buyer Assigned', 'PR_STATUS', null, null, 1, null, 65, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES     (10393, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'REL', null, 'Released', 'PR_STATUS', null, null, 1, null, 65, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES      (10394, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'CLOSED', null, 'CLOSED', 'PR_STATUS', null, null, 1, null, 65, null, null, null, null);
+
+
+INSERT INTO m_reference(m_reference_id, created, isactive, updated, value, description, name, createdby, m_bpartner_id, updatedby, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES (66, '2020-04-23 01:55:11.599926', 'Y', '2020-04-23 01:55:11.599926', 'PRIORITY', null, 'Priority', null, 1, null, null, null, null, null);
+
+
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES (10395, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'LOW', null, 'Low', 'PRIORITY', null, null, 1, null, 66, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES  (10396, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'MED', null, 'Medium', 'PRIORITY', null, null, 1, null, 66, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES   (10397, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'HIGH', null, 'High', 'PRIORITY', null, null, 1, null, 66, null, null, null, null);
+INSERT INTO m_reference_list(m_reference_list_id, created, isactive, updated, action_name, auction_url, value, description, name, reference_code, tender_url, createdby, m_bpartner_id, updatedby, m_reference_id, created_session_id, updated_session_id, m_client_id, m_org_id) VALUES    (10398, '2020-04-23 01:57:38.314862', 'Y', '2020-04-23 01:57:38.314862', null, null, 'CRT', null, 'Critical', 'PRIORITY', null, null, 1, null, 66, null, null, null, null);
+
+
+
+INSERT INTO ad_role(ad_role_id, created, isactive, updated, description, isadmin, name, page_access, user_level, value, view_name, createdby, m_bpartner_id, updatedby, updated_session_id, created_session_id, m_client_id, m_org_id) VALUES (26, '2020-04-19 23:22:18.689727', 'Y', '2020-04-19 23:22:18.689727', 'Requestioner', 'N', 'Requestioner Admin', 'Y', 'home', 'RQADM', 'userDashboard', null, null, null, null, null, null, null);
+INSERT INTO ad_role(ad_role_id, created, isactive, updated, description, isadmin, name, page_access, user_level, value, view_name, createdby, m_bpartner_id, updatedby, updated_session_id, created_session_id, m_client_id, m_org_id) VALUES (27, '2020-04-19 23:22:18.689727', 'Y', '2020-04-19 23:22:18.689727', 'Approver', 'N', 'Approver Admin', 'Y', 'home', 'APPADM', 'userDashboard', null, null, null, null, null, null, null);
+INSERT INTO ad_role(ad_role_id, created, isactive, updated, description, isadmin, name, page_access, user_level, value, view_name, createdby, m_bpartner_id, updatedby, updated_session_id, created_session_id, m_client_id, m_org_id) VALUES (28, '2020-04-19 23:22:18.689727', 'Y', '2020-04-19 23:22:18.689727', 'Purchase Manager', 'N', 'Purchase Manager Admin', 'Y', 'home', 'PMADM', 'userDashboard', null, null, null, null, null, null, null);
+
+INSERT INTO m_tile(m_tile_id, created, isactive, updated, value, count_where_condition, description, element_id, entity, is_summary, level_no, name, parent_id, sequence_no, createdby, m_bpartner_id, updatedby, created_session_id, updated_session_id, m_parent_id, is_workflow, view_sequence, master_subcategoryid, tile_icon, tile_list, tile_url, m_client_id, m_org_id) VALUES (172, '2020-06-08 21:33:44.945107', 'Y', '2020-06-08 21:33:44.945107', 'PRScreen', null, 'PR Screen', null, null, 'N', 1, 'Miro Screen', 64, null, 1, 1, 1, null, null, 64, null, null, null, null, null, null, null, null);
+INSERT INTO ad_role_access_master(ad_role_access_master_id, created, isactive, updated, delete_access, modify_access, view_only, createdby, m_bpartner_id, updatedby, ad_role_id, m_tile_id, created_session_id, updated_session_id, parent_id, m_client_id, m_org_id, ad_user_id) VALUES (50691, '2018-09-04 18:36:20.934098', 'Y', '2018-09-04 18:36:20.934098', 'N', 'N', 'Y', null, null, null, 26, 172, null, null, null, null, null, null);
+INSERT INTO ad_role_access_master(ad_role_access_master_id, created, isactive, updated, delete_access, modify_access, view_only, createdby, m_bpartner_id, updatedby, ad_role_id, m_tile_id, created_session_id, updated_session_id, parent_id, m_client_id, m_org_id, ad_user_id) VALUES (50692, '2018-09-04 18:36:20.934098', 'Y', '2018-09-04 18:36:20.934098', 'N', 'N', 'Y', null, null, null, 27, 172, null, null, null, null, null, null);
+INSERT INTO ad_role_access_master(ad_role_access_master_id, created, isactive, updated, delete_access, modify_access, view_only, createdby, m_bpartner_id, updatedby, ad_role_id, m_tile_id, created_session_id, updated_session_id, parent_id, m_client_id, m_org_id, ad_user_id) VALUES (50693, '2018-09-04 18:36:20.934098', 'Y', '2018-09-04 18:36:20.934098', 'N', 'N', 'Y', null, null, null, 28, 172, null, null, null, null, null, null);
+
+ALTER TABLE t_pr
+	ADD COLUMN remarks varchar;
+	
+ALTER TABLE t_pr_line
+	ADD COLUMN price varchar;
+	
+ALTER TABLE t_pr_line
+	ADD COLUMN uom varchar;
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN freight_charges_type varchar;
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN packing_fwd_charge varchar;
+
+ALTER TABLE t_price_bid
+	ADD COLUMN packing_fwd_charge_type varchar;	
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN total_packing_fwd_charge_amt varchar;
+
+ALTER TABLE t_price_bid
+	ADD COLUMN basic_amount varchar;
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN other_charges_type varchar;
+
+ALTER TABLE t_price_bid
+	ADD COLUMN other_charges_rate varchar;
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN other_charges_amt varchar;
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN complete_other varchar;
+	
+ALTER TABLE t_price_bid
+	ADD COLUMN delivery_date timestamp;
+
+ALTER TABLE t_bidder
+	ADD COLUMN basic_amt varchar;
+	
+ALTER TABLE t_bidder
+	ADD COLUMN other_charge_type varchar;
+	
+ALTER TABLE t_bidder
+	ADD COLUMN other_charge varchar;
+	
+ALTER TABLE t_bidder
+	ADD COLUMN tax_amt varchar;
+	
+ALTER TABLE t_bidder
+	ADD COLUMN gross_amt varchar;
+	
+ALTER TABLE m_tile
+ADD COLUMN path varchar;
+	

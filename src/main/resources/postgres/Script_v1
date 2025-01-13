@@ -1,0 +1,4 @@
+ALTER TABLE m_bpartner ADD is_ee_comp_detail_approved VARCHAR;
+ALTER TABLE m_bpartner ADD is_ce_comp_detail_approved VARCHAR;
+ALTER TABLE m_bpartner ADD ee_comp_detail_comment VARCHAR;
+ALTER TABLE m_bpartner ADD ce_comp_detail_comment VARCHAR

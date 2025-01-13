@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-17T20:02:26 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Factory_Registraion" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="008ff09b-160c-4d1c-8e53-bcb551e7b80b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="M_BP_ORG_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT B.REGISTRATION_TYPE,B.REGISTRATION_AUTHORITY,B.REGISTRATION_NO,to_char(B.VALID_FROM,'dd-mm-yyyy')AS ISSUE_DATE
+,B.VALIDITY_TYPE,B.PLANT_INVESTMENT,D.NAME AS NATURE_CODE,E.NAME AS CATEGORY_CODE,to_char(B.COMMENCEMENT_DATE,'dd-mm-yyyy') AS COMMENCEMENT_DATE ,A.NAME
+,C.PATH,C.NAME AS PHYS_NAME,C.FILE_NAME,L.NAME  AS REPORT_DIR 
+,B.MONETARY_LIMIT,
+to_char(B.VALID_TO,'dd-mm-yyyy') AS VALID_TO
+FROM M_BP_ORG A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') L
+INNER JOIN M_BP_ORG_REGISTRATION B ON (A.M_BP_ORG_ID= B.M_BP_ORG_ID)
+INNER JOIN M_ATTACHMENT C ON (C.M_ATTACHMENT_ID=B.M_ATTACHMENT_ID)
+LEFT JOIN M_REFERENCE_LIST D ON D.VALUE=B.NATURE_CODE AND D.REFERENCE_CODE='NATURE_OF_ACTIVITY'
+LEFT JOIN M_REFERENCE_LIST E ON E.VALUE=B.CATEGORY_CODE AND E.REFERENCE_CODE='ENTERPRISE_CATEGORY'
+WHERE A.M_BP_ITEM_MANUFACTURER_ID IS NULL AND A.M_BP_ORG_ID =  $P{M_BP_ORG_ID}]]>
+	</queryString>
+	<field name="REGISTRATION_TYPE" class="java.lang.String"/>
+	<field name="REGISTRATION_AUTHORITY" class="java.lang.String"/>
+	<field name="REGISTRATION_NO" class="java.lang.String"/>
+	<field name="ISSUE_DATE" class="java.lang.String"/>
+	<field name="VALIDITY_TYPE" class="java.lang.String"/>
+	<field name="PLANT_INVESTMENT" class="java.math.BigDecimal"/>
+	<field name="NATURE_CODE" class="java.lang.String"/>
+	<field name="CATEGORY_CODE" class="java.lang.String"/>
+	<field name="COMMENCEMENT_DATE" class="java.lang.String"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="PHYS_NAME" class="java.lang.String"/>
+	<field name="FILE_NAME" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="MONETARY_LIMIT" class="java.math.BigDecimal"/>
+	<field name="VALID_TO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="554" height="50" backcolor="#A6DEF7" uuid="28b2b4e4-3676-474e-909a-6576fe58c2e4"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FACTORY REGISTRATION"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="265">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="263" uuid="d17d83bf-1d69-4786-9ab0-5d321c6bcd39"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement x="0" y="2" width="553" height="20" uuid="74d951c2-90f6-4d6c-89a6-0c57a84bf603"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="e95b8837-08f5-492b-b549-67da6819f64f"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["FACTORY NAME"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="0" width="282" height="20" uuid="6a2d1598-d570-4133-b6f0-5139e6cdbcb3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="21" width="554" height="20" uuid="d3dbaae4-4416-474b-b625-b5e68394ad4a"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="175621e3-672c-4b06-874e-66982fbca27b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["REGISTERING TYPE"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="271" y="1" width="283" height="19" uuid="4fb47257-af9a-4fd8-8229-9afc7fc5d98b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{REGISTRATION_TYPE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="41" width="553" height="21" uuid="f59911a3-d260-4854-97e7-66caaef2e750"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="89fc9c91-3b5b-40a4-aab9-015aadd85414"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["REGISTRATION AUTHORITY"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="1" width="282" height="20" uuid="938c3847-031e-47e8-9f6d-20fed14c4995"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{REGISTRATION_AUTHORITY}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="61" width="554" height="20" uuid="e3e3e819-be46-47fd-981d-031cbddb5136"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="24f6533f-df3f-489d-ac06-e98157190d47"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["REGISTRATION NUMBER"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="1" width="283" height="19" uuid="c429960b-6547-4681-b7b7-fc7759956a32"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{REGISTRATION_NO}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="81" width="554" height="20" uuid="439817f1-3959-43b0-94fd-92eae3950cc3"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" x="0" y="0" width="270" height="20" uuid="88043705-c8cd-4f04-809b-275f8e0889d3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["ISSUE DATE OF REGISTRATION"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" x="270" y="0" width="284" height="20" uuid="78e5ab00-be7e-44ae-b59e-53ef9e1a0287"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{ISSUE_DATE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="181" width="554" height="21" uuid="0214d9e7-8f4f-49ed-8514-ca3347533f0c"/>
+					<textField isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="21" uuid="e5971c27-1346-48ad-9c10-82647a69f07c"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["DATE OF COMMENCEMENT OF COMMERCIAL PRODUCTION"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="0" width="282" height="21" uuid="b467be49-a7ba-4ad5-9767-1b66faa31233"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{COMMENCEMENT_DATE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="1" y="202" width="553" height="20" uuid="a1e8d6ed-df1d-467f-abc7-70e898d2f4fa"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="269" height="20" uuid="d0c01993-3f67-4348-83bd-1c4c7c502b61"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["REGISTRATION COPY"]]></textFieldExpression>
+					</textField>
+					<textField hyperlinkType="Reference" hyperlinkTarget="Blank">
+						<reportElement x="269" y="0" width="284" height="20" uuid="8b76acfc-3eeb-4b40-9366-b9ae550ac14e"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.9"/>
+							<bottomPen lineWidth="0.9"/>
+							<rightPen lineWidth="0.9"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{FILE_NAME}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{PHYS_NAME}]]></hyperlinkReferenceExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="1" y="222" width="553" height="20" uuid="7d17010d-3ce4-44e0-bb83-da6e315a6649"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="269" height="20" uuid="f88673f9-5518-4dc9-a05f-cb16bcd4c11c"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Validity Date Of Registration"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="269" y="0" width="284" height="20" uuid="0f757c3f-f95b-4d55-9ee0-fb2f261ee870"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["PERMANENT".equals($F{VALIDITY_TYPE})?"NA":$F{VALID_TO}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="242" width="553" height="21" uuid="c0c7ea9f-1603-4b0c-a8de-28d9ce2ad375"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="21" uuid="d9e0021f-d09c-49bc-8660-45a16ff626ab"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Monetory Limit(In Rs. Lakhs)"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="270" y="1" width="283" height="20" uuid="d2e28080-8a20-4e7d-996f-83ee45a47050"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA["NSIC".equals($F{REGISTRATION_TYPE})?$F{MONETARY_LIMIT}:"NA"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="161" width="554" height="20" uuid="0cd099a1-f8b1-4609-84a8-dacb9ad1fa31"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="475ba00f-7fee-4a9a-a775-a75583b014c0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["CATEGORY OF ENTERPRISE"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+						<reportElement x="271" y="1" width="283" height="19" uuid="c8eea859-258d-4fb7-a285-1b29926ccebe"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{CATEGORY_CODE} == null?"NA":$F{CATEGORY_CODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="121" width="553" height="20" uuid="f84a244c-da70-4f3b-875a-c31972ea09a9"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="ca2abd42-c08a-4c60-a63b-4b231ff5f198"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["PLANT & MACHINERY INVESTMENT(IN Rs. LAKHS)"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+						<reportElement x="272" y="1" width="281" height="19" uuid="982e5f5f-bdd2-4aac-9a6c-e1cf862907db"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{PLANT_INVESTMENT} == null ?"NA":$F{PLANT_INVESTMENT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="101" width="554" height="20" uuid="1ef8424a-f7b4-4199-ba13-bd50c0e925ca"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="10235413-e815-4702-b2b5-66fd72f5802a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["VALIDITY TYPE"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="1" width="283" height="19" uuid="cc49da57-df00-4d10-84e6-98207ad1b5f0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{VALIDITY_TYPE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="141" width="553" height="20" uuid="0d1c69e1-62c0-4db8-915c-2f0fcd5ea752"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="0" y="0" width="270" height="20" uuid="92823760-8883-4639-8a16-3b9d4fe4ffaf"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["NATURE OF ACTIVITY"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="271" y="1" width="282" height="19" uuid="8ebe3856-fbbb-4a8f-aeaa-322c022230c6"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{NATURE_CODE}==null?"NA":$F{NATURE_CODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="58">
+			<frame>
+				<reportElement positionType="Float" x="0" y="2" width="554" height="55" uuid="db78d3df-ff1e-475b-9b9e-3349b802f54b"/>
+				<subreport>
+					<reportElement x="0" y="0" width="554" height="55" uuid="bf1248ec-6519-48da-ab03-9ca570720621"/>
+					<subreportParameter name="M_BP_ORG_ID">
+						<subreportParameterExpression><![CDATA[$P{M_BP_ORG_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"BIS_DETAILS.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,57 @@
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(114,16,'Y','DOCUMENT_STATUS','TCOP','Techno Commercial Opening', SYSDATE, SYSDATE ,'Techno Commercial Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(115,16,'Y','DOCUMENT_STATUS','DBOP','Deviation Bid Opening', SYSDATE, SYSDATE ,'Deviation Bid Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(116,16,'Y','DOCUMENT_STATUS','PBOP','Price Bid Opening', SYSDATE, SYSDATE ,'Price Bid Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(117,16,'Y','DOCUMENT_STATUS','C1OP','Annexure C1 Opening', SYSDATE, SYSDATE ,'Annexure C1 Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(118,16,'Y','DOCUMENT_STATUS','RBOP','Revised Bid Opening', SYSDATE, SYSDATE ,'Annexure C1 Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(119,16,'Y','DOCUMENT_STATUS','AWOP','Award Winner Opening', SYSDATE, SYSDATE ,'Annexure C1 Opening','');
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(120,16,'Y','DOCUMENT_STATUS','DBSCH','Deviation Bid Scheduling', SYSDATE, SYSDATE ,'Deviation Bid Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(121,16,'Y','DOCUMENT_STATUS','PBSCH','Price Bid Scheduling', SYSDATE, SYSDATE ,'Price Bid Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(122,16,'Y','DOCUMENT_STATUS','C1SCH','Annexure C1 Scheduling', SYSDATE, SYSDATE ,'Annexure C1 Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(123,16,'Y','DOCUMENT_STATUS','RBSCH','Revise Bid Scheduling', SYSDATE, SYSDATE ,'Revised Bid Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(124,16,'Y','DOCUMENT_STATUS','AWSCH','Award Winner Scheduling', SYSDATE, SYSDATE ,'Award Winner Scheduling','');
+
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(26,'Y','NATURE_OF_ACTIVITY','Nature Of Activity',SYSDATE,SYSDATE );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(27,'Y','ENTERPRISE_CATEGORY','Nature Of Activity',SYSDATE,SYSDATE );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(125,26,'Y','NATURE_OF_ACTIVITY','MFR','Manufacturing', SYSDATE, SYSDATE ,'Manufacturing','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(126,26,'Y','NATURE_OF_ACTIVITY','SRV','Service', SYSDATE, SYSDATE ,'Service','');
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(127,27,'Y','ENTERPRISE_CATEGORY','MDM','Medium', SYSDATE, SYSDATE ,'Medium','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(128,27,'Y','ENTERPRISE_CATEGORY','SML','Small', SYSDATE, SYSDATE ,'Small','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(129,27,'Y','ENTERPRISE_CATEGORY','MCR','Micro', SYSDATE, SYSDATE ,'Micro','');
+
+alter TABLE M_BP_ORG_REGISTRATION
+ADD PLANT_INVESTMENT NUMBER(19,2);
+
+alter TABLE M_BP_ORG_REGISTRATION
+ADD MONETARY_LIMIT NUMBER(19,2);
+
+alter TABLE M_BP_ORG_REGISTRATION
+ADD NATURE_CODE VARCHAR2(255 CHAR);
+
+alter TABLE M_BP_ORG_REGISTRATION
+ADD CATEGORY_CODE VARCHAR2(255 CHAR);
+
+
+COMMIT;

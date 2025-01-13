@@ -1,0 +1,41 @@
+
+--run after EXCEL_UPLOAD_INSERT_SCRIPT.txt is executed first.
+
+--add two legacy column w.r.t excel provided
+ALTER TABLE M_ATTACHMENT ADD LEGACY_ITEMCODE Number(38,0);
+ALTER TABLE M_ATTACHMENT ADD LEGACY_VERSION Number(38,0);
+COMMIT;
+
+--insert attachment records w.r.t excel provided
+INSERT INTO M_ATTACHMENT(m_attachment_id,created,updated,isactive,createdby,updatedby,m_bpartner_id,file_name,name,
+LEGACY_ITEMCODE,LEGACY_VERSION,PATH)
+SELECT M_ATTACHMENT_SEQ.nextval 
+AS M_ATTACHMENT_ID,
+SYSDATE AS CREATED,SYSDATE AS UPDATED,'N' AS ISACTIVE,
+1 as CREATEDBY,1 as UPDATEDBY,1 as M_BPARTNER_ID,ms.physical_file_name as FILE_NAME,ms.physical_file_name as NAME ,
+ms.itemcode as legacy_itemcode,ms.version_number as version_no,'/dms/docs/MATERIAL_VERSION_MASTER_FILES/' as PATH
+FROM z_temp_material_specification ms;
+
+--alter column type to matched with provided excel data
+ALTER TABLE M_MATERIAL_VERSION MODIFY (name VARCHAR2(1024 CHAR),value VARCHAR2(1024 CHAR),description VARCHAR2(1024 CHAR));
+COMMIT;
+
+--insert material_specification and corresponding attachment
+INSERT INTO M_MATERIAL_VERSION(m_material_version_id,created,updated,isactive,createdby,updatedby,m_bpartner_id,m_material_id,
+VERSION_SPECIFICATION,name,value,description )
+SELECT
+M_MATERIAL_VERSION_SEQ.nextval
+,SYSDATE,SYSDATE,'Y',1,1,1,m.m_material_id,a.m_attachment_id ,
+ms.version_desc,ms.version_number,ms.version_desc
+FROM z_temp_material_specification ms
+INNER  JOIN M_MATERIAL m ON m.value=to_char(ms.itemcode) AND m.isactive='Y'
+INNER JOIN M_ATTACHMENT A ON a.legacy_itemcode=ms.itemcode AND a.LEGACY_VERSION=ms.version_number;
+
+COMMIT;
+
+
+
+
+
+
+

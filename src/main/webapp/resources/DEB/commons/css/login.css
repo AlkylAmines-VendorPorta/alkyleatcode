@@ -1,0 +1,83 @@
+@CHARSET "ISO-8859-1";
+.styled-input input:focus ~ label, select:focus ~ label, textarea:focus ~ label, input:valid ~ label, select:valid ~ label, textarea:valid ~ label, input[disabled="disabled"] ~ label, input[readonly="readonly"] ~ label, select[disabled="disabled"] ~ label, select[readonly="readonly"] ~ label, textarea[disabled="disabled"] ~ label, textarea[readonly="readonly"] ~ label{
+font-size: 14px;
+ color: #009ccc;
+ top: -2.25rem;
+ -webkit-transition: all 0.125s ease;
+ transition: all 0.125s ease;
+}
+
+.validinput
+{font-size: 0.75em;
+    color: #009ccc !important;
+    top: -2.25rem !important;
+    -webkit-transition: all 0.125s ease !important;
+    transition: all 0.125s ease !important;}
+.styled-input input[type="email"]:valid ~ label
+{font-size: 0.75em;
+ color: #009ccc;
+ top: -2.25rem;
+ -webkit-transition: all 0.125s ease;
+ transition: all 0.125s ease;}
+ .styled-input input[type="password"]:valid ~ label
+{font-size: 14px;
+ color: #009ccc;
+ top: -2.25rem;
+ -webkit-transition: all 0.125s ease;
+ transition: all 0.125s ease;}
+.styled-input {
+     float: left;
+    width: 100%;
+    margin: 2rem 0 0rem;
+    position: relative;
+}
+.textblack{color:#fff;}
+.styled-input label {
+  color: #252936;
+  padding: 1rem 0px;
+  position: absolute;
+  font-size: 16px;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.styled-input.wide { width: 100%; }
+
+input,
+textarea,
+select {
+     padding: 1rem 0px;
+    border: 0;
+    width: 100%;
+        font-size: 16px;
+    border-bottom: 1px solid #252936;
+}
+
+input ~ span,
+select ~ span,
+textarea ~ span {
+  display: block;
+  width: 0;
+    height: 2px;
+    background: #009ccc;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: all 0.125s ease;
+  transition: all 0.125s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus { outline: 0; }
+
+input:focus ~ span,
+select:focus ~ span,
+textarea:focus ~ span {
+  width: 100%;
+  -webkit-transition: all 0.075s ease;
+  transition: all 0.075s ease;
+}

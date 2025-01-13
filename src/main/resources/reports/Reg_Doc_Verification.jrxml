@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-10-22T11:56:28 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Doc_Verification" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="50" bottomMargin="20" uuid="c43d6985-cc6a-4e9e-bbc2-6824a4b372fc">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<style name="Comp_Ess_Style">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{COMP_ESS_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{COMP_ESS_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="Comp_Mgm_Status">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{COMP_MGM_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{COMP_MGM_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="Comp_Fin_Status">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{FIN_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{FIN_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT A.M_BPARTNER_ID, A.IS_CE_APPROVED COMP_ESS_APP, A.CE_COMMENT COMP_ESS_CMT
+    ,B.IS_CE_APPROVED COMP_MGM_APP, B.CE_COMMENT COMP_MGM_CMT  
+    ,E.IS_CE_APPROVED FIN_APP, E.CE_COMMENT FIN_CMT
+    ,CONFIG.NAME  AS REPORT_DIR
+FROM M_BPARTNER A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+LEFT OUTER JOIN (SELECT AD_USER_DETAILS_ID, IS_CE_APPROVED, CE_COMMENT,C.M_BPARTNER_ID 
+            FROM AD_USER_DETAILS C WHERE C.AD_USER_DETAILS_ID IN (
+            SELECT MAX(AD_USER_DETAILS_ID) AD_USER_DETAILS_ID FROM AD_USER_DETAILS D WHERE 
+            D.M_BPARTNER_ID=  $P{M_BPARTNER_ID} 
+            AND
+            D.USER_DETAIL_TYPE='COMPDIR'
+            AND IS_CE_APPROVED ='Y'
+      )
+) B ON (A.M_BPARTNER_ID = B.M_BPARTNER_ID)
+LEFT OUTER JOIN M_BP_FINANCIAL_ATTACHMENT E ON (A.M_BPARTNER_ID = E.M_BPARTNER_ID AND E.FINACIALTYPE = 'TD') 
+WHERE A.M_BPARTNER_ID = $P{M_BPARTNER_ID}]]>
+	</queryString>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal"/>
+	<field name="COMP_ESS_APP" class="java.lang.String"/>
+	<field name="COMP_ESS_CMT" class="java.lang.String"/>
+	<field name="COMP_MGM_APP" class="java.lang.String"/>
+	<field name="COMP_MGM_CMT" class="java.lang.String"/>
+	<field name="FIN_APP" class="java.lang.String"/>
+	<field name="FIN_CMT" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="158" splitType="Stretch">
+			<frame>
+				<reportElement x="2" y="0" width="554" height="30" uuid="78a7ae9a-b27a-476a-b139-96937dbdfb8c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement mode="Opaque" x="1" y="1" width="553" height="29" backcolor="#9DDCF5" uuid="5c3129ab-84a6-4dd5-93be-ea7de5ffc324"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Document Verification"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="2" y="35" width="554" height="30" uuid="5f404d70-4bed-4818-95cb-5866c12211ca"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="59" height="30" backcolor="#B0D9E8" uuid="e385fd87-4428-4634-be9a-248d1fd0305c"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["S NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="30" backcolor="#B0D9E8" uuid="4446d991-bcf6-4a99-8672-7828949e4a81"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Check List Name"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="30" backcolor="#B0D9E8" uuid="aa850efb-bfde-4dad-a48b-a3ccd0775b42"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Status"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="30" backcolor="#B0D9E8" uuid="3a7fed9b-1a53-4067-82cb-76e4ed474f84"/>
+					<box leftPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Comments"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="2" y="66" width="554" height="30" uuid="d6e3a418-108c-4455-83d7-6c9322bd9045"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="592b60eb-db53-42b7-a6cb-6a56faece8c3"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="4b25852e-3bd1-4e9c-bb14-d3e16c63d334"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Company Essential Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="6e4f2eb5-a929-4a8d-b3eb-3cb63e169374"/>
+					<box leftPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{COMP_ESS_CMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Comp_Ess_Style" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="3e52573f-0341-48f8-8a3c-ab7fa8ca4e1d"/>
+					<box leftPadding="2" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Y".equals($F{COMP_ESS_APP})?"YES":"NO"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="2" y="97" width="554" height="30" uuid="b13db526-3266-4203-b548-2aac474dea40"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="93f7541b-0204-4b88-8c72-7b4856ad4d46"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="7e4f7ca3-0b8f-4daf-93d9-d3df5b303578"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Company Management Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Comp_Mgm_Status" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="b35c9e0d-b8c9-4f15-8a68-73af2a67f63a"/>
+					<box leftPadding="2" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Y".equals($F{COMP_MGM_APP})?"YES":"NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="f412b6e4-3189-4913-9556-2ae4e5a1e311"/>
+					<box leftPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{COMP_MGM_CMT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="2" y="128" width="554" height="30" uuid="b197a91e-247c-4bd3-a27d-adb52513ea65"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="1fbe8a02-c4a4-47ef-8070-b2a623e3701c"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["3"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="e88fcb25-8a8c-472a-859d-b385efd7a9e5"/>
+					<box leftPadding="2" rightPadding="2">
+						<pen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Financial Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Comp_Fin_Status" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="af86209a-c113-4632-af3c-74c3dc2315a6"/>
+					<box leftPadding="2" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Y".equals($F{FIN_APP})?"YES":"NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="0dbba5d5-fe97-4873-8d3d-817f0cddf888"/>
+					<box leftPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FIN_CMT}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="60">
+			<frame>
+				<reportElement positionType="Float" x="2" y="10" width="552" height="49" uuid="4a53485f-3130-4ff3-84e1-00c9e5d80847"/>
+				<subreport>
+					<reportElement x="0" y="0" width="552" height="49" uuid="9138fa28-6f52-4271-828e-cd497ad5d3ed"/>
+					<subreportParameter name="M_BPARTNER_ID">
+						<subreportParameterExpression><![CDATA[$P{M_BPARTNER_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Reg_Doc_Verification_Factory.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

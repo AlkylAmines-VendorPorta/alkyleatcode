@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-10-21T15:40:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reg_experience" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="36791b87-a4bc-4afb-94aa-d90d9a3e3889">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="Report_Dir" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT A.M_BPARTNER_ID
+,B.EXP_MANUFACTURING_YRS ||' Years ' || B.EXP_MANUFACTURING_MONTHS || ' Months' as Manufacturing
+,B.EXP_DESIGN_YRS || ' Years ' || B.EXP_DESIGN_MONTHS || ' Months' as Design
+,B.EXP_SUPPLYING_YRS || ' Years ' || B.EXP_SUPPLYING_MONTHS || ' Months' as Supply
+,B.EXP_TESTING_YRS || ' Years ' || B.EXP_TESTING_MONTHS || ' Months' as Testing
+,   (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR')  AS REPORT_DIR
+FROM M_BPARTNER A
+ 
+INNER JOIN M_BP_ORG_EXPERIENCE B ON (A.M_BPARTNER_ID = B.M_BPARTNER_ID)
+WHERE B.M_BP_ORG_ID IS NULL AND A.M_BPARTNER_ID=  $P{M_BPARTNER_ID}]]>
+	</queryString>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal"/>
+	<field name="MANUFACTURING" class="java.lang.String"/>
+	<field name="DESIGN" class="java.lang.String"/>
+	<field name="SUPPLY" class="java.lang.String"/>
+	<field name="TESTING" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="1" width="550" height="52" uuid="0562f5d4-6703-4906-a208-1e74bd380240"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement mode="Opaque" x="1" y="0" width="549" height="30" backcolor="#ABE8F7" uuid="4e0dd8f5-c685-47fc-9483-8a48ea512772"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Experience Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="251" y="32" width="299" height="20" uuid="42d2d6da-23b7-49a0-b496-72638252f066"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{SUPPLY}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="31" width="251" height="21" uuid="7f343921-71cc-4f2b-a0d6-7753374dc4f7"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[SUPPLY-EXPERIENCE]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

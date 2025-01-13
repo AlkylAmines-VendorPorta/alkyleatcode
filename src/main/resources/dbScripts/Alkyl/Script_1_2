@@ -1,0 +1,4 @@
+ALTER TABLE ad_user
+DROP CONSTRAINT uk_gig5s6an2w3uiw2t7rvx9pomn;
+
+ALTER TABLE ad_user ADD COLUMN is_emai_login varchar;

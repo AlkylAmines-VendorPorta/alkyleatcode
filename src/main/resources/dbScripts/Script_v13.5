@@ -1,0 +1,38 @@
+alter table m_bpartner add column vendor_type varchar(255);
+alter table ad_user_details add column name varchar(255);
+alter table c_location add column address_3 varchar(255);
+alter table ad_user_details add column director_uid varchar(255);
+alter table ad_user_details add column qualification varchar(255);
+alter table ad_user_details add column experience varchar(255);
+alter table ad_user_details add column user_designation varchar(255);
+alter table ad_user_details add column user_dept varchar(255);
+alter table ad_user_details add column is_receive_po varchar(255);
+alter table ad_user_details add column is_receive_ac_info varchar(255);
+alter table ad_user_details add column is_receive_enquiry varchar(255);
+alter table ad_user_details add column director_type varchar(255);
+
+alter table ad_user add column is_invited varchar(255);
+
+alter table m_bank_branch_details add column branch_state varchar(255);
+alter table m_bp_approval_matrix add column is_approved_for_critical_items varchar(255);
+alter table m_bp_approval_matrix add column is_check_double_inv varchar(255);
+alter table m_bp_approval_matrix add column is_payment_terms varchar(255);
+alter table m_bp_approval_matrix add column is_income_terms varchar(255);
+alter table m_bp_approval_matrix add column is_vendor_payment_block varchar(255);
+alter table m_bp_approval_matrix add column is_vendor_overall_block varchar(255);
+
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','DIRECTOR_TYPE','Director Type', now() , now(), 1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),38,'Y','DIRECTOR_TYPE','DIRECTOR','Director', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),38,'Y','DIRECTOR_TYPE','PARTNER','Partner', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),38,'Y','DIRECTOR_TYPE','PROPRIETOR','Proprietor', now() , now() ,1 );
+
+
+alter table m_bp_company_address add column name_of_company varchar(255);
+
+alter table m_bp_kyc add column msme_number varchar(255);
