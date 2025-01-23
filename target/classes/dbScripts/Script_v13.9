@@ -1,0 +1,259 @@
+alter table t_advance_shipment_notice add column grn_year varchar(255);
+alter table t_advance_shipment_notice add column grn_id varchar(255);
+alter table t_purchase_order add column pstyp varchar(255);
+alter table t_advance_shipment_notice add column reject_reason varchar(255);
+alter table t_advance_shipment_notice add column issue_date varchar(255);
+
+alter table t_purchase_order add column m_attachment_id numeric
+alter table t_advance_shipment_notice_line add column storage_location varchar(255);
+alter table t_advance_shipment_notice add column isgrn varchar(255);
+alter table t_advance_shipment_notice add column isgateout varchar(255);
+alter table t_advance_shipment_notice add column isqcpassed varchar(255);
+alter table t_advance_shipment_notice add column isunload varchar(255);
+alter table t_advance_shipment_notice add column isgatein varchar(255);
+alter table t_advance_shipment_notice add column isreported varchar(255);
+alter table t_advance_shipment_notice add column issafetypassed varchar(255);
+alter table t_advance_shipment_notice add column isohcpassed varchar(255);
+
+alter table t_advance_shipment_notice add column grn_date timestamp;
+alter table t_advance_shipment_notice add column gateout_date timestamp;
+alter table t_advance_shipment_notice add column qcpassed_date timestamp;
+alter table t_advance_shipment_notice add column unload_date timestamp;
+alter table t_advance_shipment_notice add column gatein_date timestamp;
+alter table t_advance_shipment_notice add column reported_date timestamp;
+alter table t_advance_shipment_notice add column safteypassed_date timestamp;
+alter table t_advance_shipment_notice add column ohc_date timestamp;
+
+
+
+
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','ASN_STATUS','asn status', now() , now(), 1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','DR','Drafted', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','IT','In Transit', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','REPORTED','Reported', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','SCP','Saftey Checked Passed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','SCF','Saftey Checked Failed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','SCH','Saftey Checked Hold', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','OHCP','OHC Passed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','OHCH','OHC Hold', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','OHCF','OHC Failed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','GATE_IN','Gate In', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','QCP','QC Passed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','QCF','QC Failed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','UNLOAD','Unload', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','CLOSED','Closed', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','GATE_OUT','Gate Out', now() , now() ,1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),51,'Y','ASN_STATUS','GRN','GRN 105', now() , now() ,1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','SERVICE_SHEET_STATUS','Service Sheet Status', now() , now(), 1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SSIP','Service Status in Progress', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SSAP','Service Status Aproved', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SSRJ','Service Status Rejected', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SSDR','Service Status Drafted', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESIP','Service Entry Sheet InProgress', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESAP','Service Entry Sheet Approved', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESRJ','Service Entry Sheet Rejected', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESDR','Service Entry Sheet Drafted', now() , now() ,1 );
+nsert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','CLOSED','Closed', now() , now() ,1 );
+
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','SERVICE_ENTRY_SHEET_STATUS','Service Sheet Status', now() , now(), 1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),53,'Y','SERVICE_ENTRY_SHEET_STATUS','SESIP','Service Entry Sheet InProgress', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),53,'Y','SERVICE_ENTRY_SHEET_STATUS','SESAP','Service Entry Sheet Approved', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),53,'Y','SERVICE_ENTRY_SHEET_STATUS','SESRJ','Service Entry Sheet Rejected', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),53,'Y','SERVICE_ENTRY_SHEET_STATUS','SESDR','Service Entry Sheet Drafted', now() , now() ,1 );
+
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','PO_STATUS','Purchase Order Status', now() , now(), 1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),62,'Y','PO_STATUS','REL','Purchase Order Released', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),62,'Y','PO_STATUS','ACPT','Purchase Order Accept', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),62,'Y','PO_STATUS','REJ','Purchase Order Rejected', now() , now() ,1 );
+
+
+
+updated on4th may 2020
+
+corrections
+
+select * from m_reference_list where m_reference_id='51'
+update m_reference_list set name='Saftey Passed' where m_reference_list_id='998'
+update m_reference_list set name='Saftey Failed' where m_reference_list_id='999'
+update m_reference_list set name='Saftey Hold' where m_reference_list_id='1000'
+
+select * from m_reference_list where m_reference_id='53'
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESIP','Service Entry Sheet InProgress', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESAP','Service Entry Sheet Approved', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESRJ','Service Entry Sheet Rejected', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) 
+values (nextval('m_referencelist_seq'),52,'Y','SERVICE_SHEET_STATUS','SESDR','Service Entry Sheet Drafted', now() , now() ,1 );
+
+
+select * from m_reference_list where m_reference_id='62'
+
+update m_reference_list set name='Released' where m_reference_list_id='3503';
+update m_reference_list set name='Accept' where m_reference_list_id='3504';
+update m_reference_list set name='Rejected' where m_reference_list_id='3505';
+
+
+alter table ad_user_details add column approver varchar(255);
+alter table ad_user_details add column cost_centre varchar(255);
+alter table ad_user_details add column active_from timestamp;
+alter table ad_user_details add column active_till timestamp;
+
+
+
+following query not updated in database until19-04-2029
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','GL_MASTER','gl master', now() , now(), 1 );
+
+
+
+
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','','', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','G/L Account','Long Text', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','44115201','ADVERTISING', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','47715301','RECRUITMENT EXPENSES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115410','TRAVELLING', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115411','TRAVELLING-FOREIGN', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115412','PROFESSIONAL FEES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42515101','INSURANCE', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50916004','BANK CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','43315201','EXPORT EXPENSES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','46515308','TRAINING', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115414','COMMUNICATION', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42915101','REPAIRS-PLANT', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42915102','REPAIRS-BUILDINGS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42915103','REPAIRS-OTHERS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115416','AUDITOR'S REMUN.AUDIT FEE', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115418','AUDITORS'REMUN.-TAXATION', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115417','AUDITORS'REMUN. OTHERS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','46915301','SECURITY CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115407','FREIGHT INWARD-OTHERS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115408','FREIGHT OUTWARD', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115415','PRINTING & STATIONERY', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','46515306','STAFF WELF.-CANTEEN', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','44915201','COMMISSION ON SALES - DOMESTIC', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','44915202','COMMISSION ON EXPORTS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','40114004','PROCUREMENT CHARGES RM', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515418','OUT OF POCKET EXPENSES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','41715101','PROCESS CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515401','HIRE CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115403','ELECTRICITY CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515409','CHARITY & DONATIONS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115404','TRANSPORT CHARGES-OTHERS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42915104','COMPUTER RELATED EXPS.', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','44515201','SALES PROMOTION', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','47315301','LABOUR CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115413','LEGAL CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','46515304','STAFF WELF.-OTHERS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','46515307','STAFF WELF.-MEDICAL', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515402','TESTING CHARGES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','46515305','STAFF WELF.-TRANSP.', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515404','VEHICLE EXPENSES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42515102','INSURANCE ON FIXED ASSETS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42515103','INSURANCE ON STOCKS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42515104','INSURANCE ON VEHICLES', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','43315202','EXPORT INSURANCE', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','42515105','TRANSIT RISK INSURANCE', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515407','MEMBERSHIP & SUBSCRIP.', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115401','RENT', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115409','CONVEYANCE', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','43315203','EXPORTS - FREIGHT OUTWARD', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','43315204','EXPORT EXPS - OTHERS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','44515203','SALES PROMOTION - EXPORTS', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','48115420','CHARGES FOR DG SET', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','44515202','BUSINESS PROMOTION', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),63,'Y','GL_MASTER','50515419','CSR Expenses', now() , now() ,1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','WITH_HOLDING_TAX','With Holding Tax', now() , now(), 1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','A1_01','194A_Interest - Basic - 20% - CO','100_20', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','A1_02','194A_Interest - Basic - 10% - OT','100_10', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','A1_03','194A_Interest - Basic - 5%','100_5', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_00','194C_Contractor - Basic - 0%','100_0', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_01','194C_Contractor - Basic - 2%','100_2', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_02','194C_Advertising Contractor - Basic - 1%','100_1', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_03','194C_Contractor - Basic - 0.5% (Concessional)','100_0.5', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_04','194C_Contractor - Basic - 1%','100_1', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_05','194C_Contractor - Basic - 20%','100_20', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_06','194C_Contractor - Basic - 0.94%','100_0.94', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_07','194C_Contractor - Basic - 0.4%','100_0.4', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','C1_08','194C_Contractor - Basic - 1.40%','100_1.4', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','F1_00','195F_Pmt.to Foreign - Basic - 20%','100_20', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H1_00','194H_Commission - Basic - 0%','100_0', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H1_01','194H_Commission - Basic - 5%','100_5', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H1_02','194H_Commission - Basic - 10%','100_10', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H1_04','194H_Commission - Basic - 34.608%','100_34.608', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H1_05','194H_TDS on Salary 35.535%','100_35.535', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H4_01','194H_TDS on Salary 35.535%','100_35.535', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','H4_02','194H_TDS on Salary 35.88%','100_35.88', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','I1_00','194I_Rent - Basic - 0%','100_0', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','I1_01','194I_Rent - Basic - 20% - CO','100_20', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','I1_02','194I_Rent - Basic - 15% - OT','100_15', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','I1_03','194I_Rent - Basic - 10% P&M,Equipment','100_10', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','I1_04','194I_Rent - Basic - 2% P&M,Equipment','100_2', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_00','194J_Professional - Basic - 0%','100_0', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_01','194J_Professional - Basic - 5%','100_5', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_02','194J_Professional - Basic - 10%','100_10', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_03','194J_Professional - Basic - 2.7%','100_2.7', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_04','194J_Professional - Basic  - 20%','100_20', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_05','194J_Professional - Basic - 0.01%','100_0.01', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_06','194J_Professional - Basic - 0.25%','100_0.25', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_07','194J_Professional - Basic - 3.5%','100_3.5', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_08','194J_Professional - Basic - 25%','100_25', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_09','194J_Professional - Basic - 40%','100_40', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_10','194J_Professional - Basic - 4%','100_4', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_11','194J_Professional - Basic - 3%','100_3', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_12','194J_Professional - Basic - 6%','100_6', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, description,created, updated , m_bpartner_id) values (nextval('m_referencelist_seq'),64,'Y','WITH_HOLDING_TAX','J1_13','194J_Professional - Basic - 2%','100_2', now() , now() ,1 );
+

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-01-19T12:11:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TenderReqDoc" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="50" bottomMargin="20" uuid="c43d6985-cc6a-4e9e-bbc2-6824a4b372fc">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="TAHDRID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT row_number() OVER ( order by A.T_SECTION_DOCUMENT_ID ) sno, A.NAME,A.DESCRIPTION,D.NAME AS SECTION,F.NAME  AS ITEM FROM T_SECTION_DOCUMENT A
+
+
+INNER JOIN T_TAHDR_DETAIL B ON (A.T_TAHDR_DETAIL_ID = B.T_TAHDR_DETAIL_ID) 
+INNER JOIN T_TAHDR C ON (B.T_TAHDR_ID = C.T_TAHDR_ID)
+INNER JOIN M_REFERENCE_LIST D ON(D.VALUE=A.VALUE)
+LEFT OUTER JOIN  T_TAHDR_MATERIAL E ON(E.T_TAHDR_MATERIAL_ID=A.T_TAHDR_MATERIAL_ID)
+LEFT OUTER JOIN M_MATERIAL F ON(F.M_MATERIAL_ID=E.T_MATERIAL_ID)
+WHERE C.T_TAHDR_ID= $P{TAHDRID}  AND B.ISACTIVE='Y'  ORDER BY F.name,D.NAME]]>
+	</queryString>
+	<field name="SNO" class="java.math.BigDecimal"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="DESCRIPTION" class="java.lang.String"/>
+	<field name="SECTION" class="java.lang.String"/>
+	<field name="ITEM" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement x="20" y="0" width="554" height="30" uuid="78a7ae9a-b27a-476a-b139-96937dbdfb8c"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="554" height="30" backcolor="#9DDCF5" uuid="5c3129ab-84a6-4dd5-93be-ea7de5ffc324"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Required Documents (To be uploaded online)"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement x="20" y="0" width="554" height="30" uuid="b87e5b66-4724-45a3-9666-e1d532bf5307"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="1" y="1" width="49" height="29" uuid="26227b34-ee4d-4aa8-a5a4-520c2cea428a"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[SNO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="50" y="1" width="120" height="29" uuid="12abcdf8-b0a7-430e-8126-e2d9cd19cee7"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[NAME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="170" y="1" width="80" height="29" uuid="3a3e0bf4-e706-4672-bec0-76c93629aaca"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[SECTION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="250" y="1" width="80" height="29" uuid="2534a17c-7183-4322-91fc-4f0cd7a7ee3f"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[ITEM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="330" y="1" width="224" height="29" uuid="4fe93c59-54d5-41ac-ab28-c3e104a68cc5"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[DESCRIPTION]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement x="20" y="0" width="554" height="30" uuid="62be4828-1fc5-43e9-b4bd-5bdc310ed524"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="1" y="0" width="49" height="30" uuid="536ddc36-2a60-4f6e-bd52-099aac54f055"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="50" y="0" width="120" height="30" uuid="b83f226b-1ea0-403f-ab0c-8fe0d2a11201"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="170" y="0" width="80" height="30" uuid="977d8aac-ae78-4cd3-89e8-19e839881efc"/>
+					<box leftPadding="3" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{SECTION}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="250" y="1" width="80" height="29" uuid="df861ed3-e791-4ca3-8d9c-09e5144842a8"/>
+					<box leftPadding="3" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{ITEM}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="330" y="0" width="224" height="30" uuid="92826abe-a435-4673-b756-a4826fce96a5"/>
+					<box leftPadding="3" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

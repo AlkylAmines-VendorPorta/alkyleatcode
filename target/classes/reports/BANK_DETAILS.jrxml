@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-30T23:38:27 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Factory_Registraion" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="008ff09b-160c-4d1c-8e53-bcb551e7b80b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="201"/>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT B.NAME AS BANK_NAME,C.BRANCH_NAME,A.ACCOUNT_NUMBER,C.IFSC_CODE,A.MOBILE_NO,A.BENIFICIARY_NAME
+,D.PATH,D.NAME AS PHYS_NAME, D.FILE_NAME
+FROM M_BP_BANK_DETAIL A
+INNER JOIN M_BANK_NAME_DETAILS B ON A.M_BANK_NAME_DETAILS_ID=B.M_BANK_NAME_DETAILS_ID
+INNER JOIN M_BANK_BRANCH_DETAILS C ON A.M_BANK_BRANCH_DETAILS_ID=C.M_BANK_BRANCH_DETAILS_ID
+INNER JOIN M_ATTACHMENT D ON A.BANK_DETAIL_FILE=D.M_ATTACHMENT_ID
+INNER JOIN M_BPARTNER E ON A.M_BPARTNER_ID=E.M_BPARTNER_ID
+WHERE E.M_BPARTNER_ID=  $P{M_BPARTNER_ID}]]>
+	</queryString>
+	<field name="BANK_NAME" class="java.lang.String"/>
+	<field name="BRANCH_NAME" class="java.lang.String"/>
+	<field name="ACCOUNT_NUMBER" class="java.lang.String"/>
+	<field name="IFSC_CODE" class="java.lang.String"/>
+	<field name="MOBILE_NO" class="java.lang.String"/>
+	<field name="BENIFICIARY_NAME" class="java.lang.String"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="PHYS_NAME" class="java.lang.String"/>
+	<field name="FILE_NAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="289">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="180" uuid="d17d83bf-1d69-4786-9ab0-5d321c6bcd39"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement x="0" y="0" width="554" height="30" uuid="2b3f75d6-fa58-482f-9fad-a0a5e6d58f57"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField>
+						<reportElement mode="Opaque" x="1" y="1" width="552" height="29" backcolor="#A6DEF7" uuid="28b2b4e4-3676-474e-909a-6576fe58c2e4"/>
+						<box>
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="16" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["BANK DETAILS"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="31" width="553" height="20" uuid="74d951c2-90f6-4d6c-89a6-0c57a84bf603"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="-1" width="270" height="21" uuid="e95b8837-08f5-492b-b549-67da6819f64f"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["BANK NAME"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="-1" width="282" height="21" uuid="6a2d1598-d570-4133-b6f0-5139e6cdbcb3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{BANK_NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="51" width="553" height="19" uuid="d3dbaae4-4416-474b-b625-b5e68394ad4a"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="19" uuid="175621e3-672c-4b06-874e-66982fbca27b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["BANK BRANCH NAME"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="0" width="282" height="19" uuid="4fb47257-af9a-4fd8-8229-9afc7fc5d98b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{BRANCH_NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="71" width="553" height="20" uuid="f59911a3-d260-4854-97e7-66caaef2e750"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="-1" width="270" height="21" uuid="89fc9c91-3b5b-40a4-aab9-015aadd85414"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["ACCOUNT NUMBER"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="-1" width="282" height="21" uuid="938c3847-031e-47e8-9f6d-20fed14c4995"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{ACCOUNT_NUMBER}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="91" width="554" height="20" uuid="e3e3e819-be46-47fd-981d-031cbddb5136"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="24f6533f-df3f-489d-ac06-e98157190d47"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["IFSC CODE"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="0" width="282" height="20" uuid="c429960b-6547-4681-b7b7-fc7759956a32"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{IFSC_CODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="150" width="554" height="30" uuid="439817f1-3959-43b0-94fd-92eae3950cc3"/>
+					<box>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="30" uuid="88043705-c8cd-4f04-809b-275f8e0889d3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["BANK CANCELLED CHEQUE/RTGS DETAILS"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="0" width="283" height="30" uuid="8b76acfc-3eeb-4b40-9366-b9ae550ac14e"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{FILE_NAME}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{PHYS_NAME}]]></hyperlinkReferenceExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="111" width="554" height="19" uuid="66f9628d-706f-474b-81a8-1de427d04f6d"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="270" height="19" uuid="adb3dc90-e93a-4229-9857-7e5d06950af3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["MOBILE NUMBER"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="270" y="0" width="283" height="19" uuid="3b3c4fbc-478d-4fdd-af31-fa3c33232c0a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{MOBILE_NO}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="1" y="130" width="553" height="20" uuid="a19f02d0-813b-4648-b035-d7bb3360e05b"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="269" height="20" uuid="74db8212-7ac4-47d2-b651-ed8dad350a73"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["BENEFITIARY NAME"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="269" y="0" width="283" height="20" uuid="3f20aa17-e17b-4a2b-b5f5-b783bb40b435"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{BENIFICIARY_NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-23T15:06:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PriceSchedulerNew" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4ea7f700-32ee-494f-b966-e24ebc34877f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSCB"/>
+	<parameter name="TAHDRID" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT row_number() over ( order by material.T_MATERIAL_ID ) as rnum,mtnr.VALUE as ItemCode,mtnr.DESCRIPTION,uom.VALUE as Unit,material.QUANTITY  from T_TAHDR_MATERIAL material
+INNER JOIN M_MATERIAL mtnr on(material.T_MATERIAL_ID=mtnr.M_MATERIAL_ID)
+INNER JOIN M_UOM uom on(mtnr.M_UOM_ID=uom.M_UOM_ID)
+where material.T_TAHDR_DETAIL_ID=$P{TAHDRID}]]>
+	</queryString>
+	<field name="RNUM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RNUM"/>
+	</field>
+	<field name="ITEMCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEMCODE"/>
+	</field>
+	<field name="DESCRIPTION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPTION"/>
+	</field>
+	<field name="UNIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="UNIT"/>
+	</field>
+	<field name="QUANTITY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="QUANTITY"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="1" width="800" height="30" backcolor="#75E3EB" uuid="db11ec35-7f1f-4f84-a94d-2c4eb017249d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="270" y="2" width="264" height="28" uuid="54689c6d-4dec-4e50-bd44-90b8f71b5ece"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Annexure 'B'(Price Schedule)"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="31" width="800" height="32" isPrintWhenDetailOverflows="true" uuid="e17c453e-ae00-42b3-8b36-67e21b144fbe"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="30" height="32" uuid="8c31ad87-d785-4c69-aa2b-19d74625355e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Sr.No"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="31" y="0" width="81" height="32" uuid="e1b305df-c154-42aa-bd41-0fcdad69d83b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Item Code"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="112" y="0" width="69" height="32" uuid="82ec5d47-a805-463b-ba61-c15469dec04e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Material Description"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="182" y="0" width="29" height="32" uuid="bc22d27e-e104-4dab-8df5-b464da6cab4c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Unit"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="212" y="1" width="48" height="30" uuid="e41d36c2-ef20-486c-b63a-aec16a286fd9"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Quantity Required"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="760" y="1" width="39" height="30" uuid="e0302af7-4530-4140-ba90-14b6934c2310"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="0.0" lineStyle="Double"/>
+					</box>
+					<textFieldExpression><![CDATA["Quoted"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="634" y="0" width="126" height="32" uuid="809ca55e-a8a2-4dd6-b69f-df1ce01d0688"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Free Door Delivery Price Per Unit by Road upto Destination/Stores/Sub Station (In Rupees)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="260" y="0" width="54" height="32" uuid="6e900986-0f63-4b67-87ee-705f5045cec2"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Quantity Offered"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="364" y="0" width="50" height="32" uuid="66bed099-d2ff-420a-b5bc-ceb57c726dcd"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Freight Charges Per Unit (In Rupees)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="464" y="0" width="50" height="32" uuid="7bfc4c8e-7545-4565-8428-832ac16deb9c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Integrated GST for outside State Transaction on (Ex-Works Price+Freight Charges + Transit Insurance Charges)(In Rupees)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="315" y="0" width="48" height="32" isPrintWhenDetailOverflows="true" uuid="3639bade-9331-47e0-b6f9-9e60cfdd1742"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Unit ExWorks including packaging charges but excluding duties & taxes etc (In Rupees )"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="515" y="0" width="60" height="32" uuid="b4c8e111-554b-4776-83c5-dc7bb08650f9"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Central GST for within State Transaction on (Ex-Works Price + Freight Charges + Transit Insurance Charges)(In Rupees)"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="575" y="1" width="60" height="32" uuid="160dbfa5-6533-4aae-8f15-ca89766f46a1"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["State GST  for within State Transaction on (Ex-Works Price + Freight Charges + Transit Insurance Charges)(In Rupees)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="414" y="0" width="50" height="32" uuid="50df9503-8bd4-4d22-98d6-9f29c4db2831"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["Transit Insurance Charges Per Unit (In Rupees )"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="64" width="800" height="14" uuid="2e186e0e-2526-4e91-8472-619647ef30aa"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="464" y="-1" width="50" height="15" uuid="0fa9b212-1be0-4d85-9cd1-c90304a24b78"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["10"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="514" y="-1" width="61" height="15" uuid="1d37bdb3-135a-46ac-8211-2cb12cbb689b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["11"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="211" y="-1" width="49" height="15" uuid="616d835c-1975-46e8-87e9-d5df88579f8b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["5"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="31" y="-1" width="81" height="15" uuid="e65a73d8-817d-4a04-a397-91b9eb2b7a08"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="181" y="-1" width="30" height="15" uuid="8003c417-11cd-4f9a-9704-f0be6c9d101b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="363" y="-2" width="51" height="16" uuid="9a0000a3-1199-4f0b-851b-d5e8212378bc"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["8"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="414" y="-1" width="50" height="15" uuid="b9ccb6e4-2184-4478-a23a-1f9cb288c17e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["9"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="635" y="-2" width="125" height="16" uuid="032a58df-4afc-4dc2-a725-1196360a56b3"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["13=(7+8+9+10+11+12)"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="575" y="-1" width="60" height="15" uuid="48683c36-9e3f-4b27-9f31-57f0d88aba73"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["12"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="761" y="-2" width="39" height="16" uuid="8a805e10-d541-4ffb-ad64-5c2ab48c0368"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["14"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="314" y="-2" width="49" height="16" isPrintWhenDetailOverflows="true" uuid="8c3f3e62-8e92-46e2-880f-4c372fc42d61"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["7"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="260" y="-2" width="54" height="16" uuid="c5b2f8f8-b49e-411e-ad54-7eb7f4d3db07"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["6"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="112" y="-1" width="69" height="15" uuid="ab40472d-d706-47de-ac93-875679308061"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["3"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="-1" width="31" height="15" uuid="1d717247-f177-48d8-ba50-581dd73cf3fd"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="800" height="20" uuid="844fb3a5-defb-41e2-9073-72eb703ae758"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="31" y="0" width="81" height="20" uuid="8b259dd8-e7b1-4cf7-9b2f-d47e2d2f11bb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9779bbee-0383-4c93-aa36-f0633dafb46a"/>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="1" width="31" height="19" uuid="9629499e-32f4-4e60-a7b3-c69211c795f7"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textFieldExpression><![CDATA[$F{RNUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="112" y="0" width="69" height="20" uuid="9cab0d60-ca0f-4d91-94f6-c0af72976e7a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="181" y="0" width="30" height="20" uuid="f16ab67e-8440-4e27-866b-eccb159f4725"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{UNIT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="211" y="0" width="49" height="20" uuid="eef975f9-3f8a-4c4e-974e-e4de1297e11b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{QUANTITY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="514" y="0" width="61" height="20" uuid="bcdd958e-4001-4f62-9792-b25ea0159e20"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="260" y="0" width="54" height="20" uuid="5d9c5dba-1835-47b0-9bbe-3ccc6832a8a1"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="635" y="0" width="125" height="20" uuid="d79157e9-8267-4f80-803b-39781ff66ae8"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="575" y="0" width="60" height="20" uuid="249dcf3a-a01a-47d0-b846-73f07fcffac9"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="414" y="0" width="50" height="20" uuid="bd4d3330-6770-4722-a934-c60b13336f32"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="314" y="0" width="49" height="20" isPrintWhenDetailOverflows="true" uuid="159b5e2c-f8d5-4e86-8ba7-36b34c156a7a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="464" y="0" width="50" height="20" uuid="a6919774-4fca-4489-b80d-645310395296"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="761" y="0" width="39" height="20" uuid="7b1889dc-8f24-46da-b41b-6ff3f20e73a1"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="363" y="0" width="51" height="20" uuid="f802c763-852c-4aed-91fb-d36fe4cc7660"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

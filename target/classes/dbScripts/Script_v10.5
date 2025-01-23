@@ -1,0 +1,23 @@
+create sequence t_mis_seq start with 1 increment by  1;
+
+CREATE TABLE t_mis (
+    t_mis_id             NUMBER(19,0) NOT NULL,
+    created              TIMESTAMP,
+    isactive             VARCHAR2(255 CHAR),
+    updated              TIMESTAMP,
+    created_session_id   VARCHAR2(255 CHAR),
+    updated_session_id   VARCHAR2(255 CHAR),
+    charges              DOUBLE PRECISION,
+    doc_no               VARCHAR2(255 CHAR),
+    createdby            NUMBER(19,0),
+    m_bpartner_id        NUMBER(19,0),
+    updatedby            NUMBER(19,0),
+    PRIMARY KEY ( t_mis_id )
+);
+alter table t_mis add constraint FKaiynwlcc3pr5i6iyuj0w25o3p foreign key (createdBy) references ad_user;
+alter table t_mis add constraint FK39qf6r2dn2mxkev67wy0o7ay6 foreign key (m_bpartner_id) references m_bpartner;
+alter table t_mis add constraint FKtqtmeg47qysos16nn4041ek85 foreign key (updatedBy) references ad_user;
+
+alter table M_BPARTNER add m_location_type_id NUMBER(19,0) REFERENCES M_LOCATION_TYPE(M_LOCATION_TYPE_ID);
+alter table M_BPARTNER add m_office_location_id NUMBER(19,0) REFERENCES M_OFFICE_LOCATION(M_OFFICE_LOCATION_ID);
+commit;

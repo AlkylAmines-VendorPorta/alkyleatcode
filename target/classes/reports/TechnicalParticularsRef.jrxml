@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-07T09:59:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TechnicaParticularsRef" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="50" bottomMargin="20" uuid="5aed135a-5236-46fb-be80-7dcbb518f295">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="TAHDRID" class="java.lang.Long"/>
+	<parameter name="Report_Dir" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT row_number() over ( order by tahdar_material.T_TAHDR_MATERIAL_ID ) as rnum,GTP.NAME as GTPParameters,mtnr.NAME,GTPTYPE.VALUE as GTPParamTYPE
+	FROM T_TAHDR_MATERIAL tahdar_material
+	INNER JOIN M_MATERIAL mtnr on(tahdar_material.T_MATERIAL_ID=mtnr.M_MATERIAL_ID)
+	INNER JOIN T_TAHDR_MATERIAL_GTP gtp_material on(tahdar_material.T_TAHDR_MATERIAL_ID=gtp_material.T_TAHDR_MATERIAL_ID)
+	INNER JOIN M_GTP_PARAMETER GTP on(gtp_material.M_GTP_ID=GTP.M_GTP_PARAMETER_ID)
+	INNER JOIN M_GTP_PARAMETERTYPE GTPTYPE on(GTP.M_GTP_PARAMETERTYPE_ID=GTPTYPE.M_GTP_PARAMETERTYPE_ID)
+	INNER JOIN T_TAHDR_DETAIL tahdr_detail ON (tahdar_material.T_TAHDR_DETAIL_ID=tahdr_detail.T_TAHDR_DETAIL_ID)
+	WHERE tahdr_detail.T_TAHDR_ID= $P{TAHDRID}]]>
+	</queryString>
+	<field name="RNUM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="RNUM"/>
+	</field>
+	<field name="GTPPARAMETERS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="GTPPARAMETERS"/>
+	</field>
+	<field name="NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NAME"/>
+	</field>
+	<field name="GTPPARAMTYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="GTPPARAMTYPE"/>
+	</field>
+	<group name="Item_Name">
+		<groupExpression><![CDATA[$F{NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="51">
+				<frame>
+					<reportElement x="0" y="1" width="550" height="50" uuid="836e7a0e-3243-46ea-8d1d-a8f2edd08d97"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="31" width="80" height="19" uuid="ff7bc8b7-229b-4856-9d82-75c7b4754612"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Sr.NO"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="80" y="31" width="371" height="19" uuid="7cdad7b6-3f77-4dbd-ace7-f846f152a210"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["GTP Parameters"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="451" y="31" width="99" height="19" uuid="0a23fcea-e149-4a89-80e5-a7c5b877e773"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[""]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="1" y="0" width="549" height="30" backcolor="#9DDCF5" uuid="06f06792-7d2d-47be-b0e7-8c2f48dbf932"/>
+						<box>
+							<topPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<detail>
+		<band height="20">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="20" uuid="c5d316a3-aaec-43e8-8b39-a4b913d07fb7"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="-3" y="0" width="80" height="19" uuid="9e15ff62-7a27-43aa-95cf-ad9222171736"/>
+					<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="77" y="0" width="371" height="19" uuid="61631e86-acac-4847-a130-790e5aa0f4f0"/>
+					<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GTPPARAMETERS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="448" y="0" width="93" height="19" uuid="84eee9dc-6bfb-4ae2-ae10-5587a1c841f8"/>
+					<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GTPPARAMTYPE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20"/>
+	</pageFooter>
+</jasperReport>

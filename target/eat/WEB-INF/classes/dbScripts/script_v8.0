@@ -1,0 +1,11 @@
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value,DESCRIPTION, name, created,m_bpartner_id, updated) values
+(140,16,'Y','DOCUMENT_STATUS','AWCO','Award Winner Completed','Award Winner Completed',SYSDATE,2,SYSDATE );
+
+ALTER TABLE t_tahdr_material ADD ALLOCATED_QTY  NUMBER(19,0);
+
+INSERT INTO M_REFERENCE_LIST (M_REFERENCE_LIST_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME, REFERENCE_CODE, M_BPARTNER_ID, M_REFERENCE_ID) 
+VALUES ('147', SYSDATE, 'Y', SYSDATE, 'PARTPASPRELIMINARY_COMMERCIAL_PASSEDS', 'Commercial Passed', 'Commercial Passed', 'BIDDER_STATUS', '2', '18');
+
+alter table M_BPARTNER add is_renewed VARCHAR2(255 CHAR);
+
+Commit;

@@ -1,0 +1,10 @@
+$(document).ready(function(){
+	$(':checkbox').change(function(){
+			if(this.checked){
+        	this.value="Y"
+        }else{
+			this.value="N"            
+        }
+       }
+	);
+});

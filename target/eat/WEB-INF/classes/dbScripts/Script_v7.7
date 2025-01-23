@@ -1,0 +1,10 @@
+alter table ad_user add is_password_updated  VARCHAR2(255 CHAR);
+
+update ad_user set is_password_updated='Y';
+
+alter table M_BPARTNER add is_partner_deleted  VARCHAR2(255 CHAR);
+
+alter table ad_user add is_user_deleted  VARCHAR2(255 CHAR);
+
+
+COMMIT;

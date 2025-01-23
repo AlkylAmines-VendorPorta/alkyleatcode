@@ -1,0 +1,41 @@
+INSERT INTO ad_role (
+    ad_role_id,
+    created,
+    isactive,
+    updated,
+    description,
+    isadmin,
+    name,
+    page_access,
+    user_level,
+    value,
+    view_name,
+    createdby,
+    m_bpartner_id,
+    updatedby,
+    created_session_id,
+    updated_session_id
+) VALUES (
+    18,
+    to_timestamp('28-09-18 06:35:37.000000000 AM','DD-MM-RR HH12:MI:SSXFF AM'),
+    'Y',
+    to_timestamp('28-09-18 06:35:37.000000000 AM','DD-MM-RR HH12:MI:SSXFF AM'),
+    'Infra Admin',
+    'Y',
+    'Infra Admin',
+    'Y',
+    'home',
+    'INFADM',
+    'dashboard4',
+    NULL,
+    1,
+    NULL,
+    NULL,
+    NULL
+);
+
+
+
+update M_INFRA_AP_LVL set M_DESIGNATION_ID=4 where M_INFRA_AP_LVL_ID in(2,3,5);
+
+COMMIT;

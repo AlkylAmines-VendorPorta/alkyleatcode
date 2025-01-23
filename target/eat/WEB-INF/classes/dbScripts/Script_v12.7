@@ -1,0 +1,17 @@
+alter table ad_user add isLoginCreated varchar2(1CHAR);
+
+update ad_user u
+set u.ISLOGINCREATED ='Y' 
+where u.AD_USER_ID IN (select au.ad_user_id 
+from ad_user au
+inner join M_BPARTNER bp on bp.M_BPARTNER_ID=au.M_BPARTNER_ID
+where bp.LEGACY_PK is null);
+
+update ad_user u
+set u.ISLOGINCREATED ='N' 
+where u.AD_USER_ID IN (select au.ad_user_id 
+from ad_user au
+inner join M_BPARTNER bp on bp.M_BPARTNER_ID=au.M_BPARTNER_ID
+where bp.LEGACY_PK is not null);
+
+commit;

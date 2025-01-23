@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-01-29T17:13:34 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ISO_DETAILS" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="54b8e24d-5a72-40a7-ada1-fd1edd68f7b7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="M_BP_ORG_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[M_BP_ORG_ID]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT A.ISO_NAME AS  ISO_REGISTRATION_TYPE,
+A.CERTIFYING_AUTHORITY AS ISO_REGISTRATION_AUTHORITY,
+A.CERTIFICATE_NO AS ISO_REGISTRATION_NO,
+AT.FILE_NAME 
+,AT.PATH,AT.NAME AS PHYS_NAME
+,A.ISNOTAPPLICABLE,
+A.VALID_FROM AS VALIDITY
+FROM M_BP_ORG_CERTIFICATION A 
+LEFT JOIN M_ATTACHMENT  AT ON (A.CERTIFICATE_COPY=AT.M_ATTACHMENT_ID) 
+WHERE A.M_BP_ORG_ID =  $P{M_BP_ORG_ID}]]>
+	</queryString>
+	<field name="ISO_REGISTRATION_TYPE" class="java.lang.String"/>
+	<field name="ISO_REGISTRATION_AUTHORITY" class="java.lang.String"/>
+	<field name="ISO_REGISTRATION_NO" class="java.lang.String"/>
+	<field name="FILE_NAME" class="java.lang.String"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="PHYS_NAME" class="java.lang.String"/>
+	<field name="ISNOTAPPLICABLE" class="java.lang.String"/>
+	<field name="VALIDITY" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50">
+			<frame>
+				<reportElement x="0" y="0" width="553" height="30" uuid="7c519d32-4cff-44f7-be5c-862d12dd4e5f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="1" width="552" height="29" backcolor="#80EBED" uuid="3ee13000-d0c2-416d-a1da-805ba0b64e48"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ISO-DETAILS"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="155" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="-19" width="553" height="140" uuid="89548a7e-6b5f-448a-8c72-28b631175547"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement x="0" y="0" width="553" height="20" uuid="3fd34678-eea3-4ca5-a3af-dcb255a51197"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="280" height="20" uuid="842d84bb-bbb4-4f17-a4d1-e993f3fca54a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["ISO-REGISTRATION-TYPE"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="280" y="1" width="273" height="19" uuid="f567fe8a-3dc9-42ff-bf57-40014ac4489b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{ISO_REGISTRATION_TYPE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="20" width="553" height="30" uuid="c91e57e9-6bea-46b1-91e0-e6d83eaedc8a"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="280" height="30" uuid="a262db26-897d-418c-96e2-5c21f51e95ce"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["ISO-REGISTRATION-AUTHORITY"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="280" y="0" width="273" height="30" uuid="0506a3a3-348c-4ac5-8ace-900c6d6f877b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.9"/>
+							<bottomPen lineWidth="0.9"/>
+							<rightPen lineWidth="0.9"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{ISO_REGISTRATION_AUTHORITY}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="50" width="553" height="30" uuid="fc77f9a7-f15a-4c32-b463-a76c9d04336f"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="280" height="30" uuid="32c8c7c6-2be8-4062-9e0f-c6d9182c3eea"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["ISO-REGISTRATION-NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="280" y="0" width="273" height="30" uuid="71fbee0a-7658-4a1c-9a51-c9a30cef98d1"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.9"/>
+							<bottomPen lineWidth="0.9"/>
+							<rightPen lineWidth="0.9"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{ISO_REGISTRATION_NO}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="1" y="110" width="552" height="30" uuid="e0ebfa3a-e010-4441-9811-d91dd9211104"/>
+					<box>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="279" height="30" uuid="ceacde11-f7c2-4612-818b-1472074e01ac"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["VALIDITY DATE OF ISO CERTIFICATION"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="279" y="0" width="273" height="30" uuid="1417441f-e2b5-4c61-bfb0-8973b837228b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+						<textFieldExpression><![CDATA[$F{VALIDITY}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement x="0" y="61" width="553" height="30" uuid="d2e839dc-0316-40d2-bd69-dcc2d75802db"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="1" width="280" height="29" uuid="c295ff69-7f13-436e-bfbd-7b16725e0096"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["ISO CERTIFICATE"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="0" width="273" height="30" uuid="8b76acfc-3eeb-4b40-9366-b9ae550ac14e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FILE_NAME}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{PHYS_NAME}]]></hyperlinkReferenceExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

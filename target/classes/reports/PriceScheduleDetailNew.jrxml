@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-01-15T12:47:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PriceScheduler" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4ea7f700-32ee-494f-b966-e24ebc34877f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="T_ITEM_BID_ID" class="java.lang.Long"/>
+	<parameter name="T_PRICE_BID_ID" class="java.lang.Long"/>
+	<parameter name="SEC_KEY" class="java.lang.String"/>
+	<parameter name="IV_PREFIX" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select D.T_BIDDER_ID,B.name as Vendor,B.crn_number as RegistNo,J.name as VendFact,
+E.value as TenderCode,sysdate as pdfTime,
+rank() over(PARTITION BY C.t_item_bid_id order by C.t_item_bid_id) as srNo, 
+CASE WHEN A.M_MATERIAL_SPECIFICATION_ID IS NULL THEN H.value ELSE M.value END as ItemCode,
+CASE WHEN A.M_MATERIAL_SPECIFICATION_ID IS NULL THEN H.DESCRIPTION ELSE M.DESCRIPTION END as MaterialDesc,
+CASE WHEN A.M_MATERIAL_SPECIFICATION_ID IS NULL THEN G.QUANTITY ELSE L.QUANTITY END as QntyReq,
+CASE WHEN A.M_MATERIAL_SPECIFICATION_ID IS NULL THEN I.name ELSE N.name END as Unit,
+A.OFFERED_QUANTITY,A.ex_group_price_rate
+,A.FREIGHT_CHARGE_RATE,A.tic_rate,
+CASE WHEN C.STATUS='SBMT' THEN 'YES' ELSE 'NO' END AS status,
+CONFIG.NAME AS Report_Dir,E.value AS TENDERCODE,
+CASE WHEN A.M_MATERIAL_SPECIFICATION_ID IS NULL THEN A.FDD_RATE_WITH_GST ELSE A.FDD_RATE END as FDD,
+A.igst_amount,A.cgst_amount,A.sgst_amount,
+A.igst,A.cgst,A.sgst
+,CASE WHEN A.M_MATERIAL_SPECIFICATION_ID IS NULL THEN K.value ELSE O.value END as hsncode
+,B.PAN_NO,E. TAHDR_TYPE_CODE,
+A.M_MATERIAL_SPECIFICATION_ID
+from T_PRICE_BID A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+inner join m_bpartner B on (A.M_BPARTNER_ID= B.M_BPARTNER_ID)
+inner join t_item_bid C on (A.T_ITEM_BID_ID=C.T_ITEM_BID_ID )
+inner join t_bidder D on (C.T_BIDDER_ID=D.T_BIDDER_ID)
+inner join t_tahdr E on (E.t_tahdr_id = D.t_tahdr_id )
+inner join t_tahdr_detail F on (E.t_tahdr_id=F.t_tahdr_id and F.ISACTIVE='Y')
+inner join t_tahdr_material G on (G.T_TAHDR_MATERIAL_ID = C.T_TAHDR_MATERIAL_ID)
+inner join m_material H on (H.M_MATERIAL_ID = G.T_MATERIAL_ID)
+inner join m_uom I on (I.M_UOM_ID = H.M_UOM_ID)
+left join m_bp_org J on (D.m_bp_org_id = J.m_bp_org_id)
+INNER JOIN M_HSN K on(H.M_HSN_ID=K.M_HSN_ID)
+LEFT OUTER JOIN m_material_specification L on (L.M_MATERIAL_SPECIFICATION_ID=A.M_MATERIAL_SPECIFICATION_ID)
+LEFT OUTER JOIN m_material M on (M.M_MATERIAL_ID=L.SPECIFICATION)
+LEFT OUTER JOIN m_uom N on (N.M_UOM_ID = M.M_UOM_ID)
+LEFT OUTER JOIN M_HSN O on(O.M_HSN_ID=M.M_HSN_ID)
+where A.T_ITEM_BID_ID=  $P{T_ITEM_BID_ID}
+ORDER BY A.M_MATERIAL_SPECIFICATION_ID DESC]]>
+	</queryString>
+	<field name="T_BIDDER_ID" class="java.math.BigDecimal"/>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="REGISTNO" class="java.lang.String"/>
+	<field name="VENDFACT" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="PDFTIME" class="java.sql.Timestamp"/>
+	<field name="SRNO" class="java.math.BigDecimal"/>
+	<field name="ITEMCODE" class="java.lang.String"/>
+	<field name="MATERIALDESC" class="java.lang.String"/>
+	<field name="QNTYREQ" class="java.math.BigDecimal"/>
+	<field name="UNIT" class="java.lang.String"/>
+	<field name="OFFERED_QUANTITY" class="java.lang.String"/>
+	<field name="EX_GROUP_PRICE_RATE" class="java.lang.String"/>
+	<field name="FREIGHT_CHARGE_RATE" class="java.lang.String"/>
+	<field name="TIC_RATE" class="java.lang.String"/>
+	<field name="STATUS" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="COLUMN_18" class="java.lang.String"/>
+	<field name="FDD" class="java.lang.String"/>
+	<field name="IGST_AMOUNT" class="java.lang.String"/>
+	<field name="CGST_AMOUNT" class="java.lang.String"/>
+	<field name="SGST_AMOUNT" class="java.lang.String"/>
+	<field name="IGST" class="java.lang.String"/>
+	<field name="CGST" class="java.lang.String"/>
+	<field name="SGST" class="java.lang.String"/>
+	<field name="HSNCODE" class="java.lang.String"/>
+	<field name="PAN_NO" class="java.lang.String"/>
+	<field name="TAHDR_TYPE_CODE" class="java.lang.String"/>
+	<field name="M_MATERIAL_SPECIFICATION_ID" class="java.math.BigDecimal"/>
+	<variable name="SerialNumber" class="java.lang.String" incrementType="Report" calculation="Count">
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="73">
+			<subreport>
+				<reportElement x="80" y="16" width="600" height="54" uuid="698d3ef7-bc35-48eb-b67e-ef22cd66ef6c"/>
+				<subreportParameter name="T_PRICE_BID_ID">
+					<subreportParameterExpression><![CDATA[$P{T_PRICE_BID_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{REPORT_DIR}+"Price_Bid_Header.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="99">
+			<frame>
+				<reportElement x="0" y="0" width="800" height="99" uuid="b4fd6f39-b9bb-4bf5-a2af-669c8c27c34a"/>
+				<frame>
+					<reportElement mode="Opaque" x="0" y="0" width="800" height="30" backcolor="#39EDEA" uuid="db11ec35-7f1f-4f84-a94d-2c4eb017249d">
+						<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField>
+						<reportElement positionType="Float" x="270" y="2" width="264" height="28" uuid="54689c6d-4dec-4e50-bd44-90b8f71b5ece"/>
+						<textElement>
+							<font size="16" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Annexure 'B'(Price Schedule)"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="31" width="800" height="32" isPrintWhenDetailOverflows="true" uuid="e17c453e-ae00-42b3-8b36-67e21b144fbe">
+						<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="30" height="32" backcolor="#E9ED77" uuid="8c31ad87-d785-4c69-aa2b-19d74625355e"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Sr.No"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="32" y="0" width="72" height="32" backcolor="#E9ED77" uuid="e1b305df-c154-42aa-bd41-0fcdad69d83b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Item Code"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="105" y="0" width="67" height="32" backcolor="#E9ED77" uuid="82ec5d47-a805-463b-ba61-c15469dec04e"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Material Description"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="173" y="0" width="29" height="32" backcolor="#E9ED77" uuid="bc22d27e-e104-4dab-8df5-b464da6cab4c"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Unit"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="203" y="0" width="49" height="31" backcolor="#E9ED77" uuid="e41d36c2-ef20-486c-b63a-aec16a286fd9"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Quantity Required"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="680" y="0" width="120" height="32" backcolor="#E9ED77" uuid="809ca55e-a8a2-4dd6-b69f-df1ce01d0688"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Free Door Delivery Price Per Unit by Road upto Destination/Stores/Sub Station (In Rupees)"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="298" y="0" width="49" height="32" backcolor="#E9ED77" uuid="6e900986-0f63-4b67-87ee-705f5045cec2"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Quantity Offered"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="409" y="0" width="70" height="31" backcolor="#E9ED77" uuid="66bed099-d2ff-420a-b5bc-ceb57c726dcd"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Freight Charges Per Unit (In Rupees)"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="529" y="0" width="41" height="32" backcolor="#E9ED77" uuid="7bfc4c8e-7545-4565-8428-832ac16deb9c"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Integrated GST for outside State Transaction on (Ex-Works Price+Freight Charges + Transit Insurance Charges)(In Rupees) "]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="348" y="0" width="61" height="32" isPrintWhenDetailOverflows="true" backcolor="#E9ED77" uuid="3639bade-9331-47e0-b6f9-9e60cfdd1742"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Unit ExWorks including packaging charges but excluding duties & taxes etc (In Rupees )"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="571" y="0" width="43" height="32" backcolor="#E9ED77" uuid="b4c8e111-554b-4776-83c5-dc7bb08650f9"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Central GST for within State Transaction on (Ex-Works Price + Freight Charges + Transit Insurance Charges)(In Rupees) "]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="615" y="0" width="64" height="31" backcolor="#E9ED77" uuid="160dbfa5-6533-4aae-8f15-ca89766f46a1"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["State GST  for within State Transaction on (Ex-Works Price + Freight Charges + Transit Insurance Charges)(In Rupees)"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="480" y="0" width="48" height="32" backcolor="#E9ED77" uuid="50df9503-8bd4-4d22-98d6-9f29c4db2831"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Transit Insurance Charges Per Unit (In Rupees )"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="253" y="0" width="44" height="32" backcolor="#E9ED77" uuid="17cf7dab-7897-45d5-a9fd-ddacb7b8daa9"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["HSN"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="63" width="800" height="36" uuid="b8a9e511-1787-4872-bbaa-fc8f7dd44b8f">
+						<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+					</reportElement>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="31" height="36" uuid="296eaff3-2ae3-452e-9cd3-fdeab345e7c3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="32" y="1" width="72" height="35" uuid="a349b7e8-97d1-45c9-9051-49e21c6e2393"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="105" y="1" width="67" height="35" uuid="1191e29a-fe85-41dc-bf55-b27783e8625a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["3"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="172" y="0" width="31" height="35" uuid="6ac5f9af-3a88-476b-b8ba-062a66d76693"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="203" y="1" width="49" height="35" uuid="2ef3fcfc-e8ef-46ab-86fd-b0f5f2b9de37"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["5"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="252" y="0" width="45" height="36" uuid="973bf4ee-ad95-4d33-aaef-3c85857391fd"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["6"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="297" y="1" width="50" height="34" uuid="f15e7be0-48be-43e4-88ef-7c0a30467d02"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["7"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="347" y="1" width="62" height="34" uuid="5fb66fb2-206e-4611-81c0-06ddd0bf731a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["8"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="410" y="0" width="69" height="36" uuid="f0d3b5f5-69c7-4cfc-8f24-309eacf3c5d6"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<topPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["9"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="480" y="1" width="48" height="35" uuid="d3994ffc-25a7-4047-8c1e-81532c244937"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["10"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="529" y="1" width="41" height="34" uuid="5cb4a894-a712-4d4c-ac36-5db3516652ac"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["11"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="570" y="0" width="44" height="35" uuid="ce73da73-2de5-4dc9-ae5c-bf511045e84e"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["12"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="614" y="1" width="65" height="34" uuid="ca27e770-2cb7-4e6a-9fec-e9c635b67512"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["13"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="680" y="0" width="120" height="36" uuid="9be8c908-993a-4e41-98dc-9850f40ee6af"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["14=(8+9+10+11+12+13)"]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="800" height="20" uuid="844fb3a5-defb-41e2-9073-72eb703ae758">
+					<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="31" y="0" width="73" height="20" uuid="8b259dd8-e7b1-4cf7-9b2f-d47e2d2f11bb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9779bbee-0383-4c93-aa36-f0633dafb46a"/>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="1" width="31" height="19" uuid="9629499e-32f4-4e60-a7b3-c69211c795f7"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textFieldExpression><![CDATA[$F{M_MATERIAL_SPECIFICATION_ID}==null?$V{REPORT_COUNT}:""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="103" y="0" width="69" height="20" uuid="9cab0d60-ca0f-4d91-94f6-c0af72976e7a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{MATERIALDESC}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="172" y="1" width="31" height="19" uuid="f16ab67e-8440-4e27-866b-eccb159f4725"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{UNIT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="203" y="1" width="49" height="19" uuid="eef975f9-3f8a-4c4e-974e-e4de1297e11b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{QNTYREQ}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="570" y="1" width="44" height="19" uuid="bcdd958e-4001-4f62-9792-b25ea0159e20"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{CGST_AMOUNT}==null || "0".equals($F{CGST_AMOUNT})?"0":new String(com.novelerp.core.service.impl.MD5Security.decryptData(String.valueOf($F{CGST_AMOUNT}),$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))
++"(@"+
+((String.valueOf($F{CGST}))==null || "0".equals($F{CGST}) ?"0":
+new String(com.novelerp.core.service.impl.MD5Security.decryptData( String.valueOf($F{CGST}),$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))
+)+"%)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="297" y="1" width="50" height="19" uuid="5d9c5dba-1835-47b0-9bbe-3ccc6832a8a1"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[new String(com.novelerp.core.service.impl.MD5Security.decryptData( $F{OFFERED_QUANTITY},$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="680" y="1" width="120" height="19" uuid="d79157e9-8267-4f80-803b-39781ff66ae8"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[new String(com.novelerp.core.service.impl.MD5Security.decryptData( $F{FDD},$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="615" y="1" width="64" height="19" uuid="249dcf3a-a01a-47d0-b846-73f07fcffac9"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{SGST_AMOUNT} == null ||"0".equals($F{SGST_AMOUNT})?"0":new String(com.novelerp.core.service.impl.MD5Security.decryptData(String.valueOf($F{SGST_AMOUNT}),$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))
++
+"(@"+ ((String.valueOf($F{SGST}))==null || "0".equals($F{SGST}) ?"0":
+new String(com.novelerp.core.service.impl.MD5Security.decryptData( String.valueOf($F{SGST}),$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))
+)+"%)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="481" y="1" width="47" height="19" uuid="bd4d3330-6770-4722-a934-c60b13336f32"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[new String(com.novelerp.core.service.impl.MD5Security.decryptData( $F{TIC_RATE},$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="348" y="1" width="61" height="19" isPrintWhenDetailOverflows="true" uuid="159b5e2c-f8d5-4e86-8ba7-36b34c156a7a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[new String(com.novelerp.core.service.impl.MD5Security.decryptData( $F{EX_GROUP_PRICE_RATE},$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="529" y="1" width="41" height="19" uuid="a6919774-4fca-4489-b80d-645310395296"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{IGST_AMOUNT}==null || "0".equals($F{IGST_AMOUNT}) ?"0":
+new String(com.novelerp.core.service.impl.MD5Security.decryptData( String.valueOf($F{IGST_AMOUNT}),$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))
++"(@"+
+((String.valueOf($F{IGST}))==null || "0".equals($F{IGST}) ?"0":
+new String(com.novelerp.core.service.impl.MD5Security.decryptData( String.valueOf($F{IGST}),$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))
+)+"%)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="410" y="1" width="69" height="19" uuid="f802c763-852c-4aed-91fb-d36fe4cc7660"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[new String(com.novelerp.core.service.impl.MD5Security.decryptData( $F{FREIGHT_CHARGE_RATE},$P{SEC_KEY},$F{PAN_NO}+$P{IV_PREFIX}))]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="252" y="1" width="44" height="19" uuid="74d69f1f-5a13-43e1-8d16-0be9c5631bec"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{HSNCODE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="524">
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="90" y="20" width="560" height="28" uuid="2976699d-2e51-4770-a01d-91a79e61385e"/>
+				<subreport>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="2" width="560" height="28" uuid="605135f2-715e-499c-8649-58b36d8ac424"/>
+					<subreportParameter name="T_PRICE_BID_ID">
+						<subreportParameterExpression><![CDATA[$P{T_PRICE_BID_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Price_Bid_Req_Doc.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="57" width="800" height="393" uuid="b9e2376a-5374-46b2-86b0-2f21fb899aa7"/>
+				<staticText>
+					<reportElement key="" positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="800" height="393" isRemoveLineWhenBlank="true" uuid="c93d5ff1-d32a-4d6e-a792-cb7a8ed6b798">
+						<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<text><![CDATA[To,
+
+The Chief Engineer (M.M.Cell)
+Maharashtra State Electricity Distribution Co. Ltd.,
+'Prakashgad', 1st Floor, Bandra(E),
+Mumbai - 400 051.
+
+Dear Sir,
+
+We hereby offer to carry out the work of design, manufacture, testing and supply of material/equipments as detailed in your tender specification and in accordance with the terms and conditions thereof.
+
+We have carefully perused the above tender specification connected with the work and agree to abide by the same.
+
+We agree to pay Security Deposit and to give the Contract Performance Guarantee as per your requirements in case we are the
+successful tenderer and also accept all terms & conditions of the tender specification.
+
+I/We agree to supply the materials at the rates herein tendered by me/us subject to the conditions of tender and supply Section-II of his tender which I/We have carefully read and which I/We thoroughly understood and to which I/We agree. 
+
+I/We hereby agree to keep this offer open upto the date as indicated in tender details & clause of validity of the tender of  Section-I and shall be bound by communication of acceptance dispatched within the validity period.
+
+We further agree to execute the contract if awarded referred to in your tender specification as per the terms and conditions
+specified therein.
+
+We are enclosing herewith Section-I, II & III and other Schedules and Annexure as per the tender.
+
+All the above details are true. And I/We accept these details.
+
+									Thanking you.]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-27T14:04:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DeliveryDetails" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" uuid="361bf94a-f6a5-471f-b930-3d65b1a87faa">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="T_PRICE_BID_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+BP.NAME AS Vendor,
+BP.CRN_NUMBER AS Registration_Number,
+ORG.NAME AS Vendor_Factory,
+T.VALUE AS Tender_Code,
+(CASE WHEN P.CLAUSE5A= 'Y' then 'Agreed' else 'Not Agreed' end) AS Clause_A,
+(CASE WHEN P.CLAUSE5B= 'Y' then 'Agreed' else 'Not Agreed' end) AS Clause_B,
+TMM.NAME AS Item_Name,
+(CASE WHEN P.IS_MATCHED= 'Y' then 'Agreed' else 'Not Agreed' end) AS Agreed_to_match,
+P.OFFERED_QUANTITY AS Quantity_agreed
+FROM T_PRICE_BID P
+LEFT JOIN T_ITEM_BID IB ON IB.T_ITEM_BID_ID=P.T_ITEM_BID_ID
+LEFT JOIN T_TAHDR_MATERIAL TM ON TM.T_TAHDR_MATERIAL_ID=IB.T_TAHDR_MATERIAL_ID
+LEFT JOIN M_MATERIAL TMM ON TMM.M_MATERIAL_ID=TM.T_MATERIAL_ID
+LEFT JOIN T_BIDDER B ON B.T_BIDDER_ID=IB.T_BIDDER_ID
+LEFT JOIN M_BP_ORG ORG ON ORG.M_BP_ORG_ID=B.M_BP_ORG_ID
+LEFT JOIN T_TAHDR T ON T.T_TAHDR_ID=B.T_TAHDR_ID
+LEFT JOIN M_BPARTNER BP ON BP.M_BPARTNER_ID=B.M_BPARTNER_ID
+WHERE P.T_PRICE_BID_ID= $P{T_PRICE_BID_ID}]]>
+	</queryString>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="REGISTRATION_NUMBER" class="java.lang.String"/>
+	<field name="VENDOR_FACTORY" class="java.lang.String"/>
+	<field name="TENDER_CODE" class="java.lang.String"/>
+	<field name="CLAUSE_A" class="java.lang.String"/>
+	<field name="CLAUSE_B" class="java.lang.String"/>
+	<field name="ITEM_NAME" class="java.lang.String"/>
+	<field name="AGREED_TO_MATCH" class="java.lang.String"/>
+	<field name="QUANTITY_AGREED" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="231">
+			<frame>
+				<reportElement x="0" y="0" width="556" height="230" forecolor="#000000" uuid="f5a1bf7c-bd14-4083-9821-851702650878"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="30" y="60" width="231" height="30" uuid="e8c25219-e88e-425f-ae91-9a495094e811"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="30" y="90" width="230" height="30" uuid="5eb76036-7f0b-4436-8477-a766187359fb"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Registration Number"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="30" y="120" width="231" height="30" uuid="2f917041-c2b9-45db-8af5-3c67554ba713"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor Factory"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="30" y="30" width="460" height="30" backcolor="#45F1F7" uuid="22506fd7-3b5f-4ab7-9a32-f32e7ac8fa3f"/>
+					<box leftPadding="0">
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Annexure C1 Bid"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="30" y="150" width="231" height="30" uuid="569dc0a4-2b04-403f-b999-c50eea0f5f71"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tender Code"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="30" y="180" width="231" height="30" uuid="4929bb3f-6080-4e59-b2cf-7a340e76559e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PDF Creation Time"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="261" y="61" width="229" height="29" uuid="fd673d88-8e54-4c69-ba86-5e5319080784"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{VENDOR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="261" y="90" width="229" height="30" uuid="3fa0ef58-7681-4eb4-b313-80e8eec9afc6"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{REGISTRATION_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="261" y="120" width="229" height="30" uuid="54eee30e-ce83-4e13-9ed0-223d9efd2d7b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{VENDOR_FACTORY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="261" y="150" width="229" height="30" uuid="cdf7898c-5ab8-49a0-8eed-f8a5929c6b8c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="261" y="180" width="229" height="30" uuid="41b6744a-8757-4745-9698-59c1c4a2265e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date().getTime())]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="59">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} >1]]></printWhenExpression>
+			<textField>
+				<reportElement x="80" y="20" width="100" height="16" uuid="0d6cfe11-ac1c-4021-870a-e95d2829f2c1"/>
+				<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="20" width="70" height="16" uuid="774732da-e47c-4cef-ba04-87ff1e40ecc1"/>
+				<textFieldExpression><![CDATA["Tender Code:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="20" width="72" height="16" uuid="6541c5f3-783c-41a1-a264-77d54fde0257"/>
+				<textFieldExpression><![CDATA["Vendor Name:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="20" width="80" height="16" uuid="851cb2bc-0007-411f-94e4-2618785662a5"/>
+				<textFieldExpression><![CDATA[$F{VENDOR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="353" y="20" width="100" height="30" uuid="3e2c574e-ce0b-42a7-a454-854cd839fdbe"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="453" y="20" width="100" height="30" uuid="cc100eb8-17d6-427d-860a-ba9718fe856f"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="540" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="416" uuid="ce59bc17-bca7-4263-bea2-027e5701b1bd"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#92E6F7" uuid="732cb66b-a8d5-48cb-b62c-45196e51dec7"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Annexure C1 (Matching Statement)"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="50" width="555" height="30" backcolor="#8DE6F7" uuid="40ce9aac-f8bc-4959-b8ed-2768ffa646ea"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Agreement"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="80" width="280" height="80" uuid="101d9f9a-042c-4418-b712-4185bbe6945a"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["5.(a) In case your unit is located in Maharashtra and the lowest acceptable rate received against the tender is from the unit outside Maharashtra, please confirm whether you are agreeable to accept order at that lowest acceptable rate limited to 50% (fifty percent) of our requirement."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="160" width="280" height="57" uuid="34ceaf13-0622-4175-b8c1-bcd9f4720f6e"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["5.(b) Please confirm whether you are agreeable to accept order at the lowest acceptable rate received against the tender [Industrial units from Maharashtra can give option under 5(b) above for balance quantity]"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="218" width="555" height="26" uuid="a49795ee-26d5-4792-96e8-7b17e1eac704"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["APPLICABLE FOR ALL THE TENDERERS INCLUDING THOSE ELIGIBLE UNDER THE ABOVE CLAUSES:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="244" width="555" height="28" backcolor="#90E6F5" uuid="9878d199-0593-4181-af9b-ba92603bfa95"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Note:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="272" width="555" height="26" uuid="a05943ca-6d36-4619-b423-76dd6c2c3365"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["1. If the tenderer gives the above confirmation for the quantity less than as indicated in Clause VIII (iv) of the Instructions to the Tenderers, then the above confirmation shall not be acceptable."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="298" width="555" height="26" uuid="202c1621-0316-40d6-b1a0-6066c6bc2a3f"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["2. Tenderers may confirm matching for one or more items originally tendered."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="324" width="555" height="26" uuid="788c581e-bc9d-4745-88c2-fdf22d5d52c9"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["3. Any withdrawal of confirmation for order by matching rate within validity of offer will render the entire offer invalid and shall be summarily rejected and Earnest Money Deposit shall stand forfeited."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="350" width="555" height="38" uuid="52503a9a-c394-4fd8-9f24-877ae0768faa"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["4. A tenderer will not be entitled to the benefit of offers by matching rates and will not be considered for orders if his original offer is rejected on the ground of ambiguity or because of not accepting/non compliance of the terms &amp; conditions of the tender."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="390" width="555" height="26" uuid="ef8614c5-ee8a-438d-a33d-2d97d3e03339"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["5. In the above confirmation, if the tenderer indicates any rate, then the above confirmation given by the tenderer will not be considered as valid."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="80" width="275" height="80" uuid="7308e68f-e8b5-4852-a622-649fff023b37"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{CLAUSE_A}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="160" width="275" height="58" uuid="b6df513d-948e-4fcf-9162-e6574d5f0b7a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{CLAUSE_B}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="430" width="554" height="40" backcolor="#93E9F5" uuid="3da75e2d-84f2-4049-a588-c608a7ca5ae6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Annexure C1 - CONFIRMATION FOR ACCEPTING ORDER BY MATCHINGRATES WITH LOWEST ACCEPTABLE TENDERER"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="480" width="80" height="30" backcolor="#DFFA66" uuid="252def1b-fc13-435d-afb5-9186f01a0494"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA["Sr No"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="80" y="480" width="190" height="30" backcolor="#DFFA66" uuid="24798897-0843-4040-bf8a-0258d0eaaf35"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA["Item Name"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="270" y="480" width="183" height="30" backcolor="#DFFA66" uuid="567f2029-5033-4e64-bdb9-9754ea70b094"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA["Agreed to match with the lowest acceptable"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="453" y="480" width="101" height="30" backcolor="#DFFA66" uuid="081f7ee6-add9-450b-bee5-c0cdaa2d950a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA["Quantity agreed for matching"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="510" width="80" height="30" uuid="ccab31c2-910f-413f-886f-74fabd888c3e"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="80" y="510" width="190" height="30" uuid="3d2d7cbd-e680-4d61-93cc-8611629d60ff"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{ITEM_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="270" y="510" width="183" height="30" uuid="162adb0f-f6f2-4bb6-9a74-86ccca43bf09"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{AGREED_TO_MATCH}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="453" y="510" width="101" height="30" uuid="5808b73e-32c1-4290-95ff-393c409ab152"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{QUANTITY_AGREED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

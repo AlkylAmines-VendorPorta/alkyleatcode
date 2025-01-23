@@ -1,0 +1,25 @@
+1)Insert Record into m_tile
+insert into m_tile(m_tile_id,created,isactive,updated,value,description,is_summary,level_no,name,parent_id,
+				  createdby,m_bpartner_id,updatedby,m_parent_id) values
+
+(nextval('m_tile_seq'),current_timestamp,'Y',current_timestamp,'PurchaseOrder','Purchase Order','N',1,'Purchase Order',
+ 64,1,1,1,64),
+
+(nextval('m_tile_seq'),current_timestamp,'Y',current_timestamp,'Reports','Reports','N',1,'Reports',
+ 64,1,1,1,64),
+ 
+(nextval('m_tile_seq'),current_timestamp,'Y',current_timestamp,'Transaction','Transaction','N',1,'Transaction',
+ 64,1,1,1,64),
+ 
+(nextval('m_tile_seq'),current_timestamp,'Y',current_timestamp,'Sales','Sales','N',1,'Sales',
+ 64,1,1,1,64),
+ 
+(nextval('m_tile_seq'),current_timestamp,'Y',current_timestamp,'UpdateCredentials','Update Credentials','N',1,'Update Credentials',
+ 64,1,1,1,64)
+
+ 
+ 2)Update Record into m_tile set isactive='Y'
+update  m_tile set isactive='Y' where DATE(created)=current_date
+
+select * from m_tile  where DATE(created)=current_date
+ 

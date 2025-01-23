@@ -1,0 +1,11 @@
+Insert into m_reference_list 
+(M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,M_BPARTNER_ID) 
+values(160,9,'Y','PAYMENT_MODE','BG','Bank Guarantee',SYSDATE,SYSDATE,2 );
+
+ALTER TABLE t_payment
+ADD bg_attachment NUMBER(19,0);
+
+ALTER TABLE t_payment
+ADD validity_date TIMESTAMP(6);
+
+COMMIT;

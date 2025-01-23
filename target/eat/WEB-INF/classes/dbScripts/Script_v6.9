@@ -1,0 +1,6 @@
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,M_BPARTNER_ID) values
+(133,16,'Y','DOCUMENT_STATUS','SCRDONE','Scrutiny Done',SYSDATE,SYSDATE,2 );
+
+ALTER TABLE AD_USER_ROLES MODIFY M_BPARTNER_ID  NUMBER (19, 0) NULL;
+
+COMMIT;

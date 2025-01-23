@@ -1,0 +1,5 @@
+alter table M_BP_ORG add IS_FACTORY_INSPECTED VARCHAR(255 CHAR);
+
+alter table T_PRICE_BID add m_material_specification_id Number(19,0);
+
+Commit;

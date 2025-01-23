@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-17T19:09:28 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PriceScheduleDetails" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="04b7a985-cf24-4095-888e-6c66bbc07d50">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="T_PRICE_BID_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select tb.T_BIDDER_ID,mbp.name as Vendor,mbp.crn_number as RegistNo,mbo.name as VendFact
+,tta.value as TenderCode,sysdate as pdfTime
+,rank() over(PARTITION BY tib.t_item_bid_id order by tib.t_item_bid_id) as srNo ,mm.value as ItemCode,ttm.MATERIAL_DESCRIPTION as MaterialDesc
+,mu.name as Unit,ttm.QUANTITY as QntyReq,pb.OFFERED_QUANTITY,pb.ex_group_price_rate
+,pb.FREIGHT_CHARGE_RATE,pb.tic_rate,tib.STATUS as status,
+CONFIG.NAME AS Report_Dir,tta.value AS TENDERCODE
+from T_PRICE_BID pb cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+inner join m_bpartner mbp on (pb.M_BPARTNER_ID= mbp.M_BPARTNER_ID)
+inner join t_item_bid tib on (pb.T_ITEM_BID_ID=tib.T_ITEM_BID_ID )
+inner join t_bidder tb on (tib.T_BIDDER_ID=tb.T_BIDDER_ID)
+inner join t_tahdr tta on (tta.t_tahdr_id = tb.t_tahdr_id )
+inner join t_tahdr_detail ttd on (tta.t_tahdr_id=ttd.t_tahdr_id and ttd.ISACTIVE='Y')
+inner join t_tahdr_material ttm on (ttm.T_TAHDR_Detail_ID = ttd.T_TAHDR_detail_ID)
+inner join m_material mm on (mm.M_MATERIAL_ID = ttm.T_MATERIAL_ID)
+inner join m_uom mu on (mu.M_UOM_ID = mm.M_UOM_ID)
+left join m_bp_org mbo on (tb.m_bp_org_id = mbo.m_bp_org_id)
+where pb.T_PRICE_BID_ID= $P{T_PRICE_BID_ID}]]>
+	</queryString>
+	<field name="T_BIDDER_ID" class="java.math.BigDecimal"/>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="REGISTNO" class="java.lang.String"/>
+	<field name="VENDFACT" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="PDFTIME" class="java.sql.Timestamp"/>
+	<field name="SRNO" class="java.math.BigDecimal"/>
+	<field name="ITEMCODE" class="java.lang.String"/>
+	<field name="MATERIALDESC" class="java.lang.String"/>
+	<field name="UNIT" class="java.lang.String"/>
+	<field name="QNTYREQ" class="java.math.BigDecimal"/>
+	<field name="OFFERED_QUANTITY" class="java.lang.String"/>
+	<field name="EX_GROUP_PRICE_RATE" class="java.lang.String"/>
+	<field name="FREIGHT_CHARGE_RATE" class="java.lang.String"/>
+	<field name="TIC_RATE" class="java.lang.String"/>
+	<field name="STATUS" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="COLUMN_18" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="46">
+			<textField>
+				<reportElement x="225" y="3" width="95" height="40" uuid="7edb7d02-eb9c-4eaa-be4f-63efcd42c9c3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{TENDERCODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="96" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="62" width="555" height="32" uuid="983256a3-8988-48b2-a60e-90b3d4341d26"/>
+				<staticText>
+					<reportElement x="0" y="2" width="60" height="30" uuid="3049af78-a26a-47af-a506-760ab7f7795c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a75a9532-5e5d-4a72-9195-da47d71fa697"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Sr.N]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="2" width="55" height="30" uuid="aba9c26f-da89-43e6-94b8-93ef3dd702af">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="17a593cc-7e51-4a9d-8424-b43cc9e63165"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Item Code]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="115" y="2" width="55" height="30" uuid="86a9a988-f634-47c1-a3c6-c03a284b1ec1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6b442e7c-2a12-4df3-b851-c2eceda2c13c"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Material
+Description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="170" y="2" width="55" height="30" uuid="bd01aaf6-4c25-4696-b9e4-2dfcd7e58914">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43105c8c-9ceb-48dd-b12f-2811217e286b"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[UNIT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="225" y="2" width="55" height="30" uuid="4601a487-66a6-4193-af4c-d10e327bfb70">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d344e13e-1877-47cb-a4c3-cd2660c01594"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Quantiy
+Required]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="280" y="2" width="55" height="30" uuid="507786a9-36ba-4a0f-9994-d9871b6da0cb">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ed809fa-d8b4-48e1-8b89-2b19d404ca30"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Quantity
+Offered]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="335" y="2" width="55" height="30" uuid="3f1e769a-efad-4fcb-9ce1-8fd2f623d3b1">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5b2e89dd-4c30-4854-9d46-298b661c5a40"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Unit Ex-
+Works
+includin
+g
+packagi
+ng
+charges
+but
+excludin
+g duties
+& taxes
+etc
+(In
+Rupees
+)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="2" width="55" height="30" uuid="0b608ea3-cec9-4937-ad7b-852fdd284266">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e0ce35b-6318-457f-b0ef-5b70a7435594"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Freight
+Charge
+s Per
+Unit
+(In
+Rupees
+)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="445" y="2" width="55" height="30" uuid="c923eeff-bc55-4fff-abe3-a7fc972abe89">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2aac3671-3f6d-47f7-85e6-c4f3cc875100"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Transit
+Insuran
+ce
+Charge
+s Per
+Unit
+(In
+Rupees
+)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="500" y="2" width="55" height="30" uuid="5f2eeb13-0542-44b8-9358-6545e3818b30">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="22ea2543-da91-4933-b3e8-a5b993e4c4e3"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<text><![CDATA[Quoted]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="34" width="555" height="30" backcolor="#18EFF2" uuid="056cf3dd-edca-4365-bb9c-000ed4bd04a5"/>
+				<box topPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Annexure 'B'(Price Schedule)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="555" height="35" uuid="0ef88923-3449-4e77-ad3e-a0a92b60ead8"/>
+				<textField>
+					<reportElement x="0" y="-2" width="60" height="37" uuid="0f6e9023-2183-4ed0-84b9-8d640044435e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a75a9532-5e5d-4a72-9195-da47d71fa697"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="60" y="-2" width="55" height="37" uuid="02e26016-6197-47ab-a762-de0299290601">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="17a593cc-7e51-4a9d-8424-b43cc9e63165"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="115" y="-2" width="55" height="37" uuid="5769a3ec-0bbc-42ac-a4b9-1b11ce91aeaa">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6b442e7c-2a12-4df3-b851-c2eceda2c13c"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{MATERIALDESC}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="170" y="-2" width="55" height="37" uuid="826520ba-98f9-4c0c-b641-521846b82ac6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43105c8c-9ceb-48dd-b12f-2811217e286b"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{UNIT}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="225" y="-2" width="55" height="37" uuid="312e08e7-9e02-4b99-a069-e06ded467eed">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d344e13e-1877-47cb-a4c3-cd2660c01594"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{QNTYREQ}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="280" y="-2" width="55" height="37" uuid="08e5ce65-062f-4cc6-ae0b-b6442ca1f163">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ed809fa-d8b4-48e1-8b89-2b19d404ca30"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{OFFERED_QUANTITY}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="335" y="-2" width="55" height="37" uuid="814c4259-9aac-4a08-8da8-2c67fb55f255">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5b2e89dd-4c30-4854-9d46-298b661c5a40"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{EX_GROUP_PRICE_RATE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="390" y="-2" width="55" height="37" uuid="a5c75867-0dc2-46a1-85a2-4802b6a112fd">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e0ce35b-6318-457f-b0ef-5b70a7435594"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FREIGHT_CHARGE_RATE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="445" y="0" width="55" height="35" uuid="94a5cc66-9d98-4cad-bfd3-49d16dc5aeee">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2aac3671-3f6d-47f7-85e6-c4f3cc875100"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{TIC_RATE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="500" y="-2" width="55" height="37" uuid="92f41d2b-a91b-49b1-a96e-301a6b0667b0">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="22ea2543-da91-4933-b3e8-a5b993e4c4e3"/>
+					</reportElement>
+					<box padding="1">
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="77">
+			<textField>
+				<reportElement x="320" y="10" width="100" height="30" uuid="234e6682-3c50-4717-9589-96ebf17bacfc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="422" y="10" width="100" height="30" uuid="df5c5abd-b441-4609-a88a-77bfa755034b"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="32">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="30" uuid="c78586d8-d094-4358-9173-1cf918b38185"/>
+				<subreportParameter name="T_PRICE_BID_ID">
+					<subreportParameterExpression><![CDATA[$P{T_PRICE_BID_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{REPORT_DIR}+"Price_Bid_Req_Doc.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

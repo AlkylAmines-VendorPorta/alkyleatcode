@@ -1,0 +1,34 @@
+ALTER TABLE t_mis ADD biller_id varchar2(45);
+ALTER TABLE t_mis ADD bank_id varchar2(45);
+ALTER TABLE t_mis ADD bank_ref_no varchar2(45);
+ALTER TABLE t_mis ADD pgi_ref_no varchar2(45);
+ALTER TABLE t_mis ADD fee_type varchar2(45);
+ALTER TABLE t_mis ADD company_name varchar2(45);
+ALTER TABLE t_mis ADD tender_no varchar2(45);
+ALTER TABLE t_mis ADD ref_5 varchar2(45);
+ALTER TABLE t_mis ADD ref_6 varchar2(45);
+ALTER TABLE t_mis ADD ref_7 varchar2(45);
+ALTER TABLE t_mis ADD ref_8 varchar2(45);
+ALTER TABLE t_mis ADD filler varchar2(45);
+ALTER TABLE t_mis ADD date_of_txn varchar2(45);
+ALTER TABLE t_mis ADD settlement_date varchar2(45);
+ALTER TABLE t_mis ADD gross_mount varchar2(45);
+ALTER TABLE t_mis ADD gst varchar2(45);
+ALTER TABLE t_mis ADD net_amount DOUBLE PRECISION;
+
+INSERT INTO "EAT"."M_TILE" (M_TILE_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, IS_SUMMARY, LEVEL_NO, NAME, PARENT_ID, SEQUENCE_NO, M_BPARTNER_ID, ENTITY, ELEMENT_ID) VALUES ('101', TO_TIMESTAMP('2018-07-16 11:50:22.000000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 'Y', TO_TIMESTAMP('2018-07-16 11:50:22.000000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 'ApproveVendor', 'Approve Vendor', 'Y', '0', 'Approve Vendor', '0', '17', '2', 'Bpartner', 'approveVendor')
+INSERT INTO "EAT"."M_TILE" (M_TILE_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, IS_SUMMARY, LEVEL_NO, NAME, PARENT_ID, SEQUENCE_NO, M_BPARTNER_ID, ENTITY, ELEMENT_ID) VALUES ('102', TO_TIMESTAMP('2018-07-16 11:50:22.000000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 'Y', TO_TIMESTAMP('2018-07-16 11:50:22.000000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 'ApproveVendor', 'Approve Vendor', 'N', '0', 'Approve Vendor', '101', '0', '2', 'Bpartner', 'approveVendorTile')
+INSERT INTO "EAT"."AD_ROLE_ACCESS_MASTER" (AD_ROLE_ACCESS_MASTER_ID, CREATED, ISACTIVE, UPDATED, DELETE_ACCESS, MODIFY_ACCESS, VIEW_ONLY, AD_ROLE_ID, M_TILE_ID) VALUES ('50689', TO_TIMESTAMP('2018-08-27 14:34:29.437000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 'Y', TO_TIMESTAMP('2018-08-27 14:34:29.437000000', 'YYYY-MM-DD HH24:MI:SS.FF'), 'N', 'N', 'Y', '1', '102')
+
+ALTER TABLE T_Payment ADD is_Pushed varchar2(45);
+
+update T_Payment set is_Pushed = 'N' ;
+
+ALTER TABLE m_charge ADD payment_posting_code varchar2(45);
+
+update m_charge set PAYMENT_POSTING_CODE = '13' where value = 'RG';
+update m_charge set PAYMENT_POSTING_CODE = '14' where value = 'RN';
+update m_charge set PAYMENT_POSTING_CODE = '12' where value = 'EMD';
+update m_charge set PAYMENT_POSTING_CODE = '11' where value = 'TF';
+
+commit;

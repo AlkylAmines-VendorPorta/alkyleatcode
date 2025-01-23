@@ -1,0 +1,10 @@
+
+UPDATE M_TILE SET VALUE = 'FinalScrutiny',DESCRIPTION = 'Final Scrutiny',NAME='Final Scrutiny' WHERE M_TILE_ID=54;
+
+UPDATE M_TILE SET VALUE = 'PreliminaryScrutiny',DESCRIPTION = 'Preliminary Scrutiny',NAME='Preliminary Scrutiny' WHERE M_TILE_ID=55;
+
+
+ALTER TABLE T_ITEM_SCRUTINY ADD is_audited VARCHAR2(255);
+
+
+COMMIT;

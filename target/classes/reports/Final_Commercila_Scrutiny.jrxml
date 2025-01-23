@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-10-23T16:45:41 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Technical_Bid" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="2ff5a6fb-16d0-4555-b20a-e830762f19f2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="amanDb"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[T_BIDDER_ID]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+sp.name as scrutiny_point,
+(CASE WHEN upper(itmsl.ISDEVIATION)='N' THEN 'PRELIMINARY :'||upper(itmsl.DEVIATION_COMMENT) ELSE '' END) AS statement,
+(CASE WHEN upper(itmsl.ISDEVIATION)='Y' THEN itmsl.deviation_comment ELSE '' END) as scrutiny_comments,
+itmsl.deviation_type,
+(CASE WHEN itmsl.text_response is null then atm.FILE_NAME else itmsl.text_response end) as Deviation_Details,
+(CASE WHEN itmsl.text_response is null then atm.M_ATTACHMENT_ID else 0 end) AS Deviation_Details_Id,
+atm.PATH,atm.NAME AS PHYS_NAME,
+(CASE WHEN upper(itmsl.ISDEVIATION)='Y' THEN itms.final_comment ELSE '' END)as final_comments,
+t.value as tendercode,
+itmsl.final_auditor_comment,
+itmsl.final_auditor_status,
+p.crn_number as registration_number,
+p.name as vendor,
+org.name as factory_name,
+CONFIG.NAME AS Report_Dir
+from t_item_scrutiny_line itmsl cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+LEFT JOIN m_scrutiny_point sp on itmsl.m_scrutiny_point_id=sp.m_scrutiny_point_id
+LEFT JOIN t_item_scrutiny itms on itmsl.t_item_scrutiny_id=itms.t_item_scrutiny_id
+LEFT JOIN t_bidder bd on itms.t_bidder_id=bd.t_bidder_id
+LEFT JOIN m_bpartner p on bd.m_bpartner_id=p.m_bpartner_id 
+LEFT JOIN m_attachment atm on atm.m_attachment_id=itmsl.file_response 
+LEFT JOIN t_tahdr t on bd.t_tahdr_id=t.t_tahdr_id
+LEFT JOIN m_bp_org org on bd.m_bp_org_id=org.m_bp_org_id
+WHERE itmsl.m_scrutiny_point_id IS NOT NULL AND bd.t_bidder_id= $P{T_BIDDER_ID}]]>
+	</queryString>
+	<field name="SCRUTINY_POINT" class="java.lang.String"/>
+	<field name="STATEMENT" class="java.lang.String"/>
+	<field name="SCRUTINY_COMMENTS" class="java.lang.String"/>
+	<field name="DEVIATION_TYPE" class="java.lang.String"/>
+	<field name="DEVIATION_DETAILS" class="java.lang.String"/>
+	<field name="DEVIATION_DETAILS_ID" class="java.math.BigDecimal"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="PHYS_NAME" class="java.lang.String"/>
+	<field name="FINAL_COMMENTS" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="FINAL_AUDITOR_COMMENT" class="java.lang.String"/>
+	<field name="FINAL_AUDITOR_STATUS" class="java.lang.String"/>
+	<field name="REGISTRATION_NUMBER" class="java.lang.String"/>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="FACTORY_NAME" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="230" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="556" height="230" forecolor="#000000" uuid="f5a1bf7c-bd14-4083-9821-851702650878"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="49" y="61" width="230" height="30" uuid="e8c25219-e88e-425f-ae91-9a495094e811"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.3"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.3"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="49" y="91" width="230" height="30" uuid="5eb76036-7f0b-4436-8477-a766187359fb"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.3"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.3"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Registration Number"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="49" y="121" width="230" height="30" uuid="2f917041-c2b9-45db-8af5-3c67554ba713"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.3"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.3"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor Factory"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="49" y="31" width="460" height="30" backcolor="#45F1F7" uuid="22506fd7-3b5f-4ab7-9a32-f32e7ac8fa3f"/>
+					<box leftPadding="0">
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Final Commercial Scrutiny"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="49" y="151" width="230" height="30" uuid="569dc0a4-2b04-403f-b999-c50eea0f5f71"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.3"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.3"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tender Code"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="49" y="181" width="230" height="30" uuid="4929bb3f-6080-4e59-b2cf-7a340e76559e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.3"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.3"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PDF Creation Time"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="279" y="182" width="230" height="29" uuid="41b6744a-8757-4745-9698-59c1c4a2265e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="279" y="62" width="230" height="29" uuid="38a79c6e-3cd5-4e49-a0e5-cde64e864517"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{VENDOR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="92" width="229" height="29" uuid="75222c21-ce05-4eec-aacc-e1817c026e89"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{REGISTRATION_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="122" width="229" height="29" uuid="c2fd2e28-c203-4249-8470-cdc3a7a5908b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FACTORY_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="153" width="229" height="28" uuid="f51c95c0-f0f2-4658-b08b-223555d987ef"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{TENDERCODE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} >1]]></printWhenExpression>
+			<textField>
+				<reportElement x="228" y="10" width="100" height="30" uuid="8a63cfbd-1036-4f7f-93e1-ad8333d27dcd"/>
+				<textFieldExpression><![CDATA[$F{TENDERCODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="31" uuid="3298d6df-6bf5-40b1-8c42-4fa810ec30db"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="-1" width="555" height="30" backcolor="#3BEDED" uuid="46bfeb9d-b4f0-437e-9caf-adb8536cca60"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Final Commercial Scrutiny Points Details"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="30" width="555" height="20" uuid="e3c6be8a-0a0a-48ab-8a4a-3fdfd39f42e4"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="40" height="20" backcolor="#EEF086" uuid="a9429267-088a-4397-9e9d-10e8c524b3d7"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Sr.No"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="40" y="1" width="80" height="19" backcolor="#EEF084" uuid="c9557d8e-7224-4984-9c7b-a64abe878209"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Scrutiny Point"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="120" y="1" width="100" height="19" backcolor="#EBED82" uuid="fef12129-101e-4ec5-b125-1a6c06eea376"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Scrutiny Comments"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="220" y="0" width="90" height="20" backcolor="#EBED80" uuid="7dd95b0c-f1b7-4824-b22f-50f80158d1e5"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Deviation Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="310" y="1" width="80" height="19" backcolor="#EDED82" uuid="c8eb1527-6e62-4c01-854b-89533b38710f"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Final Comments"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="390" y="1" width="85" height="19" backcolor="#EDED82" uuid="0448d430-0f47-41f6-b561-4d6b0e238ac9"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Final Auditor Comments"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="475" y="1" width="80" height="19" backcolor="#EDED82" uuid="8aaf6a38-930d-4d06-8712-9cb0ab4cbf06"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA["Final Auditor Status"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="34" uuid="6bfed394-58ba-4e83-88a7-cf228a71308c"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="40" height="34" uuid="f15db23c-c569-4baf-9d7e-725ddf6a5aed"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="40" y="0" width="80" height="34" uuid="26c0fac0-3ef7-4241-885c-619ec04b7e9a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{SCRUTINY_POINT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="120" y="0" width="100" height="34" uuid="4cad8277-bd9f-4757-a4f3-79ccb3d18c45">
+						<printWhenExpression><![CDATA[$F{DEVIATION_TYPE} != null]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{SCRUTINY_COMMENTS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="220" y="0" width="90" height="34" uuid="e69047fe-2b41-4115-99a4-91a65f1c0063">
+						<printWhenExpression><![CDATA[!"FILE".equals($F{DEVIATION_TYPE}) && $F{DEVIATION_TYPE}!= null]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{DEVIATION_DETAILS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="310" y="0" width="80" height="34" uuid="86ed5489-0d81-4f46-9fb3-af87d2fcbb4f">
+						<printWhenExpression><![CDATA[$F{DEVIATION_TYPE}!= null]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.8"/>
+						<bottomPen lineWidth="0.8"/>
+						<rightPen lineWidth="0.8"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FINAL_COMMENTS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="390" y="0" width="85" height="34" uuid="85df22c8-94f1-4faa-a363-decd86dea32c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.8"/>
+						<bottomPen lineWidth="0.8"/>
+						<rightPen lineWidth="0.8"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FINAL_AUDITOR_COMMENT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="475" y="0" width="80" height="34" uuid="6585eac7-283a-4657-a03d-624027d9258f"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.8"/>
+						<bottomPen lineWidth="0.8"/>
+						<rightPen lineWidth="0.8"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FINAL_AUDITOR_STATUS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement stretchType="RelativeToTallestObject" x="220" y="0" width="90" height="34" uuid="8b76acfc-3eeb-4b40-9366-b9ae550ac14e">
+						<printWhenExpression><![CDATA["FILE".equals($F{DEVIATION_TYPE}) && $F{DEVIATION_TYPE} != null]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{DEVIATION_DETAILS}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{PHYS_NAME}]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="120" y="0" width="435" height="34" uuid="b7041493-b85d-4b78-9f01-6873991a00d0">
+						<printWhenExpression><![CDATA[$F{DEVIATION_TYPE} == null]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA["This Scrutiny Point was Approved in Preliminary Commercial Scrutiny"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="350" y="16" width="100" height="30" uuid="a9b7f2b5-f516-4f71-ae1e-ea4dc8335014"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="16" width="100" height="30" uuid="7ae6b7c2-4fb5-42cf-b03b-d57b1bb34795"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="126">
+			<frame>
+				<reportElement positionType="Float" x="0" y="50" width="555" height="76" uuid="c52149dc-9da0-4d06-ab3e-1fe4a01a04fa"/>
+				<subreport>
+					<reportElement positionType="Float" x="0" y="0" width="555" height="76" uuid="69fe7f22-192e-4386-ae89-8f29d274a463"/>
+					<subreportParameter name="T_BIDDER_ID">
+						<subreportParameterExpression><![CDATA[$P{T_BIDDER_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Final_Commercial_Scrutiny_Summary.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+			<frame>
+				<reportElement x="0" y="0" width="555" height="50" uuid="86776ccd-6e5a-434b-8bd4-7565e171bc3b"/>
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="50" uuid="931b9718-798d-4092-89fb-735759fd8851"/>
+					<subreportParameter name="T_BIDDER_ID">
+						<subreportParameterExpression><![CDATA[$P{T_BIDDER_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Final_Commercial_Scrutiny_Required_Documents_Details.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

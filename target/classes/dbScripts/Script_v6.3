@@ -1,0 +1,12 @@
+alter table m_bp_org_performance add po_number VARCHAR2(255 CHAR);
+
+alter table t_tahdr_detail add contact_person_name VARCHAR2(255 CHAR);
+alter table t_tahdr_detail add contact_person_number VARCHAR2(255 CHAR);
+
+ALTER TABLE m_bp_bank_detail ADD bank_detail_file REFERENCES M_ATTACHMENT(M_ATTACHMENT_ID);
+
+ALTER TABLE M_BPARTNER ADD partner_sign_copy REFERENCES M_ATTACHMENT(M_ATTACHMENT_ID);
+
+ALTER TABLE M_BPARTNER ADD ce_sign_copy REFERENCES M_ATTACHMENT(M_ATTACHMENT_ID);
+
+COMMIT;

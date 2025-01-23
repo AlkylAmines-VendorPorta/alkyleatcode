@@ -1,0 +1,6 @@
+alter table t_tahdr_material add base_price_rate VARCHAR2(255 CHAR);
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name,description, created, updated,M_BPARTNER_ID) values
+(154,20,'Y','SCHEDULING_TYPE','ASCH','Auction Scheduling','Auction Scheduling',SYSDATE,SYSDATE,2 );
+
+COMMIT;

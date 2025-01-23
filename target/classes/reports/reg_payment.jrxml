@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-06T17:25:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Payment_Details" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="008ff09b-160c-4d1c-8e53-bcb551e7b80b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="M_BP_ORG_ID" class="java.lang.Long"/>
+	<parameter name="Report_Dir" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+A.M_BPARTNER_ID
+,C.BANK_NAME, C.MICR_CODE, C.PAYMENT_MODE, C.BRANCH_NAME
+,C.TOTAL,C.AMOUNT, C.GSTAMOUNT, C.GST, C.REFERENCE_NO, to_char(C.PAYMENT_DATE,'dd-mm-yyyy') as PAYMENT_DATE
+,A.GSTIN_NO
+FROM M_BPARTNER A
+INNER JOIN M_BP_ORG B ON (A.M_BPARTNER_ID =  B.M_BPARTNER_ID)
+INNER JOIN T_PAYMENT C ON (B.T_PAYMENT_DETAIL_ID=C.T_PAYMENT_DETAIL_ID)
+INNER JOIN M_CHARGE D ON (C.M_CHARGE_ID=D.M_CHARGE_ID)
+WHERE B.M_BP_ORG_ID =  $P{M_BP_ORG_ID}]]>
+	</queryString>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="M_BPARTNER_ID"/>
+	</field>
+	<field name="BANK_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BANK_NAME"/>
+	</field>
+	<field name="MICR_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MICR_CODE"/>
+	</field>
+	<field name="PAYMENT_MODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PAYMENT_MODE"/>
+	</field>
+	<field name="BRANCH_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BRANCH_NAME"/>
+	</field>
+	<field name="TOTAL" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL"/>
+	</field>
+	<field name="AMOUNT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="AMOUNT"/>
+	</field>
+	<field name="GSTAMOUNT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="GSTAMOUNT"/>
+	</field>
+	<field name="GST" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="GST"/>
+	</field>
+	<field name="REFERENCE_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REFERENCE_NO"/>
+	</field>
+	<field name="PAYMENT_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PAYMENT_DATE"/>
+	</field>
+	<field name="GSTIN_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="GSTIN_NO"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="235">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="231" uuid="d17d83bf-1d69-4786-9ab0-5d321c6bcd39"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="554" height="30" backcolor="#ABE8F7" uuid="28b2b4e4-3676-474e-909a-6576fe58c2e4"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PAYMENT-DETAILS"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="70" width="270" height="20" uuid="89fc9c91-3b5b-40a4-aab9-015aadd85414"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["MICR CODE"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="150" width="270" height="20" uuid="ca2abd42-c08a-4c60-a63b-4b231ff5f198"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["GST AMOUNT IN RS."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="130" width="270" height="20" uuid="10235413-e815-4702-b2b5-66fd72f5802a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["AMOUNT IN RS."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="190" width="270" height="20" uuid="475ba00f-7fee-4a9a-a775-a75583b014c0"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["BANK"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="170" width="270" height="20" uuid="92823760-8883-4639-8a16-3b9d4fe4ffaf"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["TOTAL AMOUNT WITH GST"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="31" width="270" height="20" uuid="e95b8837-08f5-492b-b549-67da6819f64f"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["MODE"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="50" width="270" height="20" uuid="175621e3-672c-4b06-874e-66982fbca27b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["REF NO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="110" width="270" height="20" uuid="88043705-c8cd-4f04-809b-275f8e0889d3"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["GST IDENTIFICATION NO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="90" width="270" height="20" uuid="24f6533f-df3f-489d-ac06-e98157190d47"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["DATE"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="211" width="270" height="20" uuid="e5971c27-1346-48ad-9c10-82647a69f07c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["BRANCH"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="271" y="51" width="283" height="19" uuid="4fb47257-af9a-4fd8-8229-9afc7fc5d98b"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{REFERENCE_NO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="272" y="110" width="282" height="20" uuid="78e5ab00-be7e-44ae-b59e-53ef9e1a0287"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{GSTIN_NO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="191" width="283" height="19" uuid="c8eea859-258d-4fb7-a285-1b29926ccebe"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{BANK_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="272" y="151" width="281" height="19" uuid="982e5f5f-bdd2-4aac-9a6c-e1cf862907db"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{GSTAMOUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="131" width="283" height="19" uuid="cc49da57-df00-4d10-84e6-98207ad1b5f0"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{AMOUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="171" width="282" height="19" uuid="8ebe3856-fbbb-4a8f-aeaa-322c022230c6"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="211" width="282" height="20" uuid="b467be49-a7ba-4ad5-9767-1b66faa31233"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{BRANCH_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="91" width="283" height="19" uuid="c429960b-6547-4681-b7b7-fc7759956a32"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{PAYMENT_DATE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="71" width="282" height="20" uuid="938c3847-031e-47e8-9f6d-20fed14c4995"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{MICR_CODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="271" y="31" width="282" height="20" uuid="6a2d1598-d570-4133-b6f0-5139e6cdbcb3"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{PAYMENT_MODE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-24T16:18:01 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Preliminary_Technical_Scrutiny_Item_Details" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="0d601c75-fb3f-40ea-9c34-c467d00ff30c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MYLOCAL"/>
+	<parameter name="T_ITEM_BID_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[T_ITEM_BID_ID]]></parameterDescription>
+	</parameter>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[T_BIDDER_ID]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+TMM.NAME AS item_name,
+TMM.ITEM_CODE AS item_code,
+H.name As GTP_Parameter,
+(CASE WHEN K.value= 'FILE' then I.FILE_NAME else E.TEXT_RESPONSE end) As Submitted_Gtp,
+(CASE WHEN K.value= 'FILE' then I.M_ATTACHMENT_ID else 0 end) As Submitted_Gtp_Id,
+(CASE WHEN A.ISDEVIATION = 'Y' then 'YES' else 'NO' end) as deviation,
+A.deviation_type As deviation_type,
+A.DEVIATION_COMMENT As DEVIATION_COMMENT,
+O.value as tendercode,
+N.crn_number as registration_number,
+N.name as vendor,
+M.name as factory_name
+,O.TAHDR_TYPE_CODE
+FROM T_ITEM_SCRUTINY_LINE A
+INNER JOIN T_ITEM_SCRUTINY B ON A.T_ITEM_SCRUTINY_ID=B.T_ITEM_SCRUTINY_ID
+INNER JOIN T_ITEM_BID C ON B.T_ITEM_BID_ID=C.T_ITEM_BID_ID
+LEFT JOIN T_BIDDER_GTP E ON A.T_BIDDER_GTP_ID=E.T_BIDDER_GTP_ID
+LEFT JOIN T_TAHDR_MATERIAL_GTP G ON E.T_TAHDR_MATERIAL_GTP_ID=G.T_TAHDR_MATERIAL_GTP_ID
+LEFT JOIN M_GTP_PARAMETER H ON G.M_GTP_ID=H.M_GTP_PARAMETER_ID
+LEFT JOIN M_ATTACHMENT I ON E.FILE_RESPONSE=I.M_ATTACHMENT_ID
+LEFT JOIN M_GTP_PARAMETERTYPE K ON H.M_GTP_PARAMETERTYPE_ID=K.M_GTP_PARAMETERTYPE_ID
+LEFT JOIN T_BIDDER L ON B.T_BIDDER_ID=L.T_BIDDER_ID
+LEFT JOIN m_bp_org M on L.m_bp_org_id=M.m_bp_org_id
+LEFT JOIN m_bpartner N on L.m_bpartner_id=N.m_bpartner_id 
+LEFT JOIN t_tahdr O on L.t_tahdr_id=O.t_tahdr_id
+LEFT JOIN T_TAHDR_MATERIAL TM ON TM.T_TAHDR_MATERIAL_ID=C.T_TAHDR_MATERIAL_ID
+LEFT JOIN M_MATERIAL TMM ON TMM.M_MATERIAL_ID=TM.T_MATERIAL_ID
+WHERE B.SCRUTINY_TYPE='TECHSCR' AND B.T_ITEM_BID_ID= $P{T_ITEM_BID_ID}  AND B.T_BIDDER_ID= $P{T_BIDDER_ID}  AND A.T_BIDDER_GTP_ID IS NOT NULL]]>
+	</queryString>
+	<field name="ITEM_NAME" class="java.lang.String"/>
+	<field name="ITEM_CODE" class="java.math.BigDecimal"/>
+	<field name="GTP_PARAMETER" class="java.lang.String"/>
+	<field name="SUBMITTED_GTP" class="java.lang.String"/>
+	<field name="SUBMITTED_GTP_ID" class="java.math.BigDecimal"/>
+	<field name="DEVIATION" class="java.lang.String"/>
+	<field name="DEVIATION_TYPE" class="java.lang.String"/>
+	<field name="DEVIATION_COMMENT" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="REGISTRATION_NUMBER" class="java.lang.String"/>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="FACTORY_NAME" class="java.lang.String"/>
+	<field name="TAHDR_TYPE_CODE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="61">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="60" uuid="56f07d7d-05b1-49fd-8a58-568a212eeb1d">
+					<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<frame>
+					<reportElement x="0" y="0" width="555" height="30" uuid="83fe1f9e-c6c6-4b07-8a5b-f9a9e98ef159"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField>
+						<reportElement mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#E8F27C" uuid="4b632826-e8ad-49ea-9f1b-ee05b73890dc"/>
+						<box>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA["GTP PARAMETER"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="30" width="555" height="30" uuid="5c1f89d2-db54-434d-b3b9-9649b2aa490b"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="1" width="42" height="29" backcolor="#EEF086" uuid="7f4cf6b1-9067-42d3-ba43-b7361e283a30"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Sr.No"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="44" y="1" width="116" height="29" backcolor="#EEF084" uuid="357072a4-b4c9-4a14-9725-9a0469b467b0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["GTP Parameter"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="161" y="1" width="110" height="29" backcolor="#EBED82" uuid="5595c48f-84a1-49d2-b745-a60efecc24ed"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Submitted GTP Parameter"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="272" y="1" width="120" height="29" backcolor="#EBED80" uuid="a1cc0e74-0a92-4a74-bd9b-951f0244b650"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Deviation"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="393" y="1" width="95" height="29" backcolor="#EDED82" uuid="073fa414-9f98-4f9e-90bc-12d6e1db5f81"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Deviation Type"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="489" y="1" width="65" height="29" backcolor="#EDED85" uuid="1d059d65-84b1-454f-b724-e855f2e7b3e6"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA["Deviation Comments"]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="0" width="553" height="30" uuid="3ad568c0-8c5e-4791-ad06-eba26096993d">
+					<printWhenExpression><![CDATA[!"WT".equals($F{TAHDR_TYPE_CODE})]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="42" height="30" uuid="0b597647-78da-4b7c-9812-af9e9185fdc3"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="42" y="0" width="117" height="30" uuid="e9002a1d-5e3a-4d1d-9821-3bc3ddd8d5e3"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{GTP_PARAMETER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="159" y="0" width="111" height="30" uuid="90cb0179-d0c2-49ec-bba9-8c980471471f"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{SUBMITTED_GTP}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="270" y="0" width="121" height="30" uuid="3f4421e8-1f91-4cb1-826d-5e6bded8596a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{DEVIATION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="391" y="0" width="96" height="30" uuid="069365d9-8aad-45da-a416-21467fe4e503"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{DEVIATION_TYPE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="488" y="0" width="65" height="30" uuid="de6e158a-985c-49a1-a2d7-5e324e662a8d"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{DEVIATION_COMMENT}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

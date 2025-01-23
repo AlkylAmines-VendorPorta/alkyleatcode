@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-17T20:01:27 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RegistrationPDF" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e1caf0a1-58ea-4d2d-a6f4-9abfb5106b36">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long"/>
+	<parameter name="Report_Dir" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT M_BPARTNER_ID,  $P{Report_Dir} as REPORT_BASE,vendor_sap_code  FROM M_BPARTNER 
+WHERE M_BPARTNER_ID= $P{M_BPARTNER_ID}]]>
+	</queryString>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal"/>
+	<field name="REPORT_BASE" class="java.lang.String"/>
+	<field name="VENDOR_SAP_CODE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="218" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="50" width="555" height="90" uuid="3e4e3213-1657-40eb-970c-031a333d11d6"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement mode="Opaque" x="1" y="1" width="554" height="29" backcolor="#ABE8F7" uuid="50fab197-4fb5-4bad-92ae-d41b77758228"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Maharashtra State Electricity Distribution Co. Ltd."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="31" width="280" height="19" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="a918c3cb-2c34-4485-8f26-3e60e7c2c6f6"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PDF Type : Vendor Registration"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="1" y="51" width="99" height="19" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="3007d815-57f0-4131-9124-9f3042db3e8f"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Generated On:"]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="70" width="554" height="19" uuid="6e6fe50a-1977-4a46-b77f-c0f0c29efbff"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="554" height="19" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="4190f152-7f26-48e1-b2d5-e2d3c4fdc873"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<topPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Kindly go through the details. In case of any problems/issues related to reported data,email to etender_helpdesk@mahadiscom.in"]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField isBlankWhenNull="true">
+					<reportElement x="100" y="51" width="450" height="18" uuid="9b116df2-8db6-46fb-ac78-f044c838c5ad"/>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date().getTime())]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="280" y="30" width="274" height="20" uuid="34108e3a-7c1d-4273-a28c-216b8921245e"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Justified"/>
+					<textFieldExpression><![CDATA["Vendor SAP Code : "+$F{VENDOR_SAP_CODE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="140" width="555" height="77" uuid="a0a11238-f552-4709-bfc7-dd992f4b9fbf"/>
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="77" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="a36273ae-d9c1-48d4-9e56-54f50f183a60"/>
+					<subreportParameter name="M_BPARTNER_ID">
+						<subreportParameterExpression><![CDATA[$P{M_BPARTNER_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="Report_Dir">
+						<subreportParameterExpression><![CDATA[$P{Report_Dir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{Report_Dir}+"Reg_CompanyDetails.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</title>
+	<summary>
+		<band height="23"/>
+	</summary>
+</jasperReport>

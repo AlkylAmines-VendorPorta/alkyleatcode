@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-10-21T15:14:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Item_Approval" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="50" bottomMargin="20" uuid="c43d6985-cc6a-4e9e-bbc2-6824a4b372fc">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="M_BP_ORG_ID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+row_number() OVER ( order by A.M_BP_ORG_PRODUCT_ID) sno,
+A.IS_CE_APPROVED,
+B.NAME,B.M_BP_ORG_ID
+,C.NAME AS MATERIAL
+,D.IS_CE_APPROVED
+,CONFIG.NAME  AS REPORT_DIR
+,D.M_BPARTNER_ID
+FROM M_BP_ORG_PRODUCT A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+INNER JOIN M_BP_ORG B ON (A.M_BP_ORG_ID = B.M_BP_ORG_ID)
+INNER JOIN M_MATERIAL C ON (A.M_MATERIAL_ID = C.M_MATERIAL_ID)
+INNER JOIN M_BPARTNER D ON (B.M_BPARTNER_ID = D.M_BPARTNER_ID)
+
+WHERE B.M_BP_ORG_ID=$P{M_BP_ORG_ID}]]>
+	</queryString>
+	<field name="SNO" class="java.math.BigDecimal"/>
+	<field name="IS_CE_APPROVED" class="java.lang.String"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="M_BP_ORG_ID" class="java.math.BigDecimal"/>
+	<field name="MATERIAL" class="java.lang.String"/>
+	<field name="COLUMN_6" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal"/>
+	<group name="Factories">
+		<groupExpression><![CDATA[$F{M_BP_ORG_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="59">
+				<frame>
+					<reportElement x="0" y="29" width="554" height="30" uuid="b87e5b66-4724-45a3-9666-e1d532bf5307"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement stretchType="RelativeToTallestObject" x="50" y="1" width="341" height="29" uuid="26227b34-ee4d-4aa8-a5a4-520c2cea428a"/>
+						<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<text><![CDATA[Item Name]]></text>
+					</staticText>
+					<staticText>
+						<reportElement stretchType="RelativeToTallestObject" x="470" y="1" width="82" height="29" uuid="12abcdf8-b0a7-430e-8126-e2d9cd19cee7"/>
+						<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<text><![CDATA[Exemption]]></text>
+					</staticText>
+					<staticText>
+						<reportElement stretchType="RelativeToTallestObject" x="391" y="1" width="79" height="29" uuid="3cb1d7f8-dcc3-4712-a7d6-3ade78f62939"/>
+						<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<text><![CDATA[General]]></text>
+					</staticText>
+					<staticText>
+						<reportElement stretchType="RelativeToTallestObject" x="2" y="2" width="48" height="28" uuid="6ab43626-3b94-4269-b1f8-2d9b8808e388"/>
+						<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<text><![CDATA[S NO]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="0" y="0" width="554" height="30" uuid="7696e392-d16a-4bf9-981c-edf78405e809"/>
+					<textField>
+						<reportElement mode="Opaque" x="0" y="0" width="554" height="30" backcolor="#9DDCF5" uuid="3592f0f7-aa58-4e78-98d7-8f6d328648b3"/>
+						<box>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Factory: " + $F{NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="30" uuid="78a7ae9a-b27a-476a-b139-96937dbdfb8c"/>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="554" height="30" backcolor="#9DDCF5" uuid="5c3129ab-84a6-4dd5-93be-ea7de5ffc324"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Item Approval"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="30" uuid="62be4828-1fc5-43e9-b4bd-5bdc310ed524"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="50" y="0" width="341" height="30" uuid="536ddc36-2a60-4f6e-bd52-099aac54f055"/>
+					<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{MATERIAL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="470" y="0" width="82" height="30" forecolor="#F5112F" uuid="b83f226b-1ea0-403f-ab0c-8fe0d2a11201">
+						<printWhenExpression><![CDATA[!("EXEM".equals($F{IS_CE_APPROVED}))]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["EXEM".equals($F{IS_CE_APPROVED})?"YES":"NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="391" y="0" width="79" height="30" forecolor="#F5112F" uuid="5ab81873-0d1d-4f28-b0b8-7f3f3edfbc71">
+						<printWhenExpression><![CDATA[!("Y".equals($F{IS_CE_APPROVED}))]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[("Y".equals($F{IS_CE_APPROVED})||"EXEM".equals($F{IS_CE_APPROVED}))?"YES":"NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="1" y="0" width="49" height="30" uuid="a8187af2-655a-4e87-930f-9d612fa660a6"/>
+					<box leftPadding="2" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{SNO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="391" y="0" width="79" height="30" forecolor="#206E3B" uuid="9fb5da63-344e-4e97-b073-3a2c66374f27">
+						<printWhenExpression><![CDATA["Y".equals($F{IS_CE_APPROVED})]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[("Y".equals($F{IS_CE_APPROVED})||"EXEM".equals($F{IS_CE_APPROVED}))?"YES":"NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="471" y="0" width="82" height="30" forecolor="#206E3B" uuid="d2d40f8a-4f15-4c1b-85a3-1d5efd0d79ac">
+						<printWhenExpression><![CDATA["EXEM".equals($F{IS_CE_APPROVED})]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["EXEM".equals($F{IS_CE_APPROVED})?"YES":"NO"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="51">
+			<frame>
+				<reportElement positionType="Float" x="1" y="10" width="554" height="39" uuid="fd1499a1-3a12-4345-8a97-57db8a9d1346"/>
+				<subreport>
+					<reportElement x="0" y="0" width="554" height="39" uuid="61e6e8dd-6690-41c6-822b-0162e76b8479"/>
+					<subreportParameter name="M_BPARTNER_ID">
+						<subreportParameterExpression><![CDATA[new Long($F{M_BPARTNER_ID}.longValue())]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Verification_Summary.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

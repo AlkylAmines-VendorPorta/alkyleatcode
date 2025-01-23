@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-13T22:07:22 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DeliveryDetailTab" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9f21ecf2-aeb5-47ee-b336-608376f9b1ed">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT A.FIRST_LOT, A.DELIVERING_MONTH, A.RATE_PER_MONTH
+,CASE
+  WHEN SUBSTR(C.GSTIN_NO,1, 2)=27 THEN '(Central GST + State GST)'
+   ELSE 'Integrated GST'
+END As DynamicGSTtype,
+CASE
+  WHEN SUBSTR(C.GSTIN_NO,1, 2)=27 THEN 'for within Maharastra state'
+   ELSE 'for outside state'
+END As DynamicText
+,G.name AS COMMENCEMENT_PERIOD_CODE,
+CONFIG.NAME AS Report_Dir
+,D.value AS TENDERCODE
+FROM  T_COMMERCIAL_BID A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+INNER JOIN  T_BIDDER B ON (A.T_BIDDER_ID= B.T_BIDDER_ID)
+INNER JOIN  M_BPARTNER C ON (A.M_BPARTNER_ID = C.M_BPARTNER_ID)
+INNER JOIN T_TAHDR D ON (B.T_TAHDR_ID=  D.T_TAHDR_ID)
+INNER JOIN T_TAHDR_DETAIL F ON (F.T_TAHDR_ID=  D.T_TAHDR_ID AND F.ISACTIVE = 'Y')
+INNER JOIN M_REFERENCE_LIST G ON (G.VALUE = F.COMMENCEMENT_PERIOD_CODE)
+WHERE A.T_BIDDER_ID=  $P{T_BIDDER_ID}]]>
+	</queryString>
+	<field name="FIRST_LOT" class="java.math.BigDecimal"/>
+	<field name="DELIVERING_MONTH" class="java.math.BigDecimal"/>
+	<field name="RATE_PER_MONTH" class="java.math.BigDecimal"/>
+	<field name="DYNAMICGSTTYPE" class="java.lang.String"/>
+	<field name="DYNAMICTEXT" class="java.lang.String"/>
+	<field name="COMMENCEMENT_PERIOD_CODE" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="356" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="80" uuid="2ae19707-3710-4d69-bd2d-446bcefdd3b3"/>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="30" uuid="3ad669f3-518c-42a0-a209-fdade08c27c9"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Delivery Details"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="30" width="555" height="20" uuid="e3a1b765-a2d9-4bef-8e85-97edf349fd79"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["[Delivery must in the units specified for the items as per Price Schedule]"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="50" width="555" height="30" uuid="10f822e6-1f20-4b16-9f12-6868b48c4337"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["First lot of "+$F{FIRST_LOT}+" in assorted sizes will be delivered within "+$F{DELIVERING_MONTH}+" Months from the date of "+$F{COMMENCEMENT_PERIOD_CODE}+".After this period supply will be completed at the rate of "+$F{RATE_PER_MONTH}+" in assorted sized per month"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="119" width="555" height="237" isPrintWhenDetailOverflows="true" uuid="b1281ab9-5412-48e1-8a9b-48cdadd825e6"/>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="30" uuid="066e70e4-01b3-4495-ae10-5b76d654e9e6">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Confirmation Details"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="30" width="555" height="20" uuid="91619eca-b6ea-4df9-9c71-ea0c5f0edc4a">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<pen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["We Confirm The Following :"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="50" width="555" height="20" uuid="219385dc-6dfe-4c48-92c6-39a3d1b06fe3">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["I) Goods and Services Tax(GST) i.e Integrated GST / (Central GST+ State GST):"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="70" width="555" height="132" uuid="6139afea-e27e-4f11-8a3b-e2dc7eeee2f9">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["The GST is included in our prices quoted in price bid "+$F{DYNAMICGSTTYPE} +" "+$F{DYNAMICTEXT}+" and we shall not charge any additional amount towards  "+$F{DYNAMICGSTTYPE}+", during currency of contract except statutory variation by Central / State Government in normal (full) rate of  "+$F{DYNAMICGSTTYPE}+", in case of  "+$F{DYNAMICGSTTYPE}+" Rate is increased. In case the  "+$F{DYNAMICGSTTYPE}+" is decreased than the rate indicated in the price bid, the benefits of the reduction in the  "+$F{DYNAMICGSTTYPE}+" shall be passed on to the Purchaser.The increase in the  "+$F{DYNAMICGSTTYPE}+" rate due to increase in turnover during the contractual delivery period shall not be charged to the Purchaser .If the  "+$F{DYNAMICGSTTYPE}+" is not payable at present,we shall not charge the same, if it becomes applicable during the currency of contract due to expiry / withdrawal of tax concessions and incentives during the currency of contract except for statutory variation by Central / State Government."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="202" width="555" height="15" uuid="8a7c405f-ee3a-4831-a20c-b25cb08f05fd">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["(i) Necessary documentary evidence for the GST claimed by us shall be submitted along with the bills."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="217" width="555" height="20" uuid="3cdb72e2-800b-42b3-917e-eb51911835c9">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==2]]></printWhenExpression>
+					</reportElement>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["(ii) We here by declare that while quoting the price in the Price Bid, we have taken into account the entire credit on inputs available under the GST Act."]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

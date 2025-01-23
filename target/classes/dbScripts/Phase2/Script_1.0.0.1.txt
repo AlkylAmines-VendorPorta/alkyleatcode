@@ -1,0 +1,5 @@
+Alter table t_bidder Add column t_pr_id numeric;
+
+Alter table t_item_bid Add column t_pr_line_id numeric;
+
+alter table t_bidder add column remark varchar(255);

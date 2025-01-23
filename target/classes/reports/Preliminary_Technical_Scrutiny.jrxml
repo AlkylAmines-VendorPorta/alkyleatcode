@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-27T13:57:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Technical_Bid" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" uuid="2ff5a6fb-16d0-4555-b20a-e830762f19f2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[T_BIDDER_ID]]></parameterDescription>
+	</parameter>
+	<parameter name="T_ITEM_BID_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+DISTINCT E.ITEM_CODE As itemcode,
+E.name As Itemname,
+C.T_ITEM_BID_ID As T_ITEM_BID_ID,
+B.PRELIMINARY_COMMENT As comments,
+B.PRELIMINARY_STATUS As preliminary_status,
+O.value as tendercode,
+N.crn_number as registration_number,
+N.name as vendor,
+M.name as factory_name,
+CONFIG.NAME AS Report_Dir
+FROM T_ITEM_SCRUTINY_LINE A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+LEFT JOIN T_ITEM_SCRUTINY B ON A.T_ITEM_SCRUTINY_ID=B.T_ITEM_SCRUTINY_ID
+LEFT JOIN T_ITEM_BID C ON B.T_ITEM_BID_ID=C.T_ITEM_BID_ID
+LEFT JOIN T_BIDDER L ON L.T_BIDDER_ID=B.T_BIDDER_ID
+LEFT JOIN T_TAHDR_MATERIAL D ON C.T_TAHDR_MATERIAL_ID=D.T_TAHDR_MATERIAL_ID
+LEFT JOIN M_MATERIAL E ON D.T_MATERIAL_ID=E.M_MATERIAL_ID
+LEFT JOIN m_bp_org M on L.m_bp_org_id=M.m_bp_org_id
+LEFT JOIN m_bpartner N on L.m_bpartner_id=N.m_bpartner_id 
+LEFT JOIN t_tahdr O on L.t_tahdr_id=O.t_tahdr_id
+WHERE B.SCRUTINY_TYPE='TECHSCR'  AND B.T_BIDDER_ID= $P{T_BIDDER_ID} AND C.T_ITEM_BID_ID=$P{T_ITEM_BID_ID}]]>
+	</queryString>
+	<field name="ITEMCODE" class="java.math.BigDecimal"/>
+	<field name="ITEMNAME" class="java.lang.String"/>
+	<field name="T_ITEM_BID_ID" class="java.math.BigDecimal"/>
+	<field name="COMMENTS" class="java.lang.String"/>
+	<field name="PRELIMINARY_STATUS" class="java.lang.String"/>
+	<field name="TENDERCODE" class="java.lang.String"/>
+	<field name="REGISTRATION_NUMBER" class="java.lang.String"/>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="FACTORY_NAME" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<group name="ITEM_GROUP">
+		<groupExpression><![CDATA[$F{T_ITEM_BID_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="164">
+				<frame>
+					<reportElement positionType="Float" x="1" y="62" width="549" height="40" uuid="f89f6bad-4cd2-4849-9629-e58ff37fdae6"/>
+					<subreport>
+						<reportElement x="0" y="0" width="549" height="40" uuid="c0ac30cb-f422-4b35-bbcd-7224e916bb69"/>
+						<subreportParameter name="T_BIDDER_ID">
+							<subreportParameterExpression><![CDATA[$P{T_BIDDER_ID}]]></subreportParameterExpression>
+						</subreportParameter>
+						<subreportParameter name="T_ITEM_BID_ID">
+							<subreportParameterExpression><![CDATA[new Long($F{T_ITEM_BID_ID}.longValue())]]></subreportParameterExpression>
+						</subreportParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<subreportExpression><![CDATA[$F{REPORT_DIR}+"Preliminary_Technical_Scrutiny_Item_Details.jasper"]]></subreportExpression>
+					</subreport>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="1" y="110" width="549" height="50" uuid="c1cf5369-fe38-4d4d-8c1f-b6f00980f77e"/>
+					<subreport>
+						<reportElement x="0" y="0" width="549" height="50" uuid="01579754-7b5f-45d7-88c1-118f0f18bb2a"/>
+						<subreportParameter name="T_BIDDER_ID">
+							<subreportParameterExpression><![CDATA[$P{T_BIDDER_ID}]]></subreportParameterExpression>
+						</subreportParameter>
+						<subreportParameter name="T_ITEM_BID_ID">
+							<subreportParameterExpression><![CDATA[new Long($F{T_ITEM_BID_ID}.longValue())]]></subreportParameterExpression>
+						</subreportParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<subreportExpression><![CDATA[$F{REPORT_DIR}+"Preliminary_Technical_Scrutiny_Required_Documents_Details.jasper"]]></subreportExpression>
+					</subreport>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="21" width="556" height="30" uuid="f674a774-c127-4b87-8763-e12a0de89bef"/>
+					<textField>
+						<reportElement mode="Opaque" x="0" y="0" width="556" height="30" backcolor="#77EEF2" uuid="f4a2babd-ba73-4bd6-99d6-964de7255378"/>
+						<box>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Item:"+$F{ITEMNAME}+". AS PER TECHNICAL SPECIFICATION ANNEXURE 'D'(ItemCode:"+$F{ITEMCODE}+")"]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="304" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="556" height="230" forecolor="#000000" uuid="f5a1bf7c-bd14-4083-9821-851702650878"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<frame>
+					<reportElement x="46" y="31" width="459" height="180" uuid="8138fdf5-f671-4b8e-9746-4e745e887887"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<frame>
+						<reportElement x="0" y="0" width="459" height="30" uuid="ef362223-2b0f-49bc-a9c5-d39a1697e7e8"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement mode="Opaque" x="1" y="1" width="458" height="29" backcolor="#45F1F7" uuid="22506fd7-3b5f-4ab7-9a32-f32e7ac8fa3f"/>
+							<box leftPadding="0">
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center">
+								<font size="20" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Preliminary Technical Scrutiny"]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="30" width="459" height="30" uuid="d270ac0b-972e-4605-ab44-b8aa95e35626"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="230" height="30" uuid="e8c25219-e88e-425f-ae91-9a495094e811"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Left">
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Vendor"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="230" y="1" width="229" height="29" uuid="b384d90a-4e1d-4805-8ebe-92f45fe27b2d"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{VENDOR}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="60" width="459" height="30" uuid="681e5691-791d-4ac3-a116-b6e65be81be2"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="230" height="30" uuid="5eb76036-7f0b-4436-8477-a766187359fb"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement>
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Registration Number"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="231" y="0" width="228" height="30" uuid="1cdd161d-ca04-48a9-ab2e-5f7ae90750de"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{REGISTRATION_NUMBER}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="90" width="459" height="31" uuid="79878cf4-156d-45d4-a99f-3f1591cf3431"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="1" width="230" height="30" uuid="569dc0a4-2b04-403f-b999-c50eea0f5f71"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement>
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Tender Code"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="230" y="0" width="229" height="31" uuid="b1888928-df4c-433b-a7a1-77bae9c0aa70"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{TENDERCODE}]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="121" width="459" height="30" uuid="30d4cf9e-6d9c-446b-a700-2bdd33226897"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="230" height="30" uuid="4929bb3f-6080-4e59-b2cf-7a340e76559e"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement>
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["PDF Creation Time"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="230" y="0" width="229" height="30" uuid="0da6879b-e986-4e8f-aef0-be4488e1e7e0"/>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date().getTime())]]></textFieldExpression>
+						</textField>
+					</frame>
+					<frame>
+						<reportElement x="0" y="151" width="459" height="29" uuid="48d3634c-77fd-4c7f-9777-7724e0dd3e5d"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="230" height="29" uuid="2f917041-c2b9-45db-8af5-3c67554ba713">
+								<printWhenExpression><![CDATA[$F{FACTORY_NAME}!=null]]></printWhenExpression>
+							</reportElement>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement>
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Vendor Factory"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="230" y="0" width="229" height="29" uuid="d7928786-fcd4-4177-99ee-1f4c5fc2bb66">
+								<printWhenExpression><![CDATA[$F{FACTORY_NAME}!=null]]></printWhenExpression>
+							</reportElement>
+							<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{FACTORY_NAME}]]></textFieldExpression>
+						</textField>
+					</frame>
+				</frame>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="250" width="556" height="46" backcolor="#7EE9ED" uuid="4472f026-73f2-49fe-aec2-31f2d897b356"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Preliminary Technical Scrutiny Item Details"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} >1]]></printWhenExpression>
+			<frame>
+				<reportElement x="47" y="10" width="458" height="30" uuid="ca8c6dc9-d30b-47e2-8b5a-d0b27520166c"/>
+				<frame>
+					<reportElement x="240" y="0" width="218" height="30" uuid="cb03dfe9-e7cc-401e-b643-4ffaf915551b"/>
+					<textField>
+						<reportElement x="64" y="0" width="154" height="30" uuid="c3e932ec-8588-4549-ae79-3e481043f588"/>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{VENDOR}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="0" y="0" width="64" height="30" uuid="fb0bf2c8-55e4-462d-b654-563aeb809e34"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<text><![CDATA[Vendor :]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="0" y="0" width="229" height="30" uuid="f604a6cf-4d33-4361-afb1-1208e9b6505c"/>
+					<textField>
+						<reportElement x="70" y="0" width="159" height="30" uuid="927e1656-b640-4854-928c-d145cc5bc955"/>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{TENDERCODE}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="0" y="0" width="70" height="30" uuid="3d7e9444-1929-46f4-ad3a-a93f689867b3"/>
+						<textElement verticalAlignment="Middle"/>
+						<text><![CDATA[Tender Code :]]></text>
+					</staticText>
+				</frame>
+			</frame>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="350" y="15" width="100" height="30" uuid="23d0d36a-8cf5-41c2-b5c6-caca3d1faf1a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="15" width="100" height="30" uuid="b4718ea7-1760-422f-a6f0-248da3f38877"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="56">
+			<frame>
+				<reportElement positionType="Float" x="1" y="12" width="539" height="44" uuid="27f38798-49dc-4afa-8a44-80fb0e0ec19e"/>
+				<subreport>
+					<reportElement x="0" y="0" width="539" height="44" uuid="20a0f12f-6a56-4665-ae80-c9960f2b9405"/>
+					<subreportParameter name="T_BIDDER_ID">
+						<subreportParameterExpression><![CDATA[$P{T_BIDDER_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="T_ITEM_BID_ID">
+						<subreportParameterExpression><![CDATA[$P{T_ITEM_BID_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$F{REPORT_DIR}+"Preliminary_Technical_Scrutiny_Summary.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

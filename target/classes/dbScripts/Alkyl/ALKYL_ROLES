@@ -1,0 +1,68 @@
+INSERT INTO ad_role(ad_role_id, created, createdby, description, isactive, isadmin, name, page_access, updated, updatedby, user_level, view_name, value) 
+VALUES (19,  now() , null, 'Security Admin', 'Y', 'N', 'Security Admin', 'Y',  now() , null, 'home', 'home', 'SECADM');
+
+INSERT INTO ad_role(ad_role_id, created, createdby, description, isactive, isadmin, name, page_access, updated, updatedby, user_level, view_name, value) 
+VALUES (20,  now() , null, 'Safety Admin', 'Y', 'N', 'Safety Admin', 'Y',  now() , null, 'home', 'home', 'SFTADM');
+
+INSERT INTO ad_role(ad_role_id, created, createdby, description, isactive, isadmin, name, page_access, updated, updatedby, user_level, view_name, value) 
+VALUES (21,  now() , null, 'OHC Admin', 'Y', 'N', 'OHC Admin', 'Y',  now() , null, 'home', 'home', 'OHCADM');
+
+INSERT INTO ad_role(ad_role_id, created, createdby, description, isactive, isadmin, name, page_access, updated, updatedby, user_level, view_name, value) 
+VALUES (22,  now() , null, 'Store Admin', 'Y', 'N', 'Store Admin', 'Y',  now() , null, 'home', 'home', 'STRADM');
+
+INSERT INTO ad_role(ad_role_id, created, createdby, description, isactive, isadmin, name, page_access, updated, updatedby, user_level, view_name, value) 
+VALUES (23,  now() , null, 'QC Admin', 'Y', 'N', 'QC Admin', 'Y',  now() , null, 'home', 'userDashboard', 'QCADM');
+
+
+
+Insert into ad_user (ad_user_id,isactive, name, email, password, 
+					 created, updated, M_BPARTNER_ID,HASPLAINPASSWORD) 
+		values (nextval('ad_user_seq'),'Y','Security Admin',
+				'security@yopmail.com','Pass,123', now() , now() ,1,'Y');
+
+
+
+INSERT INTO ad_user_roles(created, createdby,  isactive, updated, updatedby
+, ad_user_id, ad_role_id, ad_user_roles_id, page_path,m_bpartner_id) 
+VALUES ( now() , 1, 'Y',  now() , 1, 5218, 19, nextval('ad_user_roles_seq'), null,'1');
+
+Insert into ad_user (ad_user_id,isactive, name, email, password, 
+					 created, updated, M_BPARTNER_ID,HASPLAINPASSWORD) 
+		values (nextval('ad_user_seq'),'Y','Safety Admin',
+				'safety@yopmail.com','Pass,123', now() , now() ,1,'Y');
+
+INSERT INTO ad_user_roles(created, createdby,  isactive, updated, updatedby
+, ad_user_id, ad_role_id, ad_user_roles_id, page_path,m_bpartner_id) 
+VALUES ( now() , 1, 'Y',  now() , 1, 5255, 20, nextval('ad_user_roles_seq'), null,'1');
+
+Insert into ad_user (ad_user_id,isactive, name, email, password, 
+					 created, updated, M_BPARTNER_ID,HASPLAINPASSWORD) 
+		values (nextval('ad_user_seq'),'Y','OHC Admin',
+				'ohc@yopmail.com','Pass,123', now() , now() ,1,'Y');
+
+INSERT INTO ad_user_roles(created, createdby,  isactive, updated, updatedby
+, ad_user_id, ad_role_id, ad_user_roles_id, page_path,m_bpartner_id) 
+VALUES ( now() , 1, 'Y',  now() , 1, 5292, 21, nextval('ad_user_roles_seq'), null,'1');
+
+Insert into ad_user (ad_user_id,isactive, name, email, password, 
+					 created, updated, M_BPARTNER_ID,HASPLAINPASSWORD) 
+		values (nextval('ad_user_seq'),'Y','Store Admin',
+				'store@yopmail.com','Pass,123', now() , now() ,1,'Y');
+
+INSERT INTO ad_user_roles(created, createdby,  isactive, updated, updatedby
+, ad_user_id, ad_role_id, ad_user_roles_id, page_path,m_bpartner_id) 
+VALUES ( now() , 1, 'Y',  now() , 1, 5329, 22, nextval('ad_user_roles_seq'), null,'1');
+
+
+Insert into ad_user (ad_user_id,isactive, name, email, password, 
+					 created, updated, M_BPARTNER_ID,HASPLAINPASSWORD) 
+		values (nextval('ad_user_seq'),'Y','QC Admin',
+				'qc@yopmail.com','Pass,123', now() , now() ,1,'Y');
+
+INSERT INTO ad_user_roles(created, createdby,  isactive, updated, updatedby
+, ad_user_id, ad_role_id, ad_user_roles_id, page_path,m_bpartner_id) 
+VALUES ( now() , 1, 'Y',  now() , 1, 10472, 23, nextval('ad_user_roles_seq'), null,'1');
+
+update ad_role
+set view_name = 'userDashboard'
+where view_name = 'home'

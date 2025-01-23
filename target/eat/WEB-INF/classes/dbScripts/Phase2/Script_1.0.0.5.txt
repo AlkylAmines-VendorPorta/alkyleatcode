@@ -1,0 +1,40 @@
+ALTER TABLE t_bidder
+	ADD COLUMN total_freight varchar;
+	
+	ALTER TABLE t_bidder
+	ADD COLUMN total_pk_fwd varchar;
+	
+	ALTER TABLE t_bidder
+	ADD COLUMN other_rates varchar;
+	
+	INSERT INTO ad_role_access_master(ad_role_access_master_id, created, isactive, updated, delete_access, modify_access, view_only, createdby, m_bpartner_id, updatedby, ad_role_id, m_tile_id, created_session_id, updated_session_id, parent_id, m_client_id, m_org_id, ad_user_id) VALUES (50730, '2018-09-04 18:36:20.934098', 'Y', '2018-09-04 18:36:20.934098', 'N', 'N', 'Y', null, null, null, 28, 176, null, null, null, null, null, null);
+	ADD COLUMN other_rates varchar;
+	
+	ALTER TABLE t_price_bid
+	ADD COLUMN per_qty_freight_amt varchar;
+	ALTER TABLE t_price_bid
+	ADD COLUMN per_qty_pk_amt varchar;
+	
+	ALTER TABLE t_price_bid
+	ADD COLUMN per_qty_other_amt varchar;
+	
+	INSERT INTO ad_role_access_master(ad_role_access_master_id, created, isactive, updated, delete_access, modify_access, view_only, createdby, m_bpartner_id, updatedby, ad_role_id, m_tile_id, created_session_id, updated_session_id, parent_id, m_client_id, m_org_id, ad_user_id) VALUES (50730, '2018-09-04 18:36:20.934098', 'Y', '2018-09-04 18:36:20.934098', 'N', 'N', 'Y', null, null, null, 28, 176, null, null, null, null, null, null);
+	
+	ALTER TABLE t_bidder
+	ADD COLUMN split_basic_value varchar;
+	
+	ALTER TABLE t_bidder
+	ADD COLUMN split_gross_value varchar;
+	
+	ALTER TABLE t_bidder
+	ADD COLUMN split_landed_cost varchar;
+	
+	ALTER TABLE t_annexure
+	ADD COLUMN total_basic_value varchar;
+	
+	ALTER TABLE t_annexure
+	ADD COLUMN total_gross_value varchar;
+	
+	ALTER TABLE t_annexure
+	ADD COLUMN total_landed_cost varchar;
+	

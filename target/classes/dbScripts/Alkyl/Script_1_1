@@ -1,0 +1,2 @@
+ALTER TABLE T_PURCHASE_ORDER_LINE ADD COLUMN parent_po_line_id numeric;
+ALTER TABLE t_advance_shipment_notice_line ADD COLUMN parent_asn_line_id numeric;

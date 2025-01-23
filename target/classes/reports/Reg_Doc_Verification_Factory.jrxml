@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-10-24T19:10:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Doc_Verification_Factory" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="50" bottomMargin="20" uuid="c43d6985-cc6a-4e9e-bbc2-6824a4b372fc">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="FACT_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{FACTORY_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{FACTORY_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="MSE_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{MSE_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{MSE_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="NSIC_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{NSIC_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{NSIC_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="ISO_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{CERT_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{CERT_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="ITEM_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{ITEM_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{ITEM_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="PERF_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{ORG_PERF_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{ORG_PERF_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="RDA_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{RDAEC_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{RDAEC_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<style name="BIS_APP_STATUS">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!("Y".equals($F{BIS_APP}))]]></conditionExpression>
+			<style forecolor="#DE0A07"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA["Y".equals($F{BIS_APP})]]></conditionExpression>
+			<style forecolor="#24962C"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT A.M_BPARTNER_ID, A.IS_CE_APPROVED COMP_ESS_APP, A.CE_COMMENT COMP_ESS_CMT
+,B.IS_CE_APPROVED COMP_MGM_APP, B.CE_COMMENT COMP_MGM_CMT  
+,E.IS_CE_APPROVED FIN_APP, E.CE_COMMENT FIN_CMT
+,F.M_BP_ORG_ID, F.NAME FACTORY_NAME, F.M_BP_ITEM_MANUFACTURER_ID, F.IS_CE_APPROVED FACTORY_APP, F.CE_COMMENT FACTORY_CMT
+,G.IS_CE_APPROVED EXP_APP, G.CE_COMMENT EXP_CMT
+,I.IS_CE_APPROVED BIS_APP, I.CE_COMMENT BIS_CMT
+,J.IS_CE_APPROVED CERT_APP, J.CE_COMMENT CERT_CMT
+,K.IS_CE_APPROVED RDAEC_APP, K.CE_COMMENT RDAEC_CMT
+,L.IS_CE_APPROVED OE_APP, L.CE_COMMENT OE_CMT
+,M.IS_CE_APPROVED ORG_PERF_APP, M.CE_COMMENT ORG_PERF_CMT
+,N.IS_CE_APPROVED MSE_APP, N.CE_COMMENT MSE_CMT
+,O.IS_CE_APPROVED NSIC_APP, O.CE_COMMENT NSIC_CMT
+,P.IS_CE_APPROVED ITEM_APP, P.CE_COMMENT ITEM_CMT
+,CONFIG.NAME  AS REPORT_DIR
+FROM M_BPARTNER A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+LEFT OUTER JOIN (SELECT AD_USER_DETAILS_ID, IS_CE_APPROVED, CE_COMMENT,C.M_BPARTNER_ID 
+            FROM AD_USER_DETAILS C WHERE C.AD_USER_DETAILS_ID IN (
+            SELECT MAX(AD_USER_DETAILS_ID) AD_USER_DETAILS_ID FROM AD_USER_DETAILS D WHERE 
+            D.M_BPARTNER_ID=  $P{M_BPARTNER_ID} 
+            AND
+            D.USER_DETAIL_TYPE='COMPDIR'
+            AND IS_CE_APPROVED ='Y'
+      )
+) B ON (A.M_BPARTNER_ID = B.M_BPARTNER_ID)
+LEFT OUTER JOIN M_BP_FINANCIAL_ATTACHMENT E ON (A.M_BPARTNER_ID = E.M_BPARTNER_ID AND E.FINACIALTYPE = 'TD') 
+LEFT OUTER JOIN M_BP_ORG F ON (A.M_BPARTNER_ID = F.M_BPARTNER_ID AND F.M_BP_ITEM_MANUFACTURER_ID IS NULL)
+LEFT OUTER JOIN M_BP_ORG_EXPERIENCE G ON (F.M_BP_ORG_ID = G.M_BP_ORG_ID)
+LEFT OUTER JOIN M_BP_ORG_BIS I ON (F.M_BP_ORG_ID = I.M_BP_ORG_ID)
+LEFT OUTER JOIN M_BP_ORG_CERTIFICATION J ON (F.M_BP_ORG_ID = J.M_BP_ORG_ID)
+LEFT OUTER JOIN M_BP_ORG_RDAEC K ON (F.M_BP_ORG_ID = K.M_BP_ORG_ID)
+LEFT OUTER JOIN (
+        SELECT M_BP_ORG_ID,M_BP_ORG_OE_ID, IS_CE_APPROVED, CE_COMMENT 
+        FROM M_BP_ORG_OE WHERE M_BP_ORG_OE_ID IN (
+                SELECT MAX(M_BP_ORG_OE_ID) M_BP_ORG_OE_ID FROM M_BP_ORG_OE WHERE 
+                M_BPARTNER_ID = $P{M_BPARTNER_ID} 
+                AND IS_CE_APPROVED ='Y'
+             )
+    ) L ON (F.M_BP_ORG_ID = L.M_BP_ORG_ID)
+
+LEFT OUTER JOIN (SELECT M_BP_ORG_ID, M_BP_ORG_PERFORMANCE_ID, IS_CE_APPROVED, CE_COMMENT
+        FROM M_BP_ORG_PERFORMANCE HA 
+        WHERE HA.M_BP_ORG_PERFORMANCE_ID IN (
+            SELECT MAX(M_BP_ORG_PERFORMANCE_ID) M_BP_ORG_PERFORMANCE_ID FROM M_BP_ORG_PERFORMANCE WHERE 
+            M_BPARTNER_ID= $P{M_BPARTNER_ID}
+            AND IS_CE_APPROVED ='Y'
+        )
+    )  M ON (F.M_BP_ORG_ID = M.M_BP_ORG_ID)  
+LEFT OUTER JOIN M_BP_ORG_REGISTRATION N ON (F.M_BP_ORG_ID = N.M_BP_ORG_ID AND N.REGISTRATION_TYPE ='MSE')
+LEFT OUTER JOIN M_BP_ORG_REGISTRATION O ON (F.M_BP_ORG_ID = O.M_BP_ORG_ID AND O.REGISTRATION_TYPE ='NSIC')
+LEFT OUTER JOIN M_BP_ORG_PRODUCT P ON (A.M_BPARTNER_ID = P.M_BPARTNER_ID AND F.M_BP_ORG_ID = P.M_BP_ORG_ID)
+WHERE A.M_BPARTNER_ID =  $P{M_BPARTNER_ID}]]>
+	</queryString>
+	<field name="M_BPARTNER_ID" class="java.math.BigDecimal"/>
+	<field name="COMP_ESS_APP" class="java.lang.String"/>
+	<field name="COMP_ESS_CMT" class="java.lang.String"/>
+	<field name="COMP_MGM_APP" class="java.lang.String"/>
+	<field name="COMP_MGM_CMT" class="java.lang.String"/>
+	<field name="FIN_APP" class="java.lang.String"/>
+	<field name="FIN_CMT" class="java.lang.String"/>
+	<field name="M_BP_ORG_ID" class="java.math.BigDecimal"/>
+	<field name="FACTORY_NAME" class="java.lang.String"/>
+	<field name="M_BP_ITEM_MANUFACTURER_ID" class="java.math.BigDecimal"/>
+	<field name="FACTORY_APP" class="java.lang.String"/>
+	<field name="FACTORY_CMT" class="java.lang.String"/>
+	<field name="EXP_APP" class="java.lang.String"/>
+	<field name="EXP_CMT" class="java.lang.String"/>
+	<field name="BIS_APP" class="java.lang.String"/>
+	<field name="BIS_CMT" class="java.lang.String"/>
+	<field name="CERT_APP" class="java.lang.String"/>
+	<field name="CERT_CMT" class="java.lang.String"/>
+	<field name="RDAEC_APP" class="java.lang.String"/>
+	<field name="RDAEC_CMT" class="java.lang.String"/>
+	<field name="OE_APP" class="java.lang.String"/>
+	<field name="OE_CMT" class="java.lang.String"/>
+	<field name="ORG_PERF_APP" class="java.lang.String"/>
+	<field name="ORG_PERF_CMT" class="java.lang.String"/>
+	<field name="MSE_APP" class="java.lang.String"/>
+	<field name="MSE_CMT" class="java.lang.String"/>
+	<field name="NSIC_APP" class="java.lang.String"/>
+	<field name="NSIC_CMT" class="java.lang.String"/>
+	<field name="ITEM_APP" class="java.lang.String"/>
+	<field name="ITEM_CMT" class="java.lang.String"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<group name="Factories">
+		<groupExpression><![CDATA[$F{M_BP_ORG_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="279">
+				<frame>
+					<reportElement x="6" y="2" width="554" height="30" uuid="7696e392-d16a-4bf9-981c-edf78405e809"/>
+					<textField>
+						<reportElement mode="Opaque" x="0" y="-1" width="554" height="30" backcolor="#9DDCF5" uuid="3592f0f7-aa58-4e78-98d7-8f6d328648b3"/>
+						<box>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Factory: " + $F{FACTORY_NAME}]]></textFieldExpression>
+					</textField>
+					<frame>
+						<reportElement x="0" y="31" width="554" height="30" uuid="80986361-c988-4782-8042-ff622444e60f"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="7495d958-b1ba-4ad5-b34f-acdcd7efb2bf"/>
+							<box leftPadding="2" rightPadding="2">
+								<pen lineWidth="0.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["1"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="f67c9cf4-d6f5-47ef-b846-c810632421ed"/>
+							<box leftPadding="2" rightPadding="2">
+								<pen lineWidth="0.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Factory Details"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="FACT_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="5bdfb3ca-edbc-45b0-80be-5b298e270269"/>
+							<box leftPadding="2" rightPadding="2">
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Y".equals($F{FACTORY_APP})?"YES":"NO"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="4affd95a-b3ef-42a8-8c68-016ca5b912a0"/>
+							<box leftPadding="2" rightPadding="2">
+								<bottomPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{FACTORY_CMT}]]></textFieldExpression>
+						</textField>
+					</frame>
+				</frame>
+				<frame>
+					<reportElement x="6" y="63" width="554" height="30" uuid="a42a3727-d475-4cf7-8111-b2b494f8e1e8"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="6128fd14-5e05-4ef2-8036-837602d7e4fa"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["2"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="94c33c96-85eb-4d85-a702-4e9ca12f49fc"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["MSE Registration Details"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="MSE_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="57d3daed-db88-4eed-83d9-d7be9c361358"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{MSE_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="95a059e1-c71b-4358-9b58-d470ffc2c617"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{MSE_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="6" y="94" width="554" height="30" uuid="c161af3a-3ec2-48c2-a821-85676b34f3c0"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="a9877596-a2ff-488c-a514-e20f17da74ce"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["3"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="a7472c7d-2bc6-4e84-832d-135297635086"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["NSIC Registration Detail"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="NSIC_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="7ccac788-2e28-45e6-8f20-02947bd5e6f6"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{NSIC_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="93d3c749-d9b9-4958-8936-d45b68f163f0"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{NSIC_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="6" y="125" width="554" height="30" uuid="09e0f245-b47d-4b2e-9b97-f55410a3e3e8"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="65e61362-904d-4ad0-a9cf-686bc28f1f8b"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["4"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="b03df028-0e27-4442-b222-f6fc8dcb7b0a"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["ISO Certification Details"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="ISO_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="0a36ed0e-5586-48d4-940f-d7805de599dc"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{CERT_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="d846825e-dc82-4169-8cdc-6fd9bb1d0741"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{CERT_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="6" y="156" width="554" height="30" uuid="5c1292a0-5e01-4069-8174-01385bf1875e"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="765d1d5e-1297-4e3e-ae9d-c3a1132dfaf8"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["5"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="d7592b32-1310-44c8-b0ff-6d255c6ba88b"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Item Manufactured Details"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="ITEM_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="4a55bba5-9663-4221-a23d-20ecf7fe0a6c"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{ITEM_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="ef5befd6-22b0-4d22-9570-3ae468c0a767"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{ITEM_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="6" y="187" width="554" height="30" uuid="02404f53-aa9f-45bf-b918-b161a892a6a7"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="afde1f4c-bf11-4ebd-a82f-8bd7d7fc6309"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["6"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="03934228-34e3-4a73-8fa1-53809ceade75"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Past Performance Details"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="PERF_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="302cfe8a-7448-4f96-9281-c923115b87be"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{ORG_PERF_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="1fa3c138-ce49-4159-b3f0-bded20c68baa"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{ORG_PERF_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="6" y="218" width="554" height="30" uuid="c4ba75e0-6a13-4572-8497-9ef35e917914"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="c37e03ce-5654-4135-b8fa-ed9518b8cec4"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["7"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="dc47f559-621c-4411-aa2c-337b95e4b55b"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Reg. Dev. Auth. Eligibility"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="RDA_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="bde55539-122d-4be1-b142-8314afd5d09e"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{RDAEC_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="5679d598-05e1-49b4-8d4c-1dc89b92a8bc"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{ORG_PERF_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="6" y="249" width="554" height="30" uuid="224999ad-0fb6-435a-aa96-df0c725abf3d"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="2" y="0" width="58" height="29" backcolor="#FFFFFF" uuid="0a51ca76-c236-4dcb-b8fc-b064863805f9"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["8"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="61" y="0" width="319" height="29" backcolor="#FFFFFF" uuid="4d17b451-3729-4a52-aed4-035424b71985"/>
+						<box leftPadding="2" rightPadding="2">
+							<pen lineWidth="0.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["BIS Details"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement style="BIS_APP_STATUS" stretchType="RelativeToTallestObject" mode="Opaque" x="381" y="0" width="60" height="29" backcolor="#FFFFFF" uuid="c45c64ab-778a-4679-91e4-35348d03a213"/>
+						<box leftPadding="2" rightPadding="2">
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Y".equals($F{BIS_APP})?"YES":"NO"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="442" y="0" width="112" height="29" backcolor="#FFFFFF" uuid="43c99f8f-cfbc-4e80-9788-f658047152bb"/>
+						<box leftPadding="2" rightPadding="2"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{BIS_CMT}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="53">
+				<frame>
+					<reportElement positionType="Float" x="1" y="10" width="554" height="41" uuid="7236b1b9-8d62-4124-b013-ed211e517722"/>
+					<subreport>
+						<reportElement x="0" y="0" width="554" height="41" uuid="e0e5c56f-ffc6-4da3-be7d-d31120f96e61"/>
+						<subreportParameter name="M_BP_ORG_ID">
+							<subreportParameterExpression><![CDATA[new Long($F{M_BP_ORG_ID}.longValue())]]></subreportParameterExpression>
+						</subreportParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						<subreportExpression><![CDATA[$F{REPORT_DIR}+"Reg_Item_Approval.jasper"]]></subreportExpression>
+					</subreport>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-22T17:50:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Partner_Fin" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="008ff09b-160c-4d1c-8e53-bcb551e7b80b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="M_BPARTNER_ID" class="java.lang.Long"/>
+	<parameter name="Report_Dir" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+A.FINACIALTYPE,
+CASE WHEN A.FINACIALTYPE='BSA' THEN 'BALANCE SHEET CERTIFICATES' 
+WHEN A.FINACIALTYPE='PNL' THEN 'PROFIT LOSS CERTIFICATES' END AS CERTIFICATE
+,A.AMOUNT
+,C.NAME AS FINYEAR
+,B.FILE_NAME, B.M_ATTACHMENT_ID 
+,D.NAME  AS REPORT_DIR
+FROM M_BP_FINANCIAL_ATTACHMENT A cross JOIN (SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') D
+INNER JOIN M_ATTACHMENT B ON (A.M_ATTACHMENT_ID=B.M_ATTACHMENT_ID)
+INNER JOIN M_FINANCIAL_YEAR C ON (A.M_FINANCIAL_YEAR_ID = C.M_FINANCIAL_YEAR_ID)
+WHERE A.M_BPARTNER_ID =  $P{M_BPARTNER_ID}  ORDER BY A.FINACIALTYPE, C.NAME  DESC]]>
+	</queryString>
+	<field name="FINACIALTYPE" class="java.lang.String"/>
+	<field name="CERTIFICATE" class="java.lang.String"/>
+	<field name="AMOUNT" class="java.lang.Double"/>
+	<field name="FINYEAR" class="java.lang.String"/>
+	<field name="FILE_NAME" class="java.lang.String"/>
+	<field name="M_ATTACHMENT_ID" class="java.math.BigDecimal"/>
+	<field name="REPORT_DIR" class="java.lang.String"/>
+	<group name="FINANCIAL">
+		<groupExpression><![CDATA[$F{CERTIFICATE}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<frame>
+					<reportElement positionType="Float" x="0" y="0" width="555" height="30" uuid="9acf3065-6af6-4453-8b2d-f3b69f5898ea"/>
+					<textField>
+						<reportElement x="0" y="0" width="555" height="30" uuid="84833096-d171-46d6-b3f4-f0f8af80be10"/>
+						<box>
+							<topPen lineWidth="1.0"/>
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="16" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{CERTIFICATE}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22">
+			<frame>
+				<reportElement x="0" y="0" width="554" height="21" uuid="40a26b72-4d96-4816-8cae-0d7b8817fb65"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="1" y="1" width="270" height="20" uuid="55569830-d953-448a-bd35-3d983d4a0d82"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{FINYEAR}]]></textFieldExpression>
+				</textField>
+				<textField hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement x="272" y="-1" width="283" height="22" uuid="8b76acfc-3eeb-4b40-9366-b9ae550ac14e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FILE_NAME}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA[$F{REPORT_DIR}+$F{M_ATTACHMENT_ID}]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField>
+					<reportElement x="260" y="90" width="5" height="3" uuid="685ea786-8fa6-4040-8a35-67b7e619552d"/>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

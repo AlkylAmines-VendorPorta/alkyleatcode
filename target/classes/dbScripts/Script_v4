@@ -1,0 +1,21 @@
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(21,'Y','HOLDER_TYPE','Holder type',SYSDATE,SYSDATE );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(88,21,'Y','HOLDER_TYPE','DS','Digital Signatory',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(90,21,'Y','HOLDER_TYPE','POA','Power Of Attorney',SYSDATE,SYSDATE );
+
+Insert into AD_ROLE_ACCESS_MASTER (AD_ROLE_ACCESS_MASTER_ID,CREATED,ISACTIVE,UPDATED,DELETE_ACCESS,MODIFY_ACCESS,VIEW_ONLY,CREATEDBY,M_BPARTNER_ID,UPDATEDBY,AD_ROLE_ID,M_TILE_ID) 
+values (95,to_timestamp('21-03-18 08:23:35.118000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'N',to_timestamp('21-03-18 08:23:35.118000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'N','N','Y',null,null,null,8,74);
+
+
+INSERT INTO AD_ROLE (AD_ROLE_ID, CREATED, ISACTIVE, UPDATED, DESCRIPTION, ISADMIN, NAME, PAGE_ACCESS, USER_LEVEL, VALUE, VIEW_NAME) 
+VALUES ('15', SYSDATE, 'Y', SYSDATE, 'Auditor', 'N', 'Auditor', 'Y', 'home', 'AUDIT', 'dashboard');
+
+
+ALTER SEQUENCE ad_role_access_master_seq increment by 96;
+ALTER SEQUENCE ad_role_seq increment by 16; 
+
+COMMIT;

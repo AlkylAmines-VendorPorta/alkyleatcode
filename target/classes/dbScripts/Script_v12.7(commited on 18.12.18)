@@ -1,0 +1,5 @@
+alter table m_bpartner add is_set_to_final_approval varchar2(255 char);
+
+alter table M_BP_ORG_OE add is_not_applicable varchar2(255 char);
+
+ALTER TABLE M_BP_ORG_OE DROP COLUMN is_applicable;

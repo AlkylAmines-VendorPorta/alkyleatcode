@@ -1,0 +1,1 @@
+INSERT INTO c_currency (c_currency_id, value, name, description, created, createdBy,updated,updatedBy,m_bpartner_id) Values ( nextval('c_currency_seq'),'INR','Indian Rupees','Indian Rupees',now(),'1',now(),'1','1');

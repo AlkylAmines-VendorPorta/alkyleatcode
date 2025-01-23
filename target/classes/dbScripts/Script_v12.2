@@ -1,0 +1,15 @@
+alter table AD_SYSCONFIG add reference_code VARCHAR2(255 CHAR);
+
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,created,isactive,updated, value,name,createdby, m_bpartner_id,reference_code) 
+VALUES ( 39, SYSDATE,'Y', SYSDATE, 'eat.sftp.file.path.linux', '/home/vivekb/server/docs/', '1', '2','SFTP_CONN_CODE');
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,created,isactive,updated, value,name,createdby, m_bpartner_id,reference_code) 
+VALUES ( 40, SYSDATE,'Y', SYSDATE, 'eat.sftp.url', '172.20.20.120', '1', '2','SFTP_CONN_CODE');
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,created,isactive,updated, value,name,createdby, m_bpartner_id,reference_code) 
+VALUES ( 41, SYSDATE,'Y', SYSDATE, 'eat.sftp.username', 'root', '1', '2','SFTP_CONN_CODE');
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,created,isactive,updated, value,name,createdby, m_bpartner_id,reference_code) 
+VALUES ( 42, SYSDATE,'Y', SYSDATE, 'eat.sftp.password', 'pass,123', '1', '2','SFTP_CONN_CODE');
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,created,isactive,updated, value,name,createdby, m_bpartner_id,reference_code) 
+VALUES ( 43, SYSDATE,'Y', SYSDATE, 'eat.sftp.port', '22', '1', '2','SFTP_CONN_CODE');
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,created,isactive,updated, value,name,createdby, m_bpartner_id,reference_code) 
+VALUES ( 44, SYSDATE,'Y', SYSDATE, 'eat.sftp.report.path.linux', '/home/vivekb/server/reports/', '1', '2','SFTP_CONN_CODE');
+

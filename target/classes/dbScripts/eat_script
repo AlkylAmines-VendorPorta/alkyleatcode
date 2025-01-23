@@ -1,0 +1,243 @@
+/////////////// FROM Script_v2 /////////////////
+UPDATE AD_USER SET PASSWORD = 'pass,123',HASPLAINPASSWORD = 'Y' ;
+////////////// END //////////////////
+
+//////////// FROM Script_v2.1//////////
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(20,'Y','SCHEDULING','Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description) values
+(84,20,'Y','SCHEDULING','TechnicalBid','Technical Bid Opening', SYSDATE, SYSDATE ,null);
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description) values
+(85,20,'Y','SCHEDULING','PriceBid','Price Bid Opening', SYSDATE, SYSDATE ,null);
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description) values
+(86,20,'Y','SCHEDULING','AnnextureC1','Annexture C1 Opening', SYSDATE, SYSDATE ,null);
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description) values
+(87,20,'Y','SCHEDULING','DeviationBid','Deviation Bid Opening', SYSDATE, SYSDATE ,null);
+///////////////END/////////////////////
+
+//////////// FROM Script_v3/////////
+Insert into M_TILE (M_TILE_ID,CREATED,ISACTIVE,UPDATED,VALUE,DESCRIPTION,IS_SUMMARY,LEVEL_NO,NAME,PARENT_ID,SEQUENCE_NO,CREATEDBY,M_BPARTNER_ID,UPDATEDBY) 
+values (75,SYSDATE,'Y',SYSDATE,'PreBidMeeting','Pre Bid Meeting','N',1,'Pre Bid Meeting',3,0,null,null,null);
+INSERT INTO AD_ROLE_ACCESS_MASTER (AD_ROLE_ACCESS_MASTER_ID, CREATED, ISACTIVE, UPDATED, DELETE_ACCESS, MODIFY_ACCESS, VIEW_ONLY, AD_ROLE_ID, M_TILE_ID) 
+VALUES ('93', SYSDATE, 'Y', SYSDATE, 'N', 'N', 'Y', '1', '74');
+INSERT INTO AD_ROLE_ACCESS_MASTER (AD_ROLE_ACCESS_MASTER_ID, CREATED, ISACTIVE, UPDATED, DELETE_ACCESS, MODIFY_ACCESS, VIEW_ONLY, AD_ROLE_ID, M_TILE_ID) 
+VALUES ('94', SYSDATE, 'Y', SYSDATE, 'N', 'N', 'Y', '1', '75');
+/////////////END/////////////////
+
+/////////////FROM Script_v3.1/////////
+UPDATE M_TILE SET VALUE = 'FinalScrutiny',DESCRIPTION = 'Final Scrutiny',NAME='Final Scrutiny' WHERE M_TILE_ID=54;
+UPDATE M_TILE SET VALUE = 'PreliminaryScrutiny',DESCRIPTION = 'Preliminary Scrutiny',NAME='Preliminary Scrutiny' WHERE M_TILE_ID=55;
+/////////END/////////
+
+////////////////////FROM Script_v4///////////
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(21,'Y','HOLDER_TYPE','Holder type',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(88,21,'Y','HOLDER_TYPE','DS','Digital Signatory',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(90,21,'Y','HOLDER_TYPE','POA','Power Of Attorney',SYSDATE,SYSDATE );
+Insert into AD_ROLE_ACCESS_MASTER (AD_ROLE_ACCESS_MASTER_ID,CREATED,ISACTIVE,UPDATED,DELETE_ACCESS,MODIFY_ACCESS,VIEW_ONLY,CREATEDBY,M_BPARTNER_ID,UPDATEDBY,AD_ROLE_ID,M_TILE_ID) 
+values (95,to_timestamp('21-03-18 08:23:35.118000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'N',to_timestamp('21-03-18 08:23:35.118000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'N','N','Y',null,null,null,8,74);
+INSERT INTO AD_ROLE (AD_ROLE_ID, CREATED, ISACTIVE, UPDATED, DESCRIPTION, ISADMIN, NAME, PAGE_ACCESS, USER_LEVEL, VALUE, VIEW_NAME) 
+VALUES ('15', SYSDATE, 'Y', SYSDATE, 'Auditor', 'N', 'Auditor', 'Y', 'home', 'AUDIT', 'dashboard');
+///////////END///////////////////
+
+////////////////////FROM Script_v5////////////
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('1', SYSDATE, 'Y', SYSDATE, '96110000', 'DATE, SEALING OR NUMBERING STAMPS, AND THE LIKE (INCLUDING D', 'DATE, SEALING OR NUMBERING STAMPS, AND THE LIKE (INCLUDING D');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('2', SYSDATE, 'Y', SYSDATE, '94036000', 'OTHER FURNITURE AND PARTS THEREOF -Other wooden furniture', 'OTHER FURNITURE AND PARTS THEREOF -Other wooden furniture');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('3', SYSDATE, 'Y', SYSDATE, '94031090', 'OTHER FURNITURE AND PARTS THEREOF - Metal furniture of a kin', 'OTHER FURNITURE AND PARTS THEREOF - Metal furniture of a kin');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('4', SYSDATE, 'Y', SYSDATE, '94031010', 'OTHER FURNITURE AND PARTS THEREOF - Metal furniture of a kin', 'OTHER FURNITURE AND PARTS THEREOF - Metal furniture of a kin');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('5', SYSDATE, 'Y', SYSDATE, '94013000', 'SEATS, WHETHER OR NOT CONVERTIBLE INTO BEDS, AND PARTS THERE', 'SEATS, WHETHER OR NOT CONVERTIBLE INTO BEDS, AND PARTS THERE');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('6', SYSDATE, 'Y', SYSDATE, '90308400', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('7', SYSDATE, 'Y', SYSDATE, '90303950', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('8', SYSDATE, 'Y', SYSDATE, '90303940', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('9', SYSDATE, 'Y', SYSDATE, '90303910', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND');
+INSERT INTO M_HSN (M_HSN_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, NAME) 
+VALUES ('10', SYSDATE, 'Y', SYSDATE, '90303900', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND', 'OSCILLOSCOPES, SPECTRUM ANALYSERS AND OTHER INSTRUMENTS AND');
+////////////////////END////////////////////
+
+//////////////////FROM Script_v5.1////////////
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('8', SYSDATE, 'Y', SYSDATE, 'Lead acid st.battary 30v 60 AH', 'Lead acid st.battary 30v 60 AH', '1', 'Y', 'N', 'N', 'Y', 'Battary 30v 60H', 'Lead acid st.battary 30v 60 AH', 'I', '3', '3', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('9', SYSDATE, 'Y', SYSDATE, '110V.100AH,LA.St.Battery55Cell', '110V.100AH,LA.St.Battery55Cell', '2', 'N', 'Y', 'N', 'Y', 'LA.St.Battery55Cell', '110V.100AH,LA.St.Battery55Cell', 'I', '3', '3', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('10', SYSDATE, 'Y', SYSDATE, 'Battery 150 AH 12 volts', 'Battery 150 AH 12 volts', '5', 'Y', 'Y', 'N', 'Y', 'Battery 150 AH', 'Battery 150 AH 12 volts', 'I', '3', '2', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('11', SYSDATE, 'Y', SYSDATE, 'DC Batteries (12V, 200 AH)', 'DC Batteries (12V, 200 AH)', '4', 'Y', 'Y', 'Y', 'Y', 'DC Batteries', 'DC Batteries (12V, 200 AH)', 'I', '3', '1', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('12', SYSDATE, 'Y', SYSDATE, 'LT C. XLPE 3.5C x 35 Sq mm', 'LT C. XLPE 3.5C x 35 Sq mm', '3', 'N', 'N', 'Y', 'N', 'LT C. XLPE', 'LT C. XLPE 3.5C x 35 Sq mm', 'I', '3', '1', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('13', SYSDATE, 'Y', SYSDATE, 'Building Maintainence', 'Building Maintainence','2', 'Y', 'N', 'N', 'Y', 'Building Maintainence', 'Building Maintainence', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('14', SYSDATE, 'Y', SYSDATE, 'Electrification', 'Electrification', '5','Y', 'N', 'N', 'Y', 'Electrification', 'Electrification', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('15', SYSDATE, 'Y', SYSDATE, 'Road Maintainence', 'Road Maintainence','6', 'Y', 'N', 'N', 'Y', 'Road Maintainence', 'Road Maintainence', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, M_HSN_ID,ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID)
+ VALUES ('16', SYSDATE, 'Y', SYSDATE, 'Drainage Re-Modelling', 'Drainage Re-Modelling','7', 'Y', 'N', 'N', 'Y', 'Drainage Re-Modelling', 'Drainage Re-Modelling', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('17', SYSDATE, 'Y', SYSDATE, 'Flyover Construction', 'Flyover Construction','1', 'Y', 'N', 'N', 'Y', 'Flyover Construction', 'Flyover Construction', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('18', SYSDATE, 'Y', SYSDATE, 'Sanitary Materials', 'Sanitary Materials','2', 'Y', 'N', 'N', 'Y', 'Sanitary Materials', 'Sanitary Materials', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('19', SYSDATE, 'Y', SYSDATE, 'Plumbing Materials', 'Plumbing Materials','3', 'Y', 'N', 'N', 'Y', 'Plumbing Materials', 'Plumbing Materials', 'S', '6', '6', '1');
+INSERT INTO M_MATERIAL (M_MATERIAL_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION,M_HSN_ID, ISNSIC, ISPROPREPORT, ISSSI, ISTESTREPORT, ITEM_TRADE, NAME, TYPE_CODE, M_MATERIAL_GROUP_ID, M_MATERIAL_SUBGROUP_ID, M_UOM_ID) 
+VALUES ('20', SYSDATE, 'Y', SYSDATE, 'WaterProofing Materials', 'WaterProofing Materials','8', 'Y', 'N', 'N', 'Y', 'WaterProofing Materials', 'WaterProofing Materials', 'S', '6', '6', '1');
+//////////////////END//////////////////////
+
+/////////////////FROM Script_v5.4//////////
+UPDATE M_REFERENCE SET VALUE = 'SCHEDULING_TYPE', NAME = 'Scheduling Types' WHERE M_REFERENCE_ID=20;
+UPDATE M_REFERENCE_LIST SET VALUE = 'PBSCH', DESCRIPTION = 'Price Bid Scheduling', NAME = 'Price Bid Scheduling', REFERENCE_CODE = 'SCHEDULING_TYPE' WHERE M_REFERENCE_LIST_ID=84;
+UPDATE M_REFERENCE_LIST SET VALUE = 'C1SCH', DESCRIPTION = 'Annexure C1 Scheduling', NAME = 'Annexure C1 Scheduling', REFERENCE_CODE = 'SCHEDULING_TYPE' WHERE M_REFERENCE_LIST_ID=85;
+UPDATE M_REFERENCE_LIST SET VALUE = 'RBSCH', DESCRIPTION = 'Revised Bid Scheduling', NAME = 'Revised Bid Scheduling', REFERENCE_CODE = 'SCHEDULING_TYPE' WHERE M_REFERENCE_LIST_ID=86;
+UPDATE M_REFERENCE_LIST SET VALUE = 'AWSCH', DESCRIPTION = 'Award Winner Scheduling', NAME = 'Award Winner Scheduling', REFERENCE_CODE = 'SCHEDULING_TYPE' WHERE M_REFERENCE_LIST_ID=87;
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(91,1,'Y','COMPANY_TYPE','PARTNERSHIP','Partnership',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(92,1,'Y','COMPANY_TYPE','PROPRIETARY','Proprietary',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(93,1,'Y','COMPANY_TYPE','PUBLTD','Public Limited',SYSDATE,SYSDATE );
+////////////////////END////////////
+
+/////////////////FROM Script_v5.5/////////////
+UPDATE T_TAHDR SET OFFICE_TYPE= 'HO' WHERE TAHDR_TYPE_CODE='PT';
+UPDATE T_TAHDR SET C_LOCATION_ID=3 WHERE TAHDR_TYPE_CODE='PT' AND OFFICE_TYPE='HO';
+UPDATE M_TILE SET NAME='Notification',VALUE='Notification',DESCRIPTION='Notification' WHERE M_TILE_ID=9 OR M_TILE_ID=19;
+update M_REFERENCE_LIST set ACTION_NAME='Send For Approval'  WHERE M_REFERENCE_LIST_ID=39;
+update M_REFERENCE_LIST set ACTION_NAME='Cancel'  WHERE M_REFERENCE_LIST_ID=45;
+update M_REFERENCE_LIST set ACTION_NAME='Approve and Publish'  WHERE M_REFERENCE_LIST_ID=42;
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(22,'Y','COMMENCEMENT_PERIOD_CODE','Commencement Period Code',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(94,22,'Y','COMMENCEMENT_PERIOD_CODE','FirstDemand','First Demand',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(95,22,'Y','COMMENCEMENT_PERIOD_CODE','LOA','LOA Award',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(96,22,'Y','COMMENCEMENT_PERIOD_CODE','ArtworkApproval','Artwork Approval',SYSDATE,SYSDATE );
+/////////////////////END/////////////////
+
+/////////////////FROM Script_v5.6///////////
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(24,'Y','VALIDITY_TYPE','Company Type',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(98,24,'Y','VALIDITY_TYPE','PERMANENT','Permanent',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(99,24,'Y','VALIDITY_TYPE','PROVISIONAL','Provisional',SYSDATE,SYSDATE );
+ UPDATE AD_USER SET EMAIL = 'sysuser' WHERE AD_USER_ID =1;
+///////////////END/////////////////
+
+////////////////////FROM Script_v5.7/////////////////
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(25,'Y','MY_TENDER_BUTTON','My Tender Button',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(100,25,'Y','MY_TENDER_BUTTON','BID','Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(101,25,'Y','MY_TENDER_BUTTON','DVTN','Deviation Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(102,25,'Y','MY_TENDER_BUTTON','C1','Annexure C1 Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(103,25,'Y','MY_TENDER_BUTTON','REVISED','Revised Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(104,25,'Y','MY_TENDER_BUTTON','TCOP','Technical Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(105,25,'Y','MY_TENDER_BUTTON','PBOP','Price Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(106,25,'Y','MY_TENDER_BUTTON','DVOP','Deviation Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(107,25,'Y','MY_TENDER_BUTTON','C1OP','Annexure C1 Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(108,25,'Y','MY_TENDER_BUTTON','TCSCHD','Technical Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(109,25,'Y','MY_TENDER_BUTTON','PBSCHD','Price Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(110,25,'Y','MY_TENDER_BUTTON','C1SCHD','Annexure C1 Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(111,25,'Y','MY_TENDER_BUTTON','RBSCHD','Revised Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(112,25,'Y','MY_TENDER_BUTTON','AWSCHD','Award Winner Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(113,25,'Y','MY_TENDER_BUTTON','WINNER','Award Winner',SYSDATE,SYSDATE );
+ Insert into M_TILE (M_TILE_ID,CREATED,ISACTIVE,UPDATED,VALUE,DESCRIPTION,IS_SUMMARY,LEVEL_NO,NAME,PARENT_ID,SEQUENCE_NO,CREATEDBY,M_BPARTNER_ID,UPDATEDBY) 
+values (76,SYSDATE,'Y',SYSDATE,'DeviationBid','Deviation Bid','N',1,'Deviation Bid',3,0,null,null,null);
+INSERT INTO M_TILE (M_TILE_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, IS_SUMMARY, LEVEL_NO, NAME, PARENT_ID, SEQUENCE_NO) 
+VALUES ('77', SYSDATE, 'Y', SYSDATE, 'MyTender', 'My Tender', 'N', '1', 'My Tender', '3', '0');
+UPDATE AD_ROLE SET VIEW_NAME = 'dashboard4' WHERE VALUE='VENADM';
+//////////////////////END ///////////////
+
+/////////////////FROM Script_v5.8////////////
+UPDATE M_REFERENCE_LIST SET VALUE = 'AW' WHERE M_REFERENCE_LIST_ID =113; 
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderSubmission' WHERE M_REFERENCE_LIST_ID =100;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'deviationBid' WHERE M_REFERENCE_LIST_ID =101;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'annexureC1' WHERE M_REFERENCE_LIST_ID =102;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderSubmission' WHERE M_REFERENCE_LIST_ID =103;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderOpening' WHERE M_REFERENCE_LIST_ID =104;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderOpening' WHERE M_REFERENCE_LIST_ID =105;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderOpening' WHERE M_REFERENCE_LIST_ID =106;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderOpening' WHERE M_REFERENCE_LIST_ID =107;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderScheduling' WHERE M_REFERENCE_LIST_ID =108;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderScheduling' WHERE M_REFERENCE_LIST_ID =109;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderScheduling' WHERE M_REFERENCE_LIST_ID =110;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderScheduling' WHERE M_REFERENCE_LIST_ID =111;
+UPDATE M_REFERENCE_LIST SET DESCRIPTION = 'tenderScheduling' WHERE M_REFERENCE_LIST_ID =112;
+//////////////////////END//////////////////
+
+//////////////////FROM Script_v5.9//////////////
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(114,16,'Y','DOCUMENT_STATUS','TCOP','Techno Commercial Opening', SYSDATE, SYSDATE ,'Techno Commercial Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(115,16,'Y','DOCUMENT_STATUS','DBOP','Deviation Bid Opening', SYSDATE, SYSDATE ,'Deviation Bid Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(116,16,'Y','DOCUMENT_STATUS','PBOP','Price Bid Opening', SYSDATE, SYSDATE ,'Price Bid Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(117,16,'Y','DOCUMENT_STATUS','C1OP','Annexure C1 Opening', SYSDATE, SYSDATE ,'Annexure C1 Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(118,16,'Y','DOCUMENT_STATUS','RBOP','Revised Bid Opening', SYSDATE, SYSDATE ,'Annexure C1 Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(119,16,'Y','DOCUMENT_STATUS','AWOP','Award Winner Opening', SYSDATE, SYSDATE ,'Annexure C1 Opening','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(120,16,'Y','DOCUMENT_STATUS','DBSCH','Deviation Bid Scheduling', SYSDATE, SYSDATE ,'Deviation Bid Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(121,16,'Y','DOCUMENT_STATUS','PBSCH','Price Bid Scheduling', SYSDATE, SYSDATE ,'Price Bid Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(122,16,'Y','DOCUMENT_STATUS','C1SCH','Annexure C1 Scheduling', SYSDATE, SYSDATE ,'Annexure C1 Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(123,16,'Y','DOCUMENT_STATUS','RBSCH','Revise Bid Scheduling', SYSDATE, SYSDATE ,'Revised Bid Scheduling','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(124,16,'Y','DOCUMENT_STATUS','AWSCH','Award Winner Scheduling', SYSDATE, SYSDATE ,'Award Winner Scheduling','');
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(26,'Y','NATURE_OF_ACTIVITY','Nature Of Activity',SYSDATE,SYSDATE );
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(27,'Y','ENTERPRISE_CATEGORY','Nature Of Activity',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(125,26,'Y','NATURE_OF_ACTIVITY','MFR','Manufacturing', SYSDATE, SYSDATE ,'Manufacturing','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(126,26,'Y','NATURE_OF_ACTIVITY','SRV','Service', SYSDATE, SYSDATE ,'Service','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(127,27,'Y','ENTERPRISE_CATEGORY','MDM','Medium', SYSDATE, SYSDATE ,'Medium','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(128,27,'Y','ENTERPRISE_CATEGORY','SML','Small', SYSDATE, SYSDATE ,'Small','');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,action_name) values
+(129,27,'Y','ENTERPRISE_CATEGORY','MCR','Micro', SYSDATE, SYSDATE ,'Micro','');
+/////////////////////END/////////////////
+
+/////////////FROM Script_v6.2//////////
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID, VALUE, NAME) VALUES (1, 'REPORT_DIR','/home/vivekb/server/reports/');
+///////////////END////////////////////
+
+///////////////FROM Script_v6.4//////////
+Insert into M_TILE (M_TILE_ID,CREATED,ISACTIVE,UPDATED,VALUE,DESCRIPTION,IS_SUMMARY,LEVEL_NO,NAME,PARENT_ID,SEQUENCE_NO,CREATEDBY,M_BPARTNER_ID,UPDATEDBY)
+values (78,SYSDATE,'Y',SYSDATE,'TenderApproval','Tender Approval','N',1,'Tender Approval',3,0,null,null,null);
+/////////////END//////////////
+
+
+
+

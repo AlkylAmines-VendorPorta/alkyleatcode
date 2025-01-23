@@ -1,0 +1,55 @@
+CREATE TABLE M_BOM_VERSION
+   (	"M_BOM_VERSION_ID" NUMBER(19,0), 
+	"CREATED" TIMESTAMP (6), 
+	"ISACTIVE" VARCHAR2(255 CHAR), 
+	"UPDATED" TIMESTAMP (6), 
+	"NAME" VARCHAR2(255 CHAR), 
+	"CREATEDBY" NUMBER(19,0), 
+	"M_BPARTNER_ID" NUMBER(19,0), 
+	"UPDATEDBY" NUMBER(19,0), 
+	"M_MATERIAL_ID" NUMBER(19,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+  
+  
+ALTER table M_BP_ORG_TRADING_ITEM add M_MATERIAL_ID NUMBER(19,0);
+ 
+alter table M_BP_ORG add M_BP_ITEM_MANUFACTURER_ID NUMBER(19,0);
+ 
+alter table t_payment add is_trader varchar2(255); 
+ 
+alter table M_BP_ORG_REGISTRATION add validity_type  VARCHAR2(255 CHAR);
+ 
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(24,'Y','VALIDITY_TYPE','Company Type',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(98,24,'Y','VALIDITY_TYPE','PERMANENT','Permanent',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(99,24,'Y','VALIDITY_TYPE','PROVISIONAL','Provisional',SYSDATE,SYSDATE );
+ 
+
+alter table m_charge add sgst Number(19,2);
+alter table m_charge add igst Number(19,2);
+alter table m_charge add cgst Number(19,2);
+
+alter table t_price_bid add sgst Number(19,2);
+alter table t_price_bid add igst Number(19,2);
+alter table t_price_bid add cgst Number(19,2);
+
+alter table t_payment add sgst Number(19,2);
+alter table t_payment add igst Number(19,2);
+alter table t_payment add cgst Number(19,2);
+alter table t_payment add gstAmount Number(19,2); 
+
+ ALTER table T_TAHDR_MATERIAL add M_BOM_VERSION_ID NUMBER(19,0);
+ 
+ UPDATE AD_USER SET EMAIL = 'sysuser' WHERE AD_USER_ID =1; 
+ 
+ alter table T_PAYMENT add VENDOR_TYPE_PAYMENT VARCHAR2(255 CHAR);
+ 
+ ALTER TABLE M_BP_ORG_CERTIFICATION ADD CERTIFICATE_COPY REFERENCES M_ATTACHMENT(M_ATTACHMENT_ID);
+ 
+COMMIT;

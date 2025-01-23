@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-08-22T19:14:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MSEDCLMain" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="50" bottomMargin="20" uuid="835f3502-16af-48d2-bae3-8049b4acd3c2">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="468"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="TAHDRMATERIALID" class="java.lang.Long"/>
+	<parameter name="Report_Dir" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+mtnr.NAME ,mtnr.DESCRIPTION,material.SPECIFICATION_VERSION
+FROM T_TAHDR_MATERIAL material
+INNER JOIN M_MATERIAL mtnr on(material.T_MATERIAL_ID=mtnr.M_MATERIAL_ID)
+WHERE material.T_TAHDR_MATERIAL_ID= $P{TAHDRMATERIALID}]]>
+	</queryString>
+	<field name="NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NAME"/>
+	</field>
+	<field name="DESCRIPTION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPTION"/>
+	</field>
+	<field name="SPECIFICATION_VERSION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SPECIFICATION_VERSION"/>
+	</field>
+	<title>
+		<band height="147" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="70" uuid="a1222513-f2ed-4395-b459-2c5bc79a3523"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="550" height="30" uuid="c3bcccc2-e4fe-4ba0-a35b-489c14ba448a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Technical Specification Item: "+ $F{NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="30" width="550" height="30" uuid="6f975536-6f07-490c-8251-2fb68e994fe8"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[" Version:"+$F{SPECIFICATION_VERSION}.isEmpty()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="191" y="80" width="180" height="60" uuid="975e0d77-c948-42a4-8f08-0a25213778d6"/>
+				<imageExpression><![CDATA[$P{Report_Dir}+"Mahadiscom_Logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="23"/>
+	</pageFooter>
+	<summary>
+		<band height="525" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="50" uuid="41d2d1c5-5a44-422d-b7ae-f397ba6e7bda"/>
+				<textField>
+					<reportElement x="-1" y="0" width="551" height="30" uuid="c9b6ee6b-9ced-4a0f-b6d0-098cdfb4f839"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Maharashtra State Electricity Distribution Company Limited "]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="38" width="545" height="1" uuid="8d4421aa-a79d-4d3e-a559-4b8b50e7669f"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement x="1" y="50" width="550" height="470" uuid="abaa582f-1613-466d-9b8b-15ec0f96dc4f"/>
+				<textField>
+					<reportElement mode="Opaque" x="120" y="10" width="320" height="20" backcolor="#9DDCF5" uuid="f93f4f78-06d8-4194-be90-7fc51a44b210"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["SPECIFICATION NO.MMC:  MSC/DB/01 /2018"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="90" width="320" height="30" uuid="fb1c4b07-dd54-41f7-9e93-1d38f9e09451"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TECHNICAL SPECIFICATION"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="140" width="320" height="30" uuid="8b1da837-276b-4264-baf0-38890d202419"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["For"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="280" width="320" height="30" uuid="28783e6f-61bc-42af-b8bd-830df693b9e6"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["For"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="321" width="320" height="30" uuid="00b4d0f2-66a4-4cc2-8241-ba6e5a933aaa"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DISTRIBUTION SYSTEM "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="360" width="320" height="30" uuid="e8594ed2-ac3d-4c16-bae3-3c5a9fbf41f5"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["IN"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="440" width="320" height="30" uuid="7e2cfc1c-37ef-4dbb-a16e-df0532950837"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MSEDCL"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="120" y="197" width="320" height="30" backcolor="#9DDCF5" uuid="90c54464-b785-4803-86d8-3c7c5535ccf6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DESCRIPTION}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

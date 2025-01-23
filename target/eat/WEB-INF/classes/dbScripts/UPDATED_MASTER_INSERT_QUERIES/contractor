@@ -1,0 +1,19 @@
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,m_bpartner_id) values
+(141,2,'Y','CONTRACTOR_TYPE','TRAINING INST','Training Institute',SYSDATE,SYSDATE,2 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,m_bpartner_id) values
+(142,2,'Y','CONTRACTOR_TYPE','SYS INTEGRATOR','System Integrator',SYSDATE,SYSDATE,2 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,m_bpartner_id) values
+(143,2,'Y','CONTRACTOR_TYPE','CONSULTANT','Consultant',SYSDATE,SYSDATE,2 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,m_bpartner_id) values
+(144,2,'Y','CONTRACTOR_TYPE','Manpower Supply','Manpower Supply',SYSDATE,SYSDATE,2 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,m_bpartner_id) values
+(145,2,'Y','CONTRACTOR_TYPE','Infrastructure Provider','Infrastructure Provider',SYSDATE,SYSDATE,2 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated,m_bpartner_id) values
+(146,2,'Y','CONTRACTOR_TYPE','OTHER','Other',SYSDATE,SYSDATE,2 );
+
+Commit;

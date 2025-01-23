@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-10-21T16:14:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Final_Commercial_Scrutiny_Summary" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="b8670cf2-42ec-4eb5-af1a-cb31b91781f8">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[T_BIDDER_ID]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+E.value As itemcode,
+E.name As Itemname,
+B.FINAL_COMMENT As FINAL_COMM_SCRUTINY_COMMENT,
+B.FINAL_STATUS As FINAL_COMM_SCRUTINY_STATUS
+FROM T_ITEM_SCRUTINY_LINE A
+LEFT JOIN T_ITEM_SCRUTINY B ON A.T_ITEM_SCRUTINY_ID=B.T_ITEM_SCRUTINY_ID
+LEFT JOIN T_ITEM_BID C ON B.T_ITEM_BID_ID=C.T_ITEM_BID_ID
+LEFT JOIN T_TAHDR_MATERIAL D ON C.T_TAHDR_MATERIAL_ID=D.T_TAHDR_MATERIAL_ID
+LEFT JOIN M_MATERIAL E ON D.T_MATERIAL_ID=E.M_MATERIAL_ID
+WHERE B.SCRUTINY_TYPE='TECHSCR' AND B.T_BIDDER_ID= $P{T_BIDDER_ID}]]>
+	</queryString>
+	<field name="ITEMCODE" class="java.lang.String"/>
+	<field name="ITEMNAME" class="java.lang.String"/>
+	<field name="FINAL_COMM_SCRUTINY_COMMENT" class="java.lang.String"/>
+	<field name="FINAL_COMM_SCRUTINY_STATUS" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="70">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="40" uuid="0dceaac5-52f9-48a3-834a-702dcf338cf2"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="555" height="40" backcolor="#82EDE4" uuid="2444d1db-ca4c-455e-a0a0-0c6c0b8176ca"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Final Technical Scrutiny Summary (Items)"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="320" y="41" width="135" height="29" backcolor="#F1F576" uuid="58e3268b-b3f1-46f8-b62a-3f0db07b69d8"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Comments"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="41" width="68" height="29" backcolor="#F1F576" uuid="f89195f3-63e6-4b10-85f7-d2bb89f73a71"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sr.NO"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="68" y="41" width="100" height="29" backcolor="#F1F576" uuid="4b980d78-8578-4cec-9d51-4f97275ed2c1"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Item Code"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="168" y="41" width="152" height="29" backcolor="#F1F576" uuid="f3412220-c5c6-40c6-b693-b00bb3e36229"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Item Name"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="455" y="41" width="100" height="29" backcolor="#F1F576" uuid="f7620286-46da-421f-85e4-c0e5cc189894"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Final Status"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43">
+			<frame>
+				<reportElement x="0" y="-1" width="555" height="40" uuid="a3efe88a-5856-4592-89df-b519f3698eb0"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="1" width="68" height="41" uuid="156537c2-f8f9-457b-b28c-c5d9d60bbdf8"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="68" y="1" width="100" height="41" uuid="cf40928d-dd24-40dd-b42b-07379cc1916f"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="168" y="1" width="152" height="41" uuid="5369e0a5-a782-48fc-b43f-b6034e4b6efb"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{ITEMNAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="320" y="1" width="135" height="41" uuid="62802b25-0758-45a2-b06a-84c582f644a2"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FINAL_COMM_SCRUTINY_COMMENT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="455" y="1" width="100" height="41" uuid="d5dfc8fa-3d84-4ba0-82b5-bdf12474b62a"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FINAL_COMM_SCRUTINY_STATUS}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

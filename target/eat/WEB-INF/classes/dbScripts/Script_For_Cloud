@@ -1,0 +1,32 @@
+INSERT INTO ad_role(ad_role_id, created, createdby, description, isactive, isadmin, name, page_access, updated, updatedby, user_level, view_name, value) 
+VALUES (16, NOW(), null, 'Partner Admin', 'Y', 'Y', 'Partner Admin', 'Y', NOW(), null, 'home', 'dashboard', 'PADMIN');
+Insert into AD_ROLE_ACCESS_MASTER (CREATED,UPDATED,ISACTIVE,CREATEDBY,UPDATEDBY,DELETE_ACCESS,MODIFY_ACCESS,VIEW_ONLY,M_BPARTNER_ID,AD_ROLE_ID,M_TILE_ID,Ad_ROLE_ACCESS_MASTER_ID) 
+(
+SELECT 
+A.created as created,
+A.updated as updated,
+'Y' as isactive,
+A.createdby as createdby,
+A.updatedby as updatedby,
+A.delete_access as delete_access,
+A.modify_access as modify_access,
+A.view_only as view_only,
+A.m_bpartner_id as m_bpartner_id,
+16 as ad_role_id,
+A.m_tile_id as m_tile_id,
+10000+row_number() over(order by A.m_tile_id) as ad_role_access_master_id
+FROM 
+(select 
+ad.created as created,
+ad.updated as updated,
+ad.createdby as createdby,
+ad.updatedby as updatedby,
+ad.delete_access as delete_access,
+ad.modify_access as modify_access,
+ad.view_only as view_only,
+ad.m_bpartner_id as m_bpartner_id,
+16 as ad_role_id,
+ad.m_tile_id as m_tile_id
+from ad_role_access_master ad where ad_role_id =1)A)
+ALTER SEQUENCE ad_role_access_master_seq increment by 10060;
+ALTER SEQUENCE ad_role_seq increment by 16;

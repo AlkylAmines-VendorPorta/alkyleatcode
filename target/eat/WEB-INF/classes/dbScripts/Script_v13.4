@@ -1,0 +1,97 @@
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','SALUTATION','salutation', now() , now(), 1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','METHODS_OF_INSPECTION_STANDARD','Methods of inspection Standard', now() , now(), 1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','VENDOR_TYPE','vendor type', now() , now(), 1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','VENDOR_CLASSIFICATION','Vendor Classification (Account group)', now() , now(), 1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','RECON_ACCOUNT','Recon account', now() , now(), 1 );
+
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated,m_bpartner_id) values
+(nextval('m_reference_seq'),'Y','VENDOR_SCHEMA_GROUP','Vendor Schema Group', now() , now(), 1 );
+
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),31,'Y','SALUTATION','MR','MR', now() , now() ,1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),31,'Y','SALUTATION','Shri','SHRI', now() , now() ,1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),31,'Y','SALUTATION','MRS','MRS', now() , now() ,1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),30,'Y',METHODS_OF_INSPECTION_STANDARD,'ISI','ISI', now() , now() ,1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),30,'Y',METHODS_OF_INSPECTION_STANDARD,'DIN','DIN', now() , now() ,1 );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),30,'Y',METHODS_OF_INSPECTION_STANDARD,'Cos own Std','OWNSTD', now() , now() ,1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),32,'Y','VENDOR_TYPE',' MANUFACTURER',' manufacturer', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),32,'Y','VENDOR_TYPE',' TRADER',' trader', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),32,'Y','VENDOR_TYPE',' SERVICE_PROVIDER',' Service provider', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),32,'Y','VENDOR_TYPE',' TRANSPORTER',' Transporter', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),32,'Y','VENDOR_TYPE',' PROJECT_CONTRACTOR',' Project contractor', now() , now() ,1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZRMD',' Raw Material Vendors – Domestic ZRMD (01)', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZRMI',' Raw Material Vendors – Imports ZRMI (02)', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZSPR',' Spares Domestic Vendor -  Domestic ZSPR (04)', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZSPI',' Imports Vendors -  Imports ZSPI (04)', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZSER',' Services & Expenses Vendors – Services ZSER (06)', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZTRA',' Transporter Vendors – ZTRA 07', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),33,'Y','VENDOR_CLASSIFICATION',' ZUTL',' Utilities Vendors – ZUTL 03', now() , now() ,1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT',' 26112001','26112001 - Domestic Raw Material', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT','26112002',' 26112002 -  Domestic Packaging Material', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT','26112003',' 26112003 – Local Utilities (Steam, Coal, Power)', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT','26112004',' 26112004 –  Stores', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT','26112005','26112005 – Transporter', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT','26112006','26112006 – Service Provider', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),34,'Y','RECON_ACCOUNT','26112008','26112008 – MSME creditors', now() , now() ,1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),35,'Y','VENDOR_SCHEMA_GROUP','02','02 – RM, MRO & Services schema vendor', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),35,'Y','VENDOR_SCHEMA_GROUP','08','08 –  Import Purchase Order', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),35,'Y','VENDOR_SCHEMA_GROUP','AL','AL-Alcohol', now() , now() ,1 );
+
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),1,'Y','COMPANY_TYPE','LLP','llp', now() , now() ,1 );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated , m_bpartner_id) values
+(nextval('m_referencelist_seq'),1,'Y','COMPANY_TYPE','SEMI_GOVERNMENT','semi government', now() , now() ,1 );
+

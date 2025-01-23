@@ -1,0 +1,35 @@
+@CHARSET "ISO-8859-1";
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+.btn-group{margin-bottom:7px; margin-right:2px;}
+.btn-group>.btn-default{padding:0px;}
+.btn-success span.glyphicon {
+  opacity: 1; 
+}
+.btn-group .btn-primary span.glyphicon{opacity: 1;}
+.btn-group .btn-primary{padding:5px;}
+.btn-success {
+    border-color: #3d863d;
+}
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+    border-radius: 4px;
+}

@@ -1,0 +1,7 @@
+ALTER TABLE T_TAHDR_MATERIAL_GTP
+ADD T_TAHDR_DETAIL_ID NUMBER(19,0);
+
+INSERT INTO AD_SYSCONFIG (AD_SYSCONFIG_ID,VALUE,NAME) VALUES (2,'REPORT_DIR','d:\eatApp\reports\');
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated, description,M_BPARTNER_ID) values
+(151,18,'Y','BIDDER_STATUS','DR','DRAFTED', SYSDATE, SYSDATE ,'Drafted',1);
+COMMIT;

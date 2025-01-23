@@ -1,0 +1,2 @@
+Alter table t_winner_selection Add column t_pr_line_id numeric;
+Alter table t_winner_selection Add column t_annexure_id numeric;

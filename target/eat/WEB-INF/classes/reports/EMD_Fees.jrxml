@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-11T16:38:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reg_Factory_Contact" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="008ff09b-160c-4d1c-8e53-bcb551e7b80b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EAT-172.20.20.125"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT 
+A.AMOUNT AS TENDER_FEES,
+A.IGST,
+A.SGST,
+A.CGST,
+A.GST,
+A.GSTAMOUNT,
+A.PAYMENT_DATE,
+A.MICR_CODE,
+CASE WHEN A.PAYMENT_MODE='OP' THEN TO_CHAR(A.DOC_NO) ELSE A.REFERENCE_NO END AS REFERENCE_NO,
+A.REALISATION_DATE,A.REALISATION_STATUS,A.REALISATION_DATE,A.MONEY_RECEIPT_DATE,MONEY_RECEIPT_NO,
+D.VALUE AS TENDER_CODE,C.NAME PAYMENT_MODE,C.VALUE AS PAID_BY,
+A.BANK_NAME,A.BRANCH_NAME,A.DOC_NO,
+CASE WHEN A.IS_FA_APPROVED='Y' THEN 'YES' ELSE 'NO' END IS_FA_APPROVED,
+A.TOTAL,E.NAME TENDER_TYPE,
+CASE WHEN D.TAHDR_TYPE_CODE = 'PT' THEN 
+CASE WHEN A.IS_TRADER='Y' THEN 'TRADER' ELSE 'MANUFACTURER' END ELSE 'CONTRACTOR' END PURCHASED_AS,
+F.NAME AS PAYMENT_TYPE,H.VERSION,I.NAME AS COMAPNY_NAME,G.NAME AS FACTORY_NAME
+FROM 
+T_PAYMENT A
+INNER JOIN M_REFERENCE_LIST C ON A.PAYMENT_MODE=C.VALUE AND C.REFERENCE_CODE='PAYMENT_MODE'
+INNER JOIN T_TAHDR D ON A.T_TAHDR_ID=D.T_TAHDR_ID
+INNER JOIN T_TAHDR_DETAIL H ON H.T_TAHDR_ID=D.T_TAHDR_ID AND H.ISACTIVE='Y'
+INNER JOIN M_REFERENCE_LIST E ON D.TAHDR_TYPE_CODE =E.VALUE AND  (E.REFERENCE_CODE='TENDER_TYPE' OR E.REFERENCE_CODE='AUCTION_TYPE')
+INNER JOIN M_CHARGE F ON F.M_CHARGE_ID=A.M_CHARGE_ID
+INNER JOIN M_BPARTNER I ON I.M_BPARTNER_ID=A.M_BPARTNER_ID
+INNER JOIN T_BIDDER B ON A.M_BPARTNER_ID=B.M_BPARTNER_ID AND A.T_TAHDR_ID=B.T_TAHDR_ID
+LEFT OUTER JOIN M_BP_ORG G ON A.M_BP_ORG_ID=G.M_BP_ORG_ID
+WHERE
+B.T_BIDDER_ID= $P{T_BIDDER_ID}  AND F.VALUE= 'EMD']]>
+	</queryString>
+	<field name="TENDER_FEES" class="java.math.BigDecimal"/>
+	<field name="IGST" class="java.math.BigDecimal"/>
+	<field name="SGST" class="java.math.BigDecimal"/>
+	<field name="CGST" class="java.math.BigDecimal"/>
+	<field name="GST" class="java.math.BigDecimal"/>
+	<field name="GSTAMOUNT" class="java.math.BigDecimal"/>
+	<field name="PAYMENT_DATE" class="java.util.Date"/>
+	<field name="MICR_CODE" class="java.lang.String"/>
+	<field name="REFERENCE_NO" class="java.lang.String"/>
+	<field name="REALISATION_DATE" class="java.util.Date"/>
+	<field name="REALISATION_STATUS" class="java.lang.String"/>
+	<field name="COLUMN_12" class="java.util.Date"/>
+	<field name="MONEY_RECEIPT_DATE" class="java.util.Date"/>
+	<field name="MONEY_RECEIPT_NO" class="java.lang.String"/>
+	<field name="TENDER_CODE" class="java.lang.String"/>
+	<field name="PAYMENT_MODE" class="java.lang.String"/>
+	<field name="PAID_BY" class="java.lang.String"/>
+	<field name="BANK_NAME" class="java.lang.String"/>
+	<field name="BRANCH_NAME" class="java.lang.String"/>
+	<field name="DOC_NO" class="java.math.BigDecimal"/>
+	<field name="IS_FA_APPROVED" class="java.lang.String"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<field name="TENDER_TYPE" class="java.lang.String"/>
+	<field name="PURCHASED_AS" class="java.lang.String"/>
+	<field name="PAYMENT_TYPE" class="java.lang.String"/>
+	<field name="VERSION" class="java.math.BigDecimal"/>
+	<field name="COMAPNY_NAME" class="java.lang.String"/>
+	<field name="FACTORY_NAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50"/>
+	</title>
+	<detail>
+		<band height="471">
+			<frame>
+				<reportElement x="7" y="0" width="554" height="331" uuid="d17d83bf-1d69-4786-9ab0-5d321c6bcd39"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="0" width="553" height="30" backcolor="#A3E1F7" uuid="28b2b4e4-3676-474e-909a-6576fe58c2e4"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["EMD FEES DETAILS"]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="0" y="31" width="553" height="20" uuid="74d951c2-90f6-4d6c-89a6-0c57a84bf603"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="e95b8837-08f5-492b-b549-67da6819f64f"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Tender No"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="0" width="282" height="20" uuid="6a2d1598-d570-4133-b6f0-5139e6cdbcb3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="50" width="554" height="20" uuid="d3dbaae4-4416-474b-b625-b5e68394ad4a"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="175621e3-672c-4b06-874e-66982fbca27b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Version"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="1" width="283" height="19" uuid="4fb47257-af9a-4fd8-8229-9afc7fc5d98b"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{VERSION}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="70" width="553" height="21" uuid="f59911a3-d260-4854-97e7-66caaef2e750"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="89fc9c91-3b5b-40a4-aab9-015aadd85414"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Purchasing Company"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="1" width="282" height="20" uuid="938c3847-031e-47e8-9f6d-20fed14c4995"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{COMAPNY_NAME}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement x="0" y="90" width="554" height="20" uuid="e3e3e819-be46-47fd-981d-031cbddb5136"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="24f6533f-df3f-489d-ac06-e98157190d47"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Amount In INR "]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="1" width="283" height="19" uuid="c429960b-6547-4681-b7b7-fc7759956a32"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{TENDER_FEES}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="110" width="554" height="20" uuid="439817f1-3959-43b0-94fd-92eae3950cc3"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="88043705-c8cd-4f04-809b-275f8e0889d3"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["IGST In %"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="272" y="0" width="282" height="20" uuid="78e5ab00-be7e-44ae-b59e-53ef9e1a0287"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{IGST}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="0" y="130" width="554" height="182" uuid="0214d9e7-8f4f-49ed-8514-ca3347533f0c"/>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="181" width="270" height="20" uuid="591d80dd-ffc0-45ec-8d0f-42dd49ef0470">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Realisation Date"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="20" width="270" height="20" uuid="ca2abd42-c08a-4c60-a63b-4b231ff5f198"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["SGST In %"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="270" height="20" uuid="10235413-e815-4702-b2b5-66fd72f5802a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["CGST In %"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="141" width="270" height="20" uuid="57bd5fdc-7f0b-4a78-81b4-7ac0b5d598de"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Payment Date"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="60" width="270" height="20" uuid="475ba00f-7fee-4a9a-a775-a75583b014c0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Total Amount Including GST In INR"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="40" width="270" height="20" uuid="92823760-8883-4639-8a16-3b9d4fe4ffaf"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["GST In INR("+$F{GST}+" % On Amount: SAC No.9984)"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="101" width="270" height="20" uuid="2631d2a5-d45e-421d-8bfa-9175569c138c"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Purchased As"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="121" width="270" height="20" uuid="978b6663-abd2-4508-aeb3-1b98d5c35da0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Payment Mode"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="161" width="270" height="20" uuid="b8c15d8a-4918-4480-bb0c-8f4f07a6c772"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["DD No/Reference No."]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="81" width="270" height="20" uuid="e5971c27-1346-48ad-9c10-82647a69f07c"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA["Tender Type"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="61" width="283" height="19" uuid="c8eea859-258d-4fb7-a285-1b29926ccebe"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="272" y="21" width="281" height="19" uuid="982e5f5f-bdd2-4aac-9a6c-e1cf862907db"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{SGST}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="1" width="283" height="19" uuid="cc49da57-df00-4d10-84e6-98207ad1b5f0"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{CGST}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="41" width="282" height="19" uuid="8ebe3856-fbbb-4a8f-aeaa-322c022230c6"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{GSTAMOUNT}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="81" width="282" height="20" uuid="b467be49-a7ba-4ad5-9767-1b66faa31233"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{TENDER_TYPE}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="102" width="283" height="19" uuid="b0d2875d-944c-456c-b5e6-6a9b9181dd25"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{PURCHASED_AS}=="MANUFACTURER"?$F{PURCHASED_AS}+$F{FACTORY_NAME}:$F{PURCHASED_AS}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="122" width="283" height="19" uuid="abccf758-a401-486f-a622-62f3fa3db219"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{PAYMENT_MODE}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="142" width="283" height="19" uuid="694a7a75-9282-477e-b235-844887455e8a"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{PAYMENT_DATE}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="161" width="283" height="20" uuid="61c88ac0-4e98-422c-a47a-3798019d79dd"/>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{REFERENCE_NO}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="182" width="283" height="18" uuid="a21453b2-eec2-4e4b-9446-0f19eb559be9">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="0.0"/>
+						</box>
+						<textFieldExpression><![CDATA[$F{REALISATION_DATE}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="201" width="270" height="19" uuid="b9426897-3b78-4878-a618-2bb83e192b13">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Realiasation Status"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="202" width="284" height="18" uuid="766f8698-1eed-4442-9dcb-efeee3435e0e">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{REALISATION_STATUS}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="220" width="270" height="19" uuid="a1a777f8-357c-45cd-9390-0653363e551e">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Money Receipt Date"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="220" width="284" height="19" uuid="77c3dd5a-b256-4194-b150-112f131c13ac">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{MONEY_RECEIPT_DATE}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="240" width="270" height="19" uuid="14df7795-e254-4180-8784-bd52a28c4417">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Money Receipt No."]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="240" width="284" height="19" uuid="d9218400-5e10-4e75-8e55-a3145119b537">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{MONEY_RECEIPT_NO}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="260" width="270" height="19" uuid="e7889be1-616c-434f-9283-b6edaaa82bbc">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Approved By Finance Admin"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="259" width="284" height="20" uuid="9d07ca50-261e-4e1d-b807-5fe0c99d494d">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{IS_FA_APPROVED}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="280" width="270" height="19" uuid="d1558d4d-4977-41c6-bd7e-3894bd714ecf">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Bank Name"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="279" width="283" height="19" uuid="9eb3bdae-26d2-4857-9f76-114577dc26cb">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{BANK_NAME}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="300" width="270" height="19" uuid="70307f0b-b38c-480b-a4d3-838c4d6bcbf3">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Branch Name"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="271" y="298" width="283" height="21" uuid="92b8f4f1-7a7b-4480-bc91-6d6682abf53a">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{BRANCH_NAME}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="320" width="270" height="19" uuid="e3569446-1107-4838-96c5-cd9cebec2cd3">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<leftPen lineWidth="1.0"/>
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["MICR Code"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="270" y="320" width="284" height="19" uuid="ffdd896a-7517-4823-944f-6c94d48a99e6">
+							<printWhenExpression><![CDATA[$F{PAID_BY}=="DD"|| $F{PAID_BY}=="CH"]]></printWhenExpression>
+						</reportElement>
+						<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+							<bottomPen lineWidth="1.0"/>
+							<rightPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{MICR_CODE}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

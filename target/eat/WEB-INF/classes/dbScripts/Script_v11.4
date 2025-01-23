@@ -1,0 +1,27 @@
+alter table M_BP_INFRA_ITEM_AP add isapproved VARCHAR2(255 CHAR);
+
+
+alter table M_BP_ITEM_DRAWING_DOC add(ee_comment VARCHAR2(255 CHAR),
+se_comment VARCHAR2(255 CHAR),
+ce_comment VARCHAR2(255 CHAR),
+ed_comment VARCHAR2(255 CHAR),
+dir_comment VARCHAR2(255 CHAR));
+
+alter table M_BP_ITEM_TYPE_TEST_DETAILS add(ee_comment VARCHAR2(255 CHAR),
+se_comment VARCHAR2(255 CHAR),
+ce_comment VARCHAR2(255 CHAR),
+ed_comment VARCHAR2(255 CHAR),
+dir_comment VARCHAR2(255 CHAR));
+
+
+alter table M_BP_ITEM_DRAWING_DOC add(is_ee_approved VARCHAR2(255 CHAR),
+is_se_approved VARCHAR2(255 CHAR),
+is_ce_approved VARCHAR2(255 CHAR),
+is_ed_approved VARCHAR2(255 CHAR),
+is_dir_approved VARCHAR2(255 CHAR));
+
+alter table M_BP_ITEM_TYPE_TEST_DETAILS add(is_ee_approved VARCHAR2(255 CHAR),
+is_se_approved VARCHAR2(255 CHAR),
+is_ce_approved VARCHAR2(255 CHAR),
+is_ed_approved VARCHAR2(255 CHAR),
+is_dir_approved VARCHAR2(255 CHAR));

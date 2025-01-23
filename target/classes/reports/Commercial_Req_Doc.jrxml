@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-10T17:26:46 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Required_Document" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="0d601c75-fb3f-40ea-9c34-c467d00ff30c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="T_BIDDER_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT A.M_ATTACHMENT_ID,B.NAME AS DOCUMENT_NAME, C.FILE_NAME AS FILE_NAME
+,CONFIG.VALUE AS DOCUMENT_URL,
+CONFIG.NAME AS DOCUMENT_PATH,
+C.PATH,C.NAME AS PHYS_NAME
+ FROM T_BIDDER_SECTION_DOC A   cross JOIN (SELECT * FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') CONFIG
+INNER JOIN T_SECTION_DOCUMENT B ON (A.T_SECTION_DOCUMENT_ID= B.T_SECTION_DOCUMENT_ID)
+INNER JOIN M_ATTACHMENT C ON (A.M_ATTACHMENT_ID= C.M_ATTACHMENT_ID)
+INNER JOIN T_COMMERCIAL_BID D ON (D.T_COMMERCIAL_BID_ID = A.T_COMMERCIAL_BID_ID)
+INNER JOIN T_BIDDER E ON (E.T_BIDDER_ID = D.T_BIDDER_ID) 
+INNER JOIN T_TAHDR F ON (E.T_TAHDR_ID = F.T_TAHDR_ID) 
+INNER JOIN T_TAHDR_DETAIL G ON (G.T_TAHDR_ID = F.T_TAHDR_ID) 
+WHERE E.T_BIDDER_ID =   $P{T_BIDDER_ID} AND G.ISACTIVE='Y' AND B.T_TAHDR_DETAIL_ID=G.T_TAHDR_DETAIL_ID]]>
+	</queryString>
+	<field name="M_ATTACHMENT_ID" class="java.math.BigDecimal"/>
+	<field name="DOCUMENT_NAME" class="java.lang.String"/>
+	<field name="FILE_NAME" class="java.lang.String"/>
+	<field name="DOCUMENT_URL" class="java.lang.String"/>
+	<field name="DOCUMENT_PATH" class="java.lang.String"/>
+	<field name="PATH" class="java.lang.String"/>
+	<field name="PHYS_NAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53"/>
+	</title>
+	<pageHeader>
+		<band height="53">
+			<frame>
+				<reportElement positionType="Float" x="0" y="23" width="553" height="30" uuid="99c09add-d487-42d9-89c3-481be81a0b5b"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="-1" width="553" height="30" backcolor="#7DF0E0" uuid="c9a9e04d-ecc4-4a9e-8a1e-5b0d53ffde6f">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} ==1]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Required Documents"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="553" height="20" uuid="23cc9169-c931-4905-9b3c-86d1348bbd2e"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="79" height="20" backcolor="#F4F788" uuid="75c1f1f1-f5bb-43fb-a593-e820e2b2967c">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Sr. No."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="80" y="0" width="340" height="20" backcolor="#F3F587" uuid="b7dcb9ff-17ea-45ed-9f03-0d27453c2ff1">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Document Name"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="420" y="0" width="133" height="20" backcolor="#F0F285" uuid="ae271133-4aa0-4ab4-b39a-bff05d5c4887">
+						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Document"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="553" height="30" uuid="0f6bd542-7afd-4e31-84eb-e9b62f92db42"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="80" height="30" uuid="3d405457-fe82-4f2e-873e-9cd89f59f035"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="80" y="0" width="340" height="30" uuid="121df94c-b5f7-4f39-8bfd-8bf9e3526a09"/>
+					<box>
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{DOCUMENT_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement stretchType="RelativeToTallestObject" x="420" y="1" width="133" height="29" uuid="8b76acfc-3eeb-4b40-9366-b9ae550ac14e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="0.9"/>
+						<bottomPen lineWidth="0.9"/>
+						<rightPen lineWidth="0.9"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{FILE_NAME}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA["EMB_"+$F{PATH}+$F{PHYS_NAME}]]></hyperlinkReferenceExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

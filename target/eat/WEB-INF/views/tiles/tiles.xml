@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"> 
+ 
+<tiles-definitions> 
+<!--   <definition name="landing.definition" template="/WEB-INF/views/tiles/layouts/landingPageLayout.jsp">
+		<put-attribute name="body" value="" />
+	</definition>
+  
+  <definition name="welcome" extends="landing.definition">
+		<put-attribute name="body" value="/WEB-INF/views/welcome.jsp" />
+	</definition>
+	<definition name="aboutUs" extends="landing.definition">
+		<put-attribute name="body" value="/WEB-INF/views/about-us.jsp" />
+	</definition>
+	<definition name="publicAuction" extends="landing.definition">
+		<put-attribute name="body" value="/WEB-INF/views/publicAuction.jsp" />
+	</definition>
+	<definition name="choosePlan" extends="landing.definition">
+		<put-attribute name="body" value="/WEB-INF/views/pricing.jsp" />
+	</definition>
+	<definition name="blog" extends="landing.definition">
+		<put-attribute name="body" value="/WEB-INF/views/blog.jsp" />
+	</definition>
+	<definition name="contactus" extends="landing.definition">
+		<put-attribute name="body" value="/WEB-INF/views/contact-us.jsp" />
+	</definition>
+ -->   <!-- Base Definition -->
+  <definition name="home-definition" template="/WEB-INF/views/tiles/layouts/v1/defaultLayout.jsp"> 
+       <put-attribute name="title" value="" /> 
+       <put-attribute name="header" value="/WEB-INF/views/tiles/layouts/v1/header.jsp" /> 
+       <put-attribute name="body" value="" /> 
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/layouts/v1/footer.jsp" /> 
+   </definition> 
+   
+    <definition name="dashboard-definition" template="/WEB-INF/views/tiles/layouts/v2/dashboardLayout.jsp"> 
+       <put-attribute name="title" value="" /> 
+       <put-attribute name="header" value="/WEB-INF/views/tiles/layouts/v2/header.jsp" /> 
+       <put-attribute name="body" value="" /> 
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/layouts/v2/footer.jsp" /> 
+   </definition> 
+   
+<!--    <definition name="base-definition-vendor" template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp"> 
+       <put-attribute name="title" value="" /> 
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/header_menu.jsp" /> 
+       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/side_menu_ven.jsp" /> 
+       <put-attribute name="body" value="" /> 
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/footer.jsp" /> 
+   </definition>
+   <definition name="vendorHome1" extends="base-definition-vendor">  
+       <put-attribute name="title" value="Welcome E-Auction" />  
+       <put-attribute name="body" value="/WEB-INF/views/vendor_Home.jsp" />  
+   </definition>
+   <definition name="executiveHome1" extends="base-definition-vendor">  
+       <put-attribute name="title" value="Welcome E-Auction" />  
+       <put-attribute name="body" value="/WEB-INF/views/vendor_Home.jsp" />  
+   </definition>
+   <definition name="Manager1" extends="base-definition-vendor">  
+       <put-attribute name="title" value="Welcome E-Auction" />  
+       <put-attribute name="body" value="/WEB-INF/views/vendor_Home.jsp" />  
+   </definition>
+ -->  
+  	<!-- Login Page -->
+  	<!-- <definition name="login" extends="base-definition">  
+       <put-attribute name="title" value="user login" />  
+       <put-attribute name="body" value="/WEB-INF/views/login.jsp" />  
+   </definition>  -->
+	<!-- Home Page -->
+   <definition name="home" extends="home-definition">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/home.jsp" />  
+   </definition>  
+   
+   <definition name="sessionOut" extends="home-definition">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/sessionOut.jsp" />  
+   </definition>  
+   
+   <definition name="AccessDenied" extends="home-definition">  
+       <put-attribute name="title" value="Access_Denied" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/accessDenied.jsp" />  
+   </definition>  
+      
+   <definition name="registration" extends="home-definition">  
+       <put-attribute name="title" value="Register" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/registration.jsp" />  
+   </definition>    
+
+   <definition name="partnerRegistration" extends="dashboard-definition">  
+       <put-attribute name="title" value="Register" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/partnerRegistration.jsp" />  
+   </definition>    
+
+   <definition name="blackListedCustomer" extends="home-definition">  
+       <put-attribute name="title" value="blackListedCustomer" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/blackListedCustomer.jsp" />  
+   </definition>     
+    <definition name="blackListedVendor" extends="home-definition">  
+       <put-attribute name="title" value="blackListedVendor" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/blackListedVendor.jsp" />  
+   </definition>
+       <definition name="resetPassword" extends="home-definition">  
+       <put-attribute name="title" value="resetPassword" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/resetPassword.jsp" />  
+   </definition>
+    <definition name="download" extends="home-definition">  
+       <put-attribute name="title" value="download" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/download.jsp" />  
+   </definition>
+    <definition name="forwardAuction" extends="home-definition">  
+       <put-attribute name="title" value="forwardAuction" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/forwardAuction.jsp" />  
+   </definition>
+   <definition name="latestAnnouncements" extends="home-definition">  
+       <put-attribute name="title" value="latestAnnouncements" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/latestAnnouncements.jsp" />  
+   </definition>
+   <definition name="latestTendersProcurements" extends="home-definition">  
+       <put-attribute name="title" value="latestTendersProcurements" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/latestTendersProcurements.jsp" />  
+   </definition>
+   <definition name="latestTendersWorks" extends="home-definition">  
+       <put-attribute name="title" value="latestTendersWorks" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/latestTendersWorks.jsp" />  
+   </definition>
+   <definition name="publicNotices" extends="home-definition">  
+       <put-attribute name="title" value="publicNotices" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/publicNotices.jsp" />  
+   </definition>
+    <definition name="registeredCustomer" extends="home-definition">  
+       <put-attribute name="title" value="registeredCustomer" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/registeredCustomer.jsp" />  
+   </definition>
+    <definition name="registeredVendors" extends="home-definition">  
+       <put-attribute name="title" value="registeredVendors" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/registeredVendors.jsp" />  
+   </definition>
+   <definition name="reverseAuction" extends="home-definition">  
+       <put-attribute name="title" value="reverseAuction" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/reverseAuction.jsp" />  
+   </definition>
+   
+	<definition name="disclaimer" extends="home-definition">  
+       <put-attribute name="title" value="disclaimer" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/disclaimer.jsp" />  
+   </definition>
+   <definition name="notification" extends="home-definition">  
+       <put-attribute name="title" value="notification" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/notification.jsp" />  
+   </definition>
+   <definition name="calendar" extends="home-definition">  
+       <put-attribute name="title" value="calendar" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/calendar.jsp" />  
+   </definition>
+   <definition name="contactUs" extends="home-definition">  
+       <put-attribute name="title" value="contactUs" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/contactUs.jsp" />  
+   </definition>
+    <definition name="termsnCondition" extends="home-definition">  
+       <put-attribute name="title" value="termsnCondition" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/termsnCondition.jsp" />  
+   </definition>
+   <definition name="faq" extends="home-definition">  
+       <put-attribute name="title" value="faq" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/faq.jsp" />  
+   </definition>
+   <definition name="credits" extends="home-definition">  
+       <put-attribute name="title" value="credits" />  
+       <put-attribute name="body" value="/WEB-INF/views/public/credits.jsp" />  
+   </definition>
+   <definition name="material" extends="dashboard-definition">  
+       <put-attribute name="title" value="material" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/material.jsp" />  
+   </definition>
+   <definition name="tendertype" extends="dashboard-definition">  
+       <put-attribute name="title" value="TenderType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/tendertype.jsp" />  
+   </definition>
+   <definition name="documentType" extends="dashboard-definition">  
+       <put-attribute name="title" value="DocumentType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/documentType.jsp" />  
+   </definition>
+   <definition name="tenderBudgetType" extends="dashboard-definition">  
+       <put-attribute name="title" value="TenderBudgetType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/tenderBudgetType.jsp" />  
+   </definition>
+   <definition name="bidType" extends="dashboard-definition">  
+       <put-attribute name="title" value="BidType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/bidType.jsp" />  
+   </definition>
+   <definition name="uom" extends="dashboard-definition">  
+       <put-attribute name="title" value="uom" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/uom.jsp" />  
+   </definition>
+      <definition name="paymentType" extends="dashboard-definition">  
+       <put-attribute name="title" value="paymentType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/paymentType.jsp" />  
+   </definition>
+   <definition name="contractorType" extends="dashboard-definition">  
+       <put-attribute name="title" value="contractorType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/contractorType.jsp" />  
+   </definition>
+   <definition name="materialGroup" extends="dashboard-definition">  
+       <put-attribute name="title" value="materialGroup" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/materialGroup.jsp" />  
+   </definition>
+   <definition name="materialSubGroup" extends="dashboard-definition">  
+       <put-attribute name="title" value="materialSubGroup" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/materialSubGroup.jsp" />  
+   </definition>
+   <definition name="materialSpecification" extends="dashboard-definition">  
+       <put-attribute name="title" value="materialSpecification" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/materialSpecification.jsp" />  
+   </definition>
+    <definition name="department" extends="dashboard-definition">  
+       <put-attribute name="title" value="department" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/department.jsp" />  
+   </definition>
+   <definition name="materialVersion" extends="dashboard-definition">  
+       <put-attribute name="title" value="materialVersion" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/materialVersion.jsp" />  
+   </definition>
+   <definition name="gtpParameter" extends="dashboard-definition">  
+       <put-attribute name="title" value="gtpParameter" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/gtpParameter.jsp" />  
+   </definition>
+   <definition name="gtpParameterType" extends="dashboard-definition">  
+       <put-attribute name="title" value="gtpParameterType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/gtpParameterType.jsp" />  
+   </definition>
+    <definition name="sysConfigurator" extends="dashboard-definition">  
+       <put-attribute name="title" value="sysConfigurator" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/sysConfigurator.jsp" />  
+   </definition>
+      <definition name="publicNoticesMaster" extends="dashboard-definition">  
+       <put-attribute name="title" value="publicNoticesMaster" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/publicNoticesMaster.jsp" />  
+   </definition>
+   <definition name="isStd" extends="dashboard-definition">  
+       <put-attribute name="title" value="isStd" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/isStd.jsp" />  
+   </definition>
+   <definition name="designation" extends="dashboard-definition">  
+       <put-attribute name="title" value="designation" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/designation.jsp" />  
+   </definition>
+   <definition name="companyType" extends="dashboard-definition">  
+       <put-attribute name="title" value="companyType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/companyType.jsp" />  
+   </definition>
+   <definition name="registrationType" extends="dashboard-definition">  
+       <put-attribute name="title" value="registrationType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/registrationType.jsp" />  
+   </definition>
+    <definition name="tax" extends="dashboard-definition">  
+       <put-attribute name="title" value="tax" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/tax.jsp" />  
+   </definition>
+   <definition name="taxCategory" extends="dashboard-definition">  
+       <put-attribute name="title" value="taxCategory" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/taxCategory.jsp" />  
+   </definition>
+   <definition name="holderType" extends="dashboard-definition">  
+       <put-attribute name="title" value="holderType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/holderType.jsp" />  
+   </definition>
+   <definition name="role" extends="dashboard-definition">  
+       <put-attribute name="title" value="role" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/role.jsp" />  
+   </definition>
+   <definition name="materialType" extends="dashboard-definition">  
+       <put-attribute name="title" value="materialType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/materialType.jsp" />  
+   </definition>
+   <definition name="cms" extends="dashboard-definition">  
+       <put-attribute name="title" value="cms" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/cms.jsp" />  
+   </definition>
+   <definition name="vendorType" extends="dashboard-definition">  
+       <put-attribute name="title" value="vendorType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/vendorType.jsp" />  
+   </definition>
+   <definition name="exemptedCategories" extends="dashboard-definition">  
+       <put-attribute name="title" value="exemptedCategories" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/exemptedCategories.jsp" />  
+   </definition>
+   <definition name="financialDocuments" extends="dashboard-definition">  
+       <put-attribute name="title" value="financialDocuments" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/financialDocuments.jsp" />  
+   </definition>
+   <definition name="businessPartnerGroup" extends="dashboard-definition">  
+       <put-attribute name="title" value="businessPartnerGroup" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/businessPartnerGroup.jsp" />  
+   </definition>
+   <definition name="internalUser" extends="dashboard-definition">  
+       <put-attribute name="title" value="internalUser" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/internalUser.jsp" />  
+   </definition>
+    <definition name="mastertiles" extends="dashboard-definition">  
+       <put-attribute name="title" value="mastertiles" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/mastertiles.jsp" />  
+   </definition>
+   <definition name="tendertiles" extends="dashboard-definition">  
+       <put-attribute name="title" value="tendertiles" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/tendertiles.jsp" />  
+   </definition>
+    <definition name="rfqTiles" extends="dashboard-definition">  
+       <put-attribute name="title" value="tendertiles" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/rfqTiles.jsp" />  
+   </definition>
+   <definition name="quickRfqTiles" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickRfqTiles" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/quickRfqTiles.jsp" />  
+   </definition>
+   <definition name="quickRfqPreparation" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickRfqPreparation" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/quickRfqPreparation.jsp" />  
+   </definition>
+   <definition name="quickAuctionTiles" extends="dashboard-definition">  
+       <put-attribute name="title" value="tendertiles" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/quickAuctionTiles.jsp" />  
+   </definition>
+   <definition name="dashboard" extends="dashboard-definition">  
+       <put-attribute name="title" value="dashboard" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/dashboard.jsp" />  
+   </definition>
+   <definition name="tenderPreparation" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderPreparation" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderPreparation.jsp" />  
+   </definition>
+    <definition name="rfqPreparation" extends="dashboard-definition">  
+       <put-attribute name="title" value="rfqPreparation" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/rfqPreparation.jsp" />  
+   </definition>
+   <definition name="quickAuction" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickAuction" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/quickAuction.jsp" />  
+   </definition>
+   <definition name="tenderPublishing" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderPublishing" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderPublishing.jsp" />  
+   </definition>
+   <definition name="annexureC1" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderPublishing" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/annexureC1.jsp" />  
+   </definition>
+   <definition name="tenderScheduling" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderScheduling" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderScheduling.jsp" />  
+   </definition>
+   <definition name="tenderPurchase" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderPurchase" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderPurchase.jsp" />  
+   </definition>
+   <definition name="tenderSubmission" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderSubmission" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderSubmission.jsp" />  
+   </definition>
+    <definition name="quickRfqProposalSubmission" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickRfqProposalSubmission" />  
+       <put-attribute name="body" value="/WEB-INF/views/QuickRFQ/quickRfqProposalSubmission.jsp" />  
+   </definition>
+    <definition name="rfqProposalSubmission" extends="dashboard-definition">  
+       <put-attribute name="title" value="rfqProposalSubmission" />  
+       <put-attribute name="body" value="/WEB-INF/views/RFQ/rfqProposalSubmission.jsp" />  
+   </definition>
+   <definition name="tenderOpening" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderOpening" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderOpening.jsp" />  
+   </definition>
+   <definition name="tenderCommercialScrutiny" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderCommercialScrutiny" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderCommercialScrutiny.jsp" />  
+   </definition>
+   <definition name="tenderTechnicalScrutiny" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderTechnicalScrutiny" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderTechnicalScrutiny.jsp" />  
+   </definition>
+   <definition name="myTenders" extends="dashboard-definition">  
+       <put-attribute name="title" value="myTenders" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/myTenders.jsp" />  
+   </definition>
+   
+   <definition name="auctionPreparation" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionPreparation" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionPreparation.jsp" />  
+   </definition>
+   <definition name="auctionPublishing" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionPublishing" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionPublishing.jsp" />  
+   </definition>
+   <definition name="auctionScheduling" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionScheduling" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionScheduling.jsp" />  
+   </definition>
+   <definition name="auctionPurchase" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionPurchase" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionPurchase.jsp" />  
+   </definition>
+   <definition name="auctionSubmission" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionSubmission" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionSubmission.jsp" />  
+   </definition>
+   <definition name="auctionOpening" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionOpening" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionOpening.jsp" />  
+   </definition>
+   <definition name="auctionCommercialScrutiny" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionCommercialScrutiny" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionCommercialScrutiny.jsp" />  
+   </definition>
+   <definition name="auctionTechnicalScrutiny" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionTechnicalScrutiny" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionTechnicalScrutiny.jsp" />  
+   </definition>
+    <definition name="auctionInvitation" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionInvitation" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/auctionInvitation.jsp" />  
+   </definition>
+   <definition name="quickRfqInvitation" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickRfqInvitation" />  
+       <put-attribute name="body" value="/WEB-INF/views/QuickRFQ/quickRfqInvitation.jsp" />  
+   </definition>
+   <definition name="InviteAndRequest" extends="dashboard-definition">  
+       <put-attribute name="title" value="InviteAndRequest" />  
+       <put-attribute name="body" value="/WEB-INF/views/inviteRequest.jsp" />  
+   </definition>
+    <definition name="CumulativeReports" extends="dashboard-definition">  
+       <put-attribute name="title" value="CumulativeReports" />  
+       <put-attribute name="body" value="/WEB-INF/views/cumulativeReports.jsp" />  
+   </definition>
+   
+   <definition name="rfqInvitation" extends="dashboard-definition">  
+       <put-attribute name="title" value="rfqInvitation" />  
+       <put-attribute name="body" value="/WEB-INF/views/RFQ/rfqInvitation.jsp" />  
+   </definition>
+   <definition name="auctionsTiles" extends="dashboard-definition">  
+       <put-attribute name="title" value="auctionsTiles" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/auctionsTiles.jsp" />  
+   </definition>
+   <definition name="mail" extends="dashboard-definition">  
+       <put-attribute name="title" value="mail" />  
+       <put-attribute name="body" value="/WEB-INF/views/mail.jsp" />  
+   </definition>
+   <definition name="vendorRegistration" extends="dashboard-definition">  
+       <put-attribute name="title" value="vendorRegistration" />  
+       <put-attribute name="body" value="/WEB-INF/views/vendorRegistration.jsp" />  
+   </definition>
+   <definition name="advanceSearch" extends="dashboard-definition">  
+       <put-attribute name="title" value="advanceSearch" />  
+       <put-attribute name="body" value="/WEB-INF/views/advanceSearch.jsp" />  
+   </definition>
+   <definition name="approval" extends="dashboard-definition">  
+       <put-attribute name="title" value="approval" />  
+       <put-attribute name="body" value="/WEB-INF/views/approval.jsp" />  
+   </definition>
+    <definition name="roleDetails" extends="dashboard-definition">  
+       <put-attribute name="title" value="roleDetails" />  
+       <put-attribute name="body" value="/WEB-INF/views/roleDetails.jsp" />  
+   </definition>
+   <definition name="dashboardView" extends="dashboard-definition">  
+       <put-attribute name="title" value="dashboardView" />  
+       <put-attribute name="body" value="/WEB-INF/views/dashboardView.jsp" />  
+   </definition>
+    <definition name="bidsdetails" extends="dashboard-definition">  
+       <put-attribute name="title" value="bidsdetails" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/bidsdetails.jsp" />  
+   </definition>
+   <definition name="dashboard2" extends="dashboard-definition">  
+       <put-attribute name="title" value="dashboard2" />  
+       <put-attribute name="body" value="/WEB-INF/views/dashboard2.jsp" />  
+   </definition>
+   <definition name="dashboard1" extends="dashboard-definition">  
+       <put-attribute name="title" value="dashboard1" />  
+       <put-attribute name="body" value="/WEB-INF/views/dashboard1.jsp" />  
+   </definition>
+      <definition name="payments" extends="dashboard-definition">  
+       <put-attribute name="title" value="payments" />  
+       <put-attribute name="body" value="/WEB-INF/views/payments/payments.jsp" />  
+   </definition>
+   <definition name="dashboard3" extends="dashboard-definition">  
+       <put-attribute name="title" value="dashboard3" />  
+       <put-attribute name="body" value="/WEB-INF/views/dashboard3.jsp" />  
+   </definition>
+   <definition name="dashboard4" extends="dashboard-definition">  
+       <put-attribute name="title" value="dashboard4" />  
+       <put-attribute name="body" value="/WEB-INF/views/dashboard4.jsp" />  
+   </definition>
+   <definition name="userProfile" extends="dashboard-definition">  
+       <put-attribute name="title" value="userProfile" />  
+       <put-attribute name="body" value="/WEB-INF/views/userProfile.jsp" />  
+   </definition>
+   <definition name="sessionAudit" extends="dashboard-definition">  
+       <put-attribute name="title" value="sessionAudit" />  
+       <put-attribute name="body" value="/WEB-INF/views/sessionAudit.jsp" />  
+   </definition>
+   <definition name="tenderCommittee" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderCommittee" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderCommittee.jsp" />  
+   </definition>
+   <definition name="deviationBid" extends="dashboard-definition">  
+       <put-attribute name="title" value="deviationBid" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/deviationBid.jsp" />  
+   </definition>
+    <definition name="finalScrutiny" extends="dashboard-definition">  
+       <put-attribute name="title" value="deviationBid" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/finalScrutiny.jsp" />  
+   </definition>
+   <definition name="reference" extends="dashboard-definition">  
+       <put-attribute name="title" value="reference" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/reference.jsp" />  
+   </definition>
+   <definition name="tenderview" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderview" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderview.jsp" />  
+   </definition>
+   <definition name="paymentApproval" extends="dashboard-definition">  
+       <put-attribute name="title" value="paymentApproval" />  
+       <put-attribute name="body" value="/WEB-INF/views/paymentApproval.jsp" />  
+   </definition>
+   <definition name="preBidMeeting" extends="dashboard-definition">  
+       <put-attribute name="title" value="preBidMeeting" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/preBidMeeting.jsp" />  
+   </definition>
+   <definition name="tenderTechnicalScrutinyNew" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderTechnicalScrutinyNew" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderTechnicalScrutinyNew.jsp" />  
+   </definition>
+   <definition name="tenderTechnicalScrutinyNew2" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderTechnicalScrutinyNew2" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderTechnicalScrutinyNew2.jsp" />  
+   </definition>
+      <definition name="winnerSelection" extends="dashboard-definition">  
+       <put-attribute name="title" value="winnerSelection" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/winnerSelection.jsp" />  
+   </definition>
+    <definition name="quickRfqWinnerSelection" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickRfqWinnerSelection" />  
+       <put-attribute name="body" value="/WEB-INF/views/QuickRFQ/quickRfqWinnerSelection.jsp" />  
+   </definition>
+    <definition name="quickAuctionWinnerSelection" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickAuctionWinnerSelection" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/quickAuctionWinnerSelection.jsp" />  
+   </definition>
+    <definition name="internalUserProfile" extends="dashboard-definition">  
+       <put-attribute name="title" value="internalUserProfile" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/internalUserProfile.jsp" />  
+   </definition>
+   <definition name="liveBid" extends="dashboard-definition">  
+       <put-attribute name="title" value="liveBid" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/liveBid.jsp" />  
+   </definition>
+   <definition name="QuickLiveBid" extends="dashboard-definition">  
+       <put-attribute name="title" value="QuickLiveBid" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/quickLiveBid.jsp" />  
+   </definition>
+   <definition name="bidSheet" extends="dashboard-definition">  
+       <put-attribute name="title" value="bidSheet" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/bidSheet.jsp" />  
+   </definition>
+   <definition name="quickBidSheet" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickBidSheet" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/quickBidSheet.jsp" />  
+   </definition>
+   <definition name="tenderBids" extends="dashboard-definition">  
+       <put-attribute name="title" value="tenderBids" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/tenderBids.jsp" />  
+   </definition>
+      <definition name="newTenderBids" extends="dashboard-definition">  
+       <put-attribute name="title" value="newTenderBids" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/newTenderBids.jsp" />  
+   </definition>
+   <definition name="quickRfqProposal" extends="dashboard-definition">  
+       <put-attribute name="title" value="quickRfqProposal" />  
+       <put-attribute name="body" value="/WEB-INF/views/QuickRFQ/quickRfqProposal.jsp" />  
+   </definition>
+   <definition name="rfqProposal" extends="dashboard-definition">  
+       <put-attribute name="title" value="rfqProposal" />  
+       <put-attribute name="body" value="/WEB-INF/views/RFQ/quickRfqProposal.jsp" />  
+   </definition>
+  <!--  <definition name="rating" extends="dashboard-definition">  
+       <put-attribute name="title" value="rating" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/rating.jsp" />  
+   </definition> -->
+    <definition name="vendorRating" extends="dashboard-definition">  
+       <put-attribute name="title" value="vendorRating" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/vendorRating.jsp" />  
+   </definition>
+    <definition name="commonVendorRating" extends="dashboard-definition">  
+       <put-attribute name="title" value="commonVendorRating" />  
+       <put-attribute name="body" value="/WEB-INF/views/CommonVendorRating.jsp" />  
+   </definition>
+   <definition name="paymentgateway" extends="dashboard-definition">  
+       <put-attribute name="title" value="paymentgateway" />  
+       <put-attribute name="body" value="/WEB-INF/views/payments/paymentgateway.jsp" />  
+
+   </definition>
+   <definition name="invoice" extends="dashboard-definition">  
+       <put-attribute name="title" value="invoice" />  
+       <put-attribute name="body" value="/WEB-INF/views/invoice.jsp" />  
+   </definition>
+   <definition name="approveVendor" extends="dashboard-definition">  
+       <put-attribute name="title" value="approveVendor" />  
+       <put-attribute name="body" value="/WEB-INF/views/approveVendor.jsp" />  
+
+   </definition>
+   <definition name="invoice" extends="dashboard-definition">  
+       <put-attribute name="title" value="invoice" />  
+       <put-attribute name="body" value="/WEB-INF/views/invoice.jsp" />  
+   </definition>
+   <definition name="approveVendorRegistration" extends="dashboard-definition">  
+       <put-attribute name="title" value="approveVendorRegistration" />  
+       <put-attribute name="body" value="/WEB-INF/views/approveVendorRegistration.jsp" />  
+
+   </definition>
+   <definition name="createContract" extends="dashboard-definition">  
+       <put-attribute name="title" value="createContract" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/createContract.jsp" />  
+
+   </definition>
+   <definition name="paymentPosting" extends="dashboard-definition">  
+       <put-attribute name="title" value="paymentPosting" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/paymentPosting.jsp" />  
+
+   </definition>
+   <definition name="hsn" extends="dashboard-definition">  
+       <put-attribute name="title" value="hsn" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/hsn.jsp" />  
+
+   </definition>
+    <definition name="inviteParticipant" extends="dashboard-definition">  
+       <put-attribute name="title" value="inviteParticipant" />  
+       <put-attribute name="body" value="/WEB-INF/views/auction/inviteParticipant.jsp" />  
+
+   </definition>
+    <definition name="pendingRequest" extends="dashboard-definition">  
+       <put-attribute name="title" value="pendingRequest" />  
+       <put-attribute name="body" value="/WEB-INF/views/bids/pendingRequest.jsp" />  
+
+   </definition>
+    <definition name="locationType" extends="dashboard-definition">  
+       <put-attribute name="title" value="locationType" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/locationType.jsp" />  
+   </definition>
+     <definition name="ratingWeightage" extends="dashboard-definition">  
+       <put-attribute name="title" value="ratingWeightage" />  
+       <put-attribute name="body" value="/WEB-INF/views/master/ratingWeightage.jsp" />  
+
+   </definition>
+      <definition name="vendorInfraDetails" extends="dashboard-definition">  
+       <put-attribute name="title" value="vendorInfraDetails" />  
+       <put-attribute name="body" value="/WEB-INF/views/tender/vendorInfraDetails.jsp" />  
+
+   </definition>
+   <definition name="analytics" extends="dashboard-definition">  
+       <put-attribute name="title" value="analytics" />  
+       <put-attribute name="body" value="/WEB-INF/views/analytics.jsp" />  
+
+   </definition>
+   <definition name="reports" extends="dashboard-definition">  
+       <put-attribute name="title" value="reports" />  
+       <put-attribute name="body" value="/WEB-INF/views/reports.jsp" />  
+
+   </definition>
+   
+    <definition name="workflows" extends="dashboard-definition">  
+       <put-attribute name="title" value="workflows" />  
+       <put-attribute name="body" value="/WEB-INF/views/tilesLayout/workflows.jsp" /> 
+       </definition> 
+</tiles-definitions>

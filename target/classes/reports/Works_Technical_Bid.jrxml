@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-12-27T14:10:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Works_Technical_Bid" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="2ff5a6fb-16d0-4555-b20a-e830762f19f2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MSEDCL"/>
+	<parameter name="T_TECHNICAL_BID_ID" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT A.T_TAHDR_ID, A.VALUE AS TENDER_CODE 
+,C.T_TAHDR_MATERIAL_ID
+,D.NAME AS ITEM_NAME, D.VALUE AS ITEM_CODE
+,G.NAME AS PARTNER , G.CRN_NUMBER AS REG_NO
+,H.T_TECHNICAL_BID_ID
+,K.NAME GTP_PARAMETER
+,coalesce (I.TEXT_RESPONSE,'') RESPONSE
+,L.NAME AS FACTORY
+, coalesce ((SELECT NAME FROM AD_SYSCONFIG WHERE VALUE='REPORT_DIR') ,'') AS REPORT_DIR
+FROM T_TAHDR A 
+INNER JOIN T_TAHDR_DETAIL B ON (A.T_TAHDR_ID=B.T_TAHDR_ID AND B.ISACTIVE='Y')
+INNER JOIN T_TAHDR_MATERIAL C ON (B.T_TAHDR_DETAIL_ID = C.T_TAHDR_DETAIL_ID)
+INNER JOIN M_MATERIAL D ON (C.T_MATERIAL_ID= D.M_MATERIAL_ID)
+INNER JOIN T_ITEM_BID E ON (C.T_TAHDR_MATERIAL_ID = E.T_TAHDR_MATERIAL_ID)
+INNER JOIN T_BIDDER F ON (E.T_BIDDER_ID= F.T_BIDDER_ID)
+INNER JOIN M_BPARTNER G ON (F.M_BPARTNER_ID = G.M_BPARTNER_ID)
+INNER JOIN T_TECHNICAL_BID H ON (E.T_ITEM_BID_ID= H.T_ITEM_BID_ID)
+LEFT OUTER JOIN T_BIDDER_GTP I ON (H.T_TECHNICAL_BID_ID = I.T_TECHNICAL_BID_ID)
+LEFT OUTER JOIN T_TAHDR_MATERIAL_GTP J ON (I.T_TAHDR_MATERIAL_GTP_ID = J.T_TAHDR_MATERIAL_GTP_ID)
+LEFT OUTER JOIN M_GTP_PARAMETER K ON (J.M_GTP_ID= K.M_GTP_PARAMETER_ID)
+LEFT OUTER JOIN M_BP_ORG L ON (F.M_BP_ORG_ID=  L.M_BP_ORG_ID)
+WHERE 
+
+H.T_TECHNICAL_BID_ID=  $P{T_TECHNICAL_BID_ID}]]>
+	</queryString>
+	<field name="T_TAHDR_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="T_TAHDR_ID"/>
+	</field>
+	<field name="TENDER_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TENDER_CODE"/>
+	</field>
+	<field name="T_TAHDR_MATERIAL_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="T_TAHDR_MATERIAL_ID"/>
+	</field>
+	<field name="ITEM_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_NAME"/>
+	</field>
+	<field name="ITEM_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ITEM_CODE"/>
+	</field>
+	<field name="PARTNER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PARTNER"/>
+	</field>
+	<field name="REG_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REG_NO"/>
+	</field>
+	<field name="T_TECHNICAL_BID_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="T_TECHNICAL_BID_ID"/>
+	</field>
+	<field name="GTP_PARAMETER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="GTP_PARAMETER"/>
+	</field>
+	<field name="RESPONSE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="RESPONSE"/>
+	</field>
+	<field name="FACTORY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FACTORY"/>
+	</field>
+	<field name="REPORT_DIR" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="REPORT_DIR"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="285" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="40" width="556" height="230" forecolor="#000000" uuid="f5a1bf7c-bd14-4083-9821-851702650878"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textField>
+					<reportElement x="48" y="61" width="230" height="30" uuid="e8c25219-e88e-425f-ae91-9a495094e811"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendor"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="48" y="91" width="230" height="30" uuid="5eb76036-7f0b-4436-8477-a766187359fb"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Registration Number"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="48" y="31" width="460" height="30" backcolor="#45F1F7" uuid="22506fd7-3b5f-4ab7-9a32-f32e7ac8fa3f"/>
+					<box leftPadding="0">
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Technical Bid"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="48" y="122" width="230" height="30" uuid="569dc0a4-2b04-403f-b999-c50eea0f5f71"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tender Code"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="48" y="152" width="230" height="30" uuid="4929bb3f-6080-4e59-b2cf-7a340e76559e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PDF Creation Time"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="278" y="62" width="230" height="29" uuid="fd673d88-8e54-4c69-ba86-5e5319080784"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{PARTNER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="278" y="92" width="230" height="29" uuid="3fa0ef58-7681-4eb4-b313-80e8eec9afc6"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{REG_NO}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="278" y="121" width="230" height="31" uuid="cdf7898c-5ab8-49a0-8eed-f8a5929c6b8c"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="278" y="153" width="230" height="29" uuid="41b6744a-8757-4745-9698-59c1c4a2265e"/>
+					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date().getTime())]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="150" y="0" width="220" height="30" uuid="dcccb9c2-4505-4c37-937d-7c347864774b"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="1" y="50" width="555" height="30" uuid="3298d6df-6bf5-40b1-8c42-4fa810ec30db"/>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="30" uuid="35ae3263-b98c-4189-a3ff-c6b8ef65218c"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ItemName: "+$F{ITEM_NAME}+" - ItemCode: "+$F{ITEM_CODE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="190" y="15" width="160" height="25" uuid="315dab3f-6cfc-471e-8569-e469b49b47be"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TENDER_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="160" y="10" width="100" height="30" uuid="def23ed7-f4a7-4118-95e8-62e342babefb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="262" y="10" width="100" height="30" uuid="9322d440-be1b-45fe-8064-f92031f88d5f"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="43">
+			<subreport>
+				<reportElement x="0" y="0" width="556" height="43" uuid="f4bc5b81-cdc6-46df-b514-c6ef00deb6d0"/>
+				<subreportParameter name="T_TECHNICAL_BID_ID">
+					<subreportParameterExpression><![CDATA[$P{T_TECHNICAL_BID_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$F{REPORT_DIR}+"Required_Document.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

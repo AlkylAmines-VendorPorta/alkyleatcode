@@ -1,0 +1,71 @@
+Insert into m_reference (m_reference_id,isactive,value, name, created, updated) values
+(25,'Y','MY_TENDER_BUTTON','My Tender Button',SYSDATE,SYSDATE );
+
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(100,25,'Y','MY_TENDER_BUTTON','BID','Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(101,25,'Y','MY_TENDER_BUTTON','DVTN','Deviation Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(102,25,'Y','MY_TENDER_BUTTON','C1','Annexure C1 Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(103,25,'Y','MY_TENDER_BUTTON','REVISED','Revised Bid Submission',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(104,25,'Y','MY_TENDER_BUTTON','TCOP','Technical Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(105,25,'Y','MY_TENDER_BUTTON','PBOP','Price Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(106,25,'Y','MY_TENDER_BUTTON','DVOP','Deviation Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(107,25,'Y','MY_TENDER_BUTTON','C1OP','Annexure C1 Bid Opening',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(108,25,'Y','MY_TENDER_BUTTON','TCSCHD','Technical Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(109,25,'Y','MY_TENDER_BUTTON','PBSCHD','Price Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(110,25,'Y','MY_TENDER_BUTTON','C1SCHD','Annexure C1 Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(111,25,'Y','MY_TENDER_BUTTON','RBSCHD','Revised Bid Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(112,25,'Y','MY_TENDER_BUTTON','AWSCHD','Award Winner Scheduling',SYSDATE,SYSDATE );
+Insert into m_reference_list (M_REFERENCE_LIST_ID,m_reference_id,isactive,REFERENCE_CODE ,value, name, created, updated) values
+(113,25,'Y','MY_TENDER_BUTTON','WINNER','Award Winner',SYSDATE,SYSDATE );
+ 
+ alter table t_tahdr_detail
+modify description varchar2(2000CHAR);
+
+alter table t_tahdr_detail
+modify PRE_QUAL_REQ varchar2(2000CHAR);
+
+
+alter table t_tahdr_detail
+modify PRE_BID_ADDR varchar2(2000CHAR);
+
+
+alter table t_tahdr_detail
+modify BID_OPENING_ADDR varchar2(2000CHAR);
+
+
+alter table t_tahdr_detail
+modify description varchar2(2000CHAR);
+
+alter table t_tahdr_detail
+modify PRE_QUAL_REQ varchar2(2000CHAR);
+
+
+alter table t_tahdr_detail
+modify PRE_BID_ADDR varchar2(2000CHAR);
+
+
+alter table t_tahdr
+modify REMARKS varchar2(2000CHAR);
+
+
+Insert into M_TILE (M_TILE_ID,CREATED,ISACTIVE,UPDATED,VALUE,DESCRIPTION,IS_SUMMARY,LEVEL_NO,NAME,PARENT_ID,SEQUENCE_NO,CREATEDBY,M_BPARTNER_ID,UPDATEDBY) 
+values (76,SYSDATE,'Y',SYSDATE,'DeviationBid','Deviation Bid','N',1,'Deviation Bid',3,0,null,null,null);
+
+INSERT INTO M_TILE (M_TILE_ID, CREATED, ISACTIVE, UPDATED, VALUE, DESCRIPTION, IS_SUMMARY, LEVEL_NO, NAME, PARENT_ID, SEQUENCE_NO) 
+VALUES ('77', SYSDATE, 'Y', SYSDATE, 'MyTender', 'My Tender', 'N', '1', 'My Tender', '3', '0');
+
+UPDATE AD_ROLE SET VIEW_NAME = 'dashboard4' WHERE VALUE='VENADM';
+
+COMMIT;
